@@ -1,0 +1,16 @@
+[
+  {
+    "title": "title",
+    "location": "city",
+    "price": 1200,
+    "images": ["images"],
+    "comments": [
+      {
+        "body": "Comment"
+      }
+    ],
+    "score": 5,
+    "included": ["Servicios"],
+    "description": "Descripcion"
+  }
+]
