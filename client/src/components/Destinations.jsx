@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React  from 'react'
 import id1 from '../assets/Id1.jpg'
 import id2 from '../assets/id2.jpg'
 import id3 from '../assets/id3.jpg'
