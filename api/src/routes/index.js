@@ -7,7 +7,7 @@ const router = Router();
 
 router.use("/setplainsdb", setPlainsDb);
 router.use("/getplains", getPlains);
-router.use("/getdetails", getDetails);
 router.use("/postPlains", postPlains);
+router.use("/", getDetails);
 
 module.exports = router;
