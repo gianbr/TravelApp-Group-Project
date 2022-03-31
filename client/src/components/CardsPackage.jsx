@@ -25,7 +25,7 @@ export default function CardsPackage({location, images }) {
     
     </div>
   </div>
-  {/* CARTA */ }
+  {/* CARTAS */  }
       <div className='h-full border-2 hover:opacity-80  bg-gray-100 border-gray-100 border-opacity-100 rounded-lg overflow-hidden' >
     <img src={act3} alt='vacation' />
     <div className='px-6 py-4'>
