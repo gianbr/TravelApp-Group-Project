@@ -1,0 +1,14 @@
+[
+  {
+    "locations": [
+      { "name": "Puerto Iguazú, Misiones", "price": 100 },
+      { "name": "San Ignacio, Misiones", "price": 85 },
+      { "name": "Mendoza, Argentina", "price": 120 },
+      { "name": "Mar del Plata, Buenos Aires", "price": 180 },
+      { "name": "Tandil, Buenos Aires", "price": 120 },
+      { "name": "Tigre, Buenos Aires", "price": 150 },
+      { "name": "Nuñéz, Buenos Aires", "price": 100 },
+      { "name": "Ciudad Autonóma de Buenos Aires, Buenos Aires", "price": 200 }
+    ]
+  }
+]

@@ -16,6 +16,7 @@ getPlains.get("/", (req, res, next) => {
           return res.json(
             respuesta.map((r) => {
               return {
+                id: r._id,
                 title: r.title,
                 location: r.location,
                 price: r.price,
@@ -35,6 +36,7 @@ getPlains.get("/", (req, res, next) => {
           return res.json(
             result.map((r) => {
               return {
+                id: r._id,
                 title: r.title,
                 location: r.location,
                 price: r.price,
@@ -52,20 +54,3 @@ getPlains.get("/", (req, res, next) => {
   }
 });
 module.exports = getPlains;
-
-// Plain.find({}).then((result) => {
-//   if (result) {
-//     return res.json(
-//       result.map((r) => {
-//         return {
-//           title: r.title,
-//           location: r.location,
-//           price: r.price,
-//           image: r.images[0],
-//         };
-//       })
-//     );
-//   } else {
-//     res.status(404).send({ error: "Not Found" });
-//   }
-// });
