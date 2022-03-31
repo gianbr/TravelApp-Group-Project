@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "title": "Excursión a las cataratas del Iguazú, paseo en barco, tren, camión de safari",
     "location": "Puerto Iguazú, Misiones",
     "price": 21330,
@@ -39,7 +38,6 @@
     }
   },
   {
-    "id": 2,
     "title": "Visita a las ruinas de San Ignacio y a las minas de Wanda Tour de día completo",
     "location": "San Ignacio, Misiones",
     "price": 3050,
@@ -74,7 +72,6 @@
     }
   },
   {
-    "id": 3,
     "title": "Vuelo panorámico en helicóptero por las Cataratas del Iguazú con traslados opcionales",
     "location": "Puerto Iguazú, Misiones",
     "price": 15000,
@@ -113,7 +110,6 @@
     }
   },
   {
-    "id": 4,
     "title": "Escapada de un día al Parque Nacional Iberá desde San Ignacio",
     "location": "San Ignacio, Misiones",
     "price": 10000,
@@ -144,7 +140,6 @@
     }
   },
   {
-    "id": 5,
     "title": "Entrada a la reserva de animales salvajes Güirá Oga",
     "location": "Puerto Iguazú, Misiones",
     "price": 4500,
@@ -179,7 +174,6 @@
     }
   },
   {
-    "id": "6",
     "title": "Tour privado de vinos en bodegas unicas",
     "location": "Mendoza, Argentina",
     "price": 15445,
@@ -225,7 +219,6 @@
     }
   },
   {
-    "id": "7",
     "title": "Día de cocina y cultura Argentina",
     "location": "Mendoza, Argentina",
     "price": 7445,
@@ -267,7 +260,6 @@
     }
   },
   {
-    "id": "8",
     "title": "Un día en la vida de un gaucho mendocino en Los Andes",
     "location": "Mendoza, Argentina",
     "price": 24445,
@@ -309,7 +301,6 @@
     }
   },
   {
-    "id": "9",
     "title": "Kayak Montaña y Asado",
     "location": "Mendoza, Argentina",
     "price": 16667,
@@ -343,7 +334,6 @@
     }
   },
   {
-    "id": "10",
     "title": "Moto Tour Mendoza",
     "location": "Mendoza, Argentina",
     "price": 44446,
@@ -377,7 +367,6 @@
     }
   },
   {
-    "id": 11,
     "title": "Excursión por La Feliz",
     "location": "Mar del Plata, Buenos Aires",
     "price": 15000,
@@ -426,7 +415,6 @@
   },
 
   {
-    "id": 12,
     "title": "A caballo por las Sierras de Tandil",
     "location": "Tandil, Buenos Aires",
     "price": 13.5,
@@ -464,7 +452,6 @@
   },
 
   {
-    "id": "13",
     "title": "¡Pasea por el Tigre y el Delta!",
     "location": "Tigre, Buenos Aires",
     "price": 6000,
@@ -505,7 +492,6 @@
   },
 
   {
-    "id": "14",
     "title": "Navegar a vela en el Río de la Plata",
     "location": "Nuñéz, Buenos Aires",
     "price": 5000,
@@ -542,7 +528,6 @@
   },
 
   {
-    "id": "15",
     "title": "¡Descubre Bs As como un local en bici!",
     "location": "Ciudad Autonóma de Buenos Aires, Buenos Aires",
     "price": 3000,
@@ -584,7 +569,6 @@
     }
   },
   {
-    "id": 16,
     "title": "Recorrido en auto y trekking por Bari",
     "location": "San Carlos de Bariloche, Argentina",
     "price": 12200,
@@ -618,7 +602,6 @@
     }
   },
   {
-    "id": 17,
     "title": "Tesoros para Explorar la Patagonia",
     "location": "San Carlos de Bariloche, Argentina",
     "price": 22700,
@@ -653,7 +636,6 @@
     }
   },
   {
-    "id": 18,
     "title": "Trekking & visita a cerveceria local",
     "location": "San Carlos de Bariloche, Argentina",
     "price": 14900,
@@ -688,7 +670,6 @@
     }
   },
   {
-    "id": 19,
     "title": "Astropatagonia - Astroturismo",
     "location": "San Carlos de Bariloche, Argentina",
     "price": 10500,
@@ -717,7 +698,6 @@
     }
   },
   {
-    "id": 20,
     "title": "Navegando Patagonia",
     "location": "San Carlos de Bariloche, Argentina",
     "price": 10500,
