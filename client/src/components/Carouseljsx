@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AiOutlineVerticalRight, AiOutlineVerticalLeft } from "react-icons/ai";
-import img from "../assets/actividad3.jpeg";
-import img2 from "../assets/actividad4.jpeg";
-import img3 from "../assets/actividad5.jpeg";
-
-
-const featuredProducts = [
-    img,
-    img2,
-    img3
-];
+import { useParams } from 'react-router-dom'
+import { getDetailId } from '../actions/index'
+import { useSelector, useDispatch } from 'react-redux';
 
 let count = 0;
 let slideInterval;
-export default function Carousel() {
+export default function Slider() {
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const detail = useSelector((state) => state.detail);
+
+
+    useEffect(() => {
+        dispatch(getDetailId(id));
+    }, [dispatch, id]);
+
+
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const slideRef = useRef();
@@ -45,12 +48,12 @@ export default function Carousel() {
     };
 
     const handleOnNextClick = () => {
-        count = (count + 1) % featuredProducts.length;
+        count = (count + 1) % detail.images.length;
         setCurrentIndex(count);
         slideRef.current.classList.add("fade-anim");
     };
     const handleOnPrevClick = () => {
-        const productsLength = featuredProducts.length;
+        const productsLength = detail.images.length;
         count = (currentIndex + productsLength - 1) % productsLength;
         setCurrentIndex(count);
         slideRef.current.classList.add("fade-anim");
@@ -59,7 +62,7 @@ export default function Carousel() {
     return (
         <div ref={slideRef} className="w-full select-none relative">
             <div className="aspect-w-16 aspect-h-9">
-                <img src={featuredProducts[currentIndex]} alt="" />
+                <img src={detail.images[currentIndex]} alt="" />
             </div>
 
             <div className="absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
