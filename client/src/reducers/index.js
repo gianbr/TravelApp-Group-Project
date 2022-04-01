@@ -17,7 +17,7 @@ function rootReducer(state = initialState, action){
                 plainsCopy: action.payload
             }
         case 'GET_DETAIL':
-            console.log('juth',action.payload)
+            console.log('alba',action.payload)
                 return {
                     ...state,
                     detail: action.payload
@@ -26,7 +26,7 @@ function rootReducer(state = initialState, action){
                 const allPlains = state.plainsCopy
                 const provinceFilter = action.payload === "All" 
                 ? allPlains
-                : allPlains.filter(e=> e.location === action.payload)
+                : allPlains.filter(e => e.location === action.payload)
                 return {
                     ...state,
                     plains: provinceFilter
@@ -82,7 +82,7 @@ function rootReducer(state = initialState, action){
         case 'SEARCH_DESTINATION':
             return {
                 ...state,
-                destination: action.payload
+                plains: action.payload
             };
             
         default:

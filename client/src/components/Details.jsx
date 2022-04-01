@@ -22,11 +22,11 @@ function Details (){
       {detail.images?.map((e) => (
         <img src={e} alt={e} key={e}/>
       ))} 
-      <h3>{detail.location}</h3>
+      <h3>{detail.location} </h3>
       <h3>{detail.city}</h3>
 
       {/* //FALTA // */}
-      {/* <h3>{detail.description.title}</h3 */}
+       <h3>{detail.description.title}</h3>
 
         {detail.included?.map((i,id) => (
           <div key={id}>
@@ -35,11 +35,12 @@ function Details (){
         ))}
       <h3>{detail.score}</h3>
       <h3>{detail.stock}</h3>
-      <h3>{detail.price}</h3>
+      <h3>$ {detail.price}</h3>
       {detail.comments?.map((c,id) => (
-          <li key={id}>{c.body}</li> 
-          ))}
+        <li key={id}>
           <br/>
+          {c.body}</li> 
+          ))}
     </div>
     )
 };

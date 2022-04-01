@@ -4,6 +4,7 @@ import {
   FaTwitter,
   FaInstagram,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function Footer(){
   return (
@@ -11,7 +12,7 @@ function Footer(){
       <div className='max-w-[1240px] mx-auto flex flex-col px-4'>
         <div className='sm:flex text-center justify-between items-center'>
           <h1 style={{color: '#ffff'}}>TRAVEL APP.</h1>
-                    {/* ICONOS */}
+          {/* ICONOS */}
           <div className='flex justify-between w-full sm:max-w-[280px] my-4'>
             <FaFacebook className='icon' />
             <FaTwitter className='icon' />
@@ -21,17 +22,22 @@ function Footer(){
                   {/* COMPONENTES */}
         <div className='flex justify-between'>
           <ul className='lg:flex' style={{color: '#ffff'}}>
-            <li>About</li>
-            <li>Contacy</li>     
-            <li>Newsroom</li>
+            <Link to='/about'>
+            <li>Acerca de</li>
+            </Link>
+            <Link to='/contact'>
+            <li>Contacto</li>     
+            </Link>
+            <Link to='/destination'>
+            <li>Destinos</li>
+            </Link>
           </ul>
-          <ul className='text-right lg:flex' style={{color: '#ffff'}}>
-            <li>Home</li>
-            <li>Destinations</li>
-            <li>Travel</li>
+        {/* <p style={{color: '#ffff'}} className='items-center'> 2022 Travel App. All rights reserved</p> */}
+          <ul className='text-right lg:flex' style={{ color: '#ffff' }}>
+          <div className='sm:flex text-center justify-between items-center'>
+          </div>
           </ul>
         </div>
-        {/* <p style={{color: '#ffff'}} className='items-center'> 2022 Travel App. All rights reserved</p> */}
       </div>
     </div>
   );
