@@ -84,6 +84,12 @@ function rootReducer(state = initialState, action){
                 ...state,
                 destination: action.payload
             };
+
+        case 'CLEAR_DETAILS_STATE':
+            return {
+                ...state,
+                details: []
+            }  
             
         default:
             return state;

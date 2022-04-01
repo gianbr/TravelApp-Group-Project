@@ -60,3 +60,18 @@ export function getDetailId(id) {
                 payload
             }
         }
+
+
+        export function clearDetailsState() {
+            return {
+                type: "CLEAR_DETAILS_STATE",
+            };
+        }
+
+
+        export function resetDetail() {
+            return {
+                type: "RESET_DETAIL",
+
+            };
+        }

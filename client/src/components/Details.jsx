@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import {getDetailId} from '../actions/index'
+import { getDetailId, clearDetailsState} from '../actions/index'
 import { useSelector,useDispatch} from 'react-redux';
 import Carousel from './Carousel';
 
@@ -13,21 +13,22 @@ function Details (){
 
   useEffect(() => {
     dispatch(getDetailId(id));
+    dispatch(clearDetailsState())
   }, [dispatch, id]);
+ 
   
 
   return (
+
     <div>
       <h3>{detail.title}</h3>
-      {detail.images?.map((e) => (
-        <img src={e} alt={e} key={e}/>
-      ))} 
+      <Carousel />
       <div className="">
       </div>
       
       <h3>{detail.location}</h3>
       <h3>{detail.city}</h3>
-
+          
       {/* //FALTA // */}
       {/* <h3>{detail.description.title}</h3 */}
 
@@ -44,6 +45,7 @@ function Details (){
           ))}
           <br/>
     </div>
+
     )
 };
   export default Details;
