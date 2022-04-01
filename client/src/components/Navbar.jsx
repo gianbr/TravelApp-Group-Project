@@ -26,7 +26,8 @@ const [logo, setLogo] = useState(false)
    
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(searchDestination(name));
+      dispatch(searchDestination(name));
+
   }; console.log(name)
 
   return(
@@ -36,9 +37,9 @@ const [logo, setLogo] = useState(false)
         </div>
         <ul className='hidden md:flex'>
         <li> <Link to='/'>HOME</Link> </li>
-        <li> <Link to='/destination'>DESTINATIONS</Link> </li>
-        <li> <Link to='/about'>ABOUT US</Link> </li>
-        <li> <Link to='/contact'>CONTACT</Link> </li>
+        <li> <Link to='/destination'>DESTINOS</Link> </li>
+        <li> <Link to='/about'>ACERCA DE </Link> </li>
+        <li> <Link to='/contact'>CONTACTO</Link> </li>
         </ul>
                       {/* ICONOS */}
         <div className='hidden md:flex'>
@@ -52,9 +53,9 @@ const [logo, setLogo] = useState(false)
           <ul>
             <h1 className='border-b'>TRAVEL APP</h1>
               <li> <Link to='/'>HOME</Link> </li>
-              <li> <Link to='/destination'>DESTINATIONS</Link> </li>
-              <li> <Link to='/about'>ABOUT US</Link> </li>
-              <li> <Link to='/contact'>CONTACT</Link></li>
+              <li> <Link to='/destination'>DESTINOS</Link> </li>
+              <li> <Link to='/about'>ACERCA DE</Link> </li>
+              <li> <Link to='/contact'>CONTACTO</Link></li>
               <li> <Link to='login'>LOGIN</Link> </li>
                               {/* SEARCHBAR */}
         <div className='flex flex-col'>
