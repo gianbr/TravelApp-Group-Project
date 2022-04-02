@@ -24,9 +24,7 @@ function Details (){
       ))} 
       <h3>{detail.location} </h3>
       <h3>{detail.city}</h3>
-
-      {/* //FALTA // */}
-       <h3>{detail.description.title}</h3>
+      <h3>{detail.description}</h3>
 
         {detail.included?.map((i,id) => (
           <div key={id}>
@@ -39,7 +37,7 @@ function Details (){
       {detail.comments?.map((c,id) => (
         <li key={id}>
           <br/>
-          {c.body}</li> 
+          {c}</li> 
           ))}
     </div>
     )
