@@ -5,7 +5,6 @@ import Destino from './Destino';
 import Filters from './Filters';
 import { searchDestination } from "../actions";
 import { AiOutlineSearch } from 'react-icons/ai';
-import { Link } from "react-router-dom";
 import { useState } from 'react';
 
 function Destinations() { 
@@ -42,14 +41,14 @@ return(
      {/* RENDERIZADO DE FILTROS */}
       <Filters />
       <div className='py-4'>
-          <form className=' w-full flex justify-between items-center max-w-[700px] mx-auto rounded-2xl border-none text-black bg-gray-100/90 py-1'>
+          <form onSubmit={e => handleClick(e)} className=' w-full flex justify-between items-center max-w-[700px] mx-auto rounded-2xl border-none text-black bg-gray-100/90 py-1'>
             <div>
               <input className=' px-3 py-2 font-semibold bg-transparent text-black focus:outline-none rounded-2xl border-none'
                 type='text' placeholder='Busca tu destino' onChange={e => handleInputChange(e)}/>
                 </div>
-                <Link to="/destination" onClick={e => handleClick(e)}>
-          <AiOutlineSearch size={25} className='icon mr-2' style={{color: '#000000 '}}  />
-           </Link>
+          <div>
+            <AiOutlineSearch size={25} className='icon mr-2' style={{ color: '#000000 ' }} onClick={e => handleClick(e)}/>
+              </div>
           </form>
           </div>
       </div>
