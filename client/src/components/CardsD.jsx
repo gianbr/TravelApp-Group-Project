@@ -20,7 +20,7 @@ return(
     <div className='flex justify-between items-center'>
         <RiStarFill className='mr-1' size={15}/>  <RiStarFill className='mr-1' size={15}/>
         <RiStarFill className='mr-1' size={15}/> <RiStarFill className='mr-1' size={15}/>
-            <RiStarHalfFill className='mr-1' size={15}/>
+        <RiStarHalfFill className='mr-1' size={15}/>
             </div>
         </div>
     </div>

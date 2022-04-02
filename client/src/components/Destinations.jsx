@@ -6,6 +6,7 @@ import Filters from './Filters';
 import { searchDestination } from "../actions";
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useState } from 'react';
+import Pagination from './Pagination';
 
 function Destinations() { 
 
@@ -67,6 +68,7 @@ return(
             </div>
           );
         })}
+         <Pagination />
          </div>
         </div>
       </div>
