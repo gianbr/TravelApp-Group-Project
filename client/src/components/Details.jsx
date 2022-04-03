@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { getDetailId, clearDetailsState} from '../actions/index'
+import { getDetailId} from '../actions/index'
 import { useSelector,useDispatch} from 'react-redux';
 import Carousel from './Carousel';
 
@@ -13,7 +13,6 @@ function Details (){
 
   useEffect(() => {
     dispatch(getDetailId(id));
-    dispatch(clearDetailsState())
   }, [dispatch, id]);
  
   
@@ -23,14 +22,9 @@ function Details (){
     <div>
       <h3>{detail.title}</h3>
       <Carousel />
-      <div className="">
-      </div>
-      
-      <h3>{detail.location}</h3>
+      <h3>{detail.location} </h3>
       <h3>{detail.city}</h3>
-          
-      {/* //FALTA // */}
-      {/* <h3>{detail.description.title}</h3 */}
+      <h3>{detail.description}</h3>
 
         {detail.included?.map((i,id) => (
           <div key={id}>
@@ -39,11 +33,12 @@ function Details (){
         ))}
       <h3>{detail.score}</h3>
       <h3>{detail.stock}</h3>
-      <h3>{detail.price}</h3>
+      <h3>$ {detail.price}</h3>
       {detail.comments?.map((c,id) => (
-          <li key={id}>{c.body}</li> 
-          ))}
+        <li key={id}>
           <br/>
+          {c}</li> 
+          ))}
     </div>
 
     )

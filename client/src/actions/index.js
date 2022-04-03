@@ -1,14 +1,16 @@
 
 const axios = require('axios');
 
-
-export const searchDestination = (name) => async (dispatch) => {
-    let response = await  axios.get('?name=' + name);
-    return dispatch({
-        type: "SEARCH_DESTINATION",
-        payload: response.data,
-    });
-};
+export function searchDestination(name) {
+    return async function (dispatch) {
+        let response = await axios.get('http://localhost:8800/getplains?location=' + name);
+        console.log('alba',response.data)
+        return dispatch({
+            type: "SEARCH_DESTINATION",
+            payload: response.data,
+        });
+    };
+}
 
 export function getPlains() {
     return async function (dispatch) {
@@ -24,7 +26,7 @@ export function getPlains() {
 export function getDetailId(id) {
     return async function (dispatch) {
         let response = await axios.get('http://localhost:8800/' + id);
-        console.log('juth', response.data)
+        //console.log('juth', response.data)
         return dispatch({
             type: "GET_DETAIL",
             payload: response.data,
@@ -59,19 +61,4 @@ export function getDetailId(id) {
                 type: "ORDER_BY_SCORE",
                 payload
             }
-        }
-
-
-        export function clearDetailsState() {
-            return {
-                type: "CLEAR_DETAILS_STATE",
-            };
-        }
-
-
-        export function resetDetail() {
-            return {
-                type: "RESET_DETAIL",
-
-            };
         }

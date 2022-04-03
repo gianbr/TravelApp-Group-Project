@@ -2,6 +2,7 @@ import React ,{useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlains } from '../actions';
 import CardsD from './CardsD';
+import { Link } from 'react-router-dom';
 
 function Destacados(){
     const dispatch = useDispatch();
@@ -14,11 +15,11 @@ function Destacados(){
 
     return(
         <div className='max-w-[1240px] mx-auto py-16 px-4'>
-            <h1 className='py-2 text-center'>Recommended Destinations</h1>
+            <h1 className='py-2 text-center'>Destinos Recomendados</h1>
             <hr className='py-4  border-gray-300' style={{color: '#14b8a6'}}/>
             <div className='grid grid-cols-4 gap-4'>
             {plains?.slice(0,4).map((p) => {
-                return (
+                return (   
                 <CardsD
                 key={p.title}
                 image={p.image}  
