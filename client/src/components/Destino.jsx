@@ -11,7 +11,7 @@ const Destino = ({image, title, price, location,id}) => {
         </Link>
         <p>{location}</p>
         <div className="info">
-        <h4>$ {price}</h4>
+        <h4>{price}</h4>
         </div>
         </div>
     );

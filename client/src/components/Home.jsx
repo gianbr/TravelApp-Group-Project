@@ -10,7 +10,6 @@ import Footer from "./Footer";
 function Home(){
   const dispatch = useDispatch();
   const [name, setName] = useState("");
-
   const handleInputChange = (e) => {
     e.preventDefault();
     setName(e.target.value);
@@ -47,6 +46,7 @@ function Home(){
                         {/* FIN DEL SEARCHBAR */}
         </div>
       </div>
+    
       <Destacados />
       <Footer />
       </div>
