@@ -62,3 +62,14 @@ export function getDetailId(id) {
                 payload
             }
         }
+
+        export function getPlainsDestacados() {
+          return async function (dispatch) {
+            var json = await axios.get('http://localhost:8800/getplains');
+        //console.log(json.data)
+             return dispatch({
+            type: "GET_PLAINS_DESTACADOS",
+            payload: json.data
+        })
+    }
+};
