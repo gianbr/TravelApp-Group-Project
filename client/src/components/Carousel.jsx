@@ -18,6 +18,7 @@ const Carousel1 = () => {
 
 
     return (
+        
         <div>
             <Carousel
                 useKeyboardArrows
