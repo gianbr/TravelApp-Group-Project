@@ -62,3 +62,10 @@ export function getDetailId(id) {
                 payload
             }
         }
+
+        export function clearState(payload) {
+            return {
+                type: "CLEAR_STATE",
+                payload
+            }
+        }

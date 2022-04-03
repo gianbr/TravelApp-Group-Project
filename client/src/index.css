@@ -37,4 +37,8 @@
   .icon {
     @apply text-2xl cursor-pointer
   }
+  .button{
+    @apply p-3 border bg-gradient-to-r from-[var(--primary-ligth)] text-white rounded-md
+  }
+ 
 }
