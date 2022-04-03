@@ -25,7 +25,6 @@ function Destacados(){
                 title={p.title}
                 location={p.location}  
                 score={p.score}
-                
                 /> )
             })}    
             </div>

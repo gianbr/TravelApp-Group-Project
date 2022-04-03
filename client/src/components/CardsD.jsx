@@ -1,8 +1,6 @@
-import React from 'react';
-
-import { RiStarFill } from 'react-icons/ri'
-import { RiStarHalfFill } from 'react-icons/ri'
-
+import React, { useState } from "react";
+import "./styles.css";
+import StarRating from "./StartRating";
 
 
 function CardsD({ image, title, location, score}){
@@ -18,7 +16,7 @@ return(
     <p className='leading-relaxed mb-3'>{location} </p>
     </div>
     <div className='flex justify-between items-center'>
-    
+                    <StarRating score={score} />
        
             </div>
         </div>
