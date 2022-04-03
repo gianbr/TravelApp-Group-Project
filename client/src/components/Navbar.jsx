@@ -39,7 +39,7 @@ const [logo, setLogo] = useState(false)
         <li> <Link to='/'>HOME</Link> </li>
         <li> <Link to='/destination'>DESTINOS</Link> </li>
         <li> <Link to='/about'>ACERCA DE </Link> </li>
-        <li> <Link to='/contact'>CONTACTO</Link> </li>
+        <li> <Link to='/servicios'>SERVICIOS</Link> </li>
         </ul>
                       {/* ICONOS */}
         <div className='hidden md:flex'>
