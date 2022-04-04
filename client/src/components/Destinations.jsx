@@ -45,10 +45,10 @@ function Destinations() {
       <div className="relative z-10 flex items-baseline justify-between bg-teal-500 pt-10 pb-6 border-b border-gray-200">
         {/* RENDERIZADO DE FILTROS */}
         <Filters />
-        <div className="py-4">
+        <div className="py-4 mr-4">
           <form
             onSubmit={(e) => handleClick(e)}
-            className=" w-full flex justify-between items-center max-w-[700px] mx-auto rounded-2xl border-none text-black bg-gray-100/90 py-1"
+            className="w-full flex justify-between items-center max-w-[700px] mx-auto rounded-2xl border-none text-black bg-gray-100/90 py-1"
           >
             <div>
               <input
@@ -71,6 +71,15 @@ function Destinations() {
       </div>
       {/* CONTAINER DE LA CARTA - PAQUETE */}
       <div className="container mx-auto">
+      <div className=' pt-4 flex justify-center text-center p-4'>
+      <Pagination
+            page={page}
+            setPage={setPage}
+            plainsPerPage={plainsPerPage}
+            plains={plains.length}
+            pagination={pagination}
+          />
+          </div>
         <div className="py-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {currentPlains?.map((destination) => {
             return (
@@ -85,13 +94,6 @@ function Destinations() {
               </div>
             );
           })}
-          <Pagination
-            page={page}
-            setPage={setPage}
-            plainsPerPage={plainsPerPage}
-            plains={plains.length}
-            pagination={pagination}
-          />
         </div>
       </div>
     </div>

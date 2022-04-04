@@ -7,7 +7,7 @@ import swal from 'sweetalert';
 
 
 export default function CreateForm(){
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
 
     const [plain, setPlain] = useState({
         title: '',
@@ -16,8 +16,8 @@ export default function CreateForm(){
         price:'',
         images:[],
         stock:'',
-        included:[],
-        description:''
+        included:[{body: ''}],
+        description:[{body: ''}]
     });
 
     // useEffect(() => {
@@ -37,12 +37,20 @@ export default function CreateForm(){
         if(e.target.value){
         setPlain({
             ...plain,
-            included: [...plain.included, e.target.value]
+            included: [{...plain.included.body, body: e.target.value}]
         })
     }
 console.log('included', e.target.value);
 }
-   
+ 
+function handleDescription(e){
+  if(e.target.value){
+    setPlain({
+      ...plain,
+      description: {...plain.description.body, body: e.target.value}
+    });
+  };
+};
 
     function handleSubmit(e){
         e.preventDefault();
@@ -61,21 +69,24 @@ console.log('included', e.target.value);
 
 
 return(
-   <div> <Link to= '/home'><button>Volver</button></Link>
+   <div> <Link to= '/'><button className='rounded-md ml-2 py-2 p-3 border bg-teal-400 hover:bg-indigo-500 relative text-white'>Volver</button></Link>
+    <div className="px-4 sm:px-0 pt-4">
+              <h3 className="text-lg font-medium leading-6 text-gray-900">CREA TU PROPIO PAQUETE</h3>
+            </div>
 <form className="w-full max-w-lg" onSubmit={handleSubmit}>
-  <div className="flex flex-wrap -mx-3 mb-6">
+  <div className="flex flex-wrap -mx-3 mb-6 pt-4 justify-center items-center h-full">
     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlForm="grid-first-name">
         Titulo
       </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Excursion/Paseo..."
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Excursion/Paseo..."
       onChange={(e)=>setPlain({...plain, title: e.target.value})}/>
     </div>
     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlForm="grid-first-name">
         Precio
       </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="number" placeholder="3000"
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="number" placeholder="3000"
       onChange={(e)=>setPlain({...plain, price: e.target.value})}/>
     </div>
   </div>
@@ -83,35 +94,35 @@ return(
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlForm="grid-first-name">
         Imagenes
       </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="Inserte url aqui..."
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="Inserte url aqui..."
       onChange={handleImages}/>
       
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="Inserte url aqui..."
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="Inserte url aqui..."
       onChange={handleImages}/>
       
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="Inserte url aqui..."
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="Inserte url aqui..."
       onChange={handleImages}/>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="Inserte url aqui..."
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="Inserte url aqui..."
       onChange={handleImages}/>
     </div>
     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlForm="grid-first-name">
         Incluido
       </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Guia/Bebidas..."
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Guia/Bebidas..."
       onChange={handleIncluded}/>
       
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Guia/Bebidas..."
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Guia/Bebidas..."
       onChange={handleIncluded}/>
-        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Guia/Bebidas..."
+        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Guia/Bebidas..."
       onChange={handleIncluded}/>
     </div>
     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlForm="grid-first-name">
        Descripcion
       </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Experiencia unica..."
-      onChange={(e)=>setPlain({...plain, description: e.target.value})}/>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Experiencia unica..."
+      onChange={handleDescription}/>
 
     </div>
   <div className="flex flex-wrap -mx-3 mb-2">
@@ -119,7 +130,7 @@ return(
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlForm="grid-city">
         Ciudad
       </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="CABA"
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="CABA"
       onChange={(e)=>setPlain({...plain, city: e.target.value})}/>
       
     </div>
@@ -128,7 +139,7 @@ return(
         Provincia
       </label>
       <div className="relative">
-        <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" onChange={(e)=>setPlain({...plain, location: e.target.value})}>
+        <select className="block appearance-none w-full bg-gray-200 border border-teal-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" onChange={(e)=>setPlain({...plain, location: e.target.value})}>
         <option>Seleccionar</option>
           <option>Buenos Aires</option>
           <option>Mendoza</option>
@@ -144,13 +155,13 @@ return(
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlForm="grid-first-name">
        Stock
       </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="number" placeholder="10"
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-teal-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="number" placeholder="10"
       onChange={(e)=>setPlain({...plain, stock: e.target.value})}/>
 
     </div>
   </div>
   <div>
-                    <button type= 'submit'>Crea tu servicio</button>
+    <button className='w-full rounded-md py-2 pt-4 p-3 border bg-teal-400 hover:bg-indigo-500 relative text-white' type= 'submit'>Crea tu servicio</button>
                 </div>
 </form>
 </div>
