@@ -3,10 +3,10 @@ import React, { useEffect } from 'react'
 import { Carousel } from "react-responsive-carousel";
 import { useParams } from 'react-router-dom'
 import { getDetailId } from '../actions/index'
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { useSelector, useDispatch } from 'react-redux';
 
-const Carousel1 = () => {
+const Carousel2 = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.detail);
@@ -18,7 +18,6 @@ const Carousel1 = () => {
 
 
     return (
-        
         <div>
             <Carousel
                 useKeyboardArrows
@@ -27,15 +26,13 @@ const Carousel1 = () => {
                 interval={6000}
                 showThumbs={false}
             >
-                {detail.images?.map((e, i) => {
+                {detail.comments?.map((c, i) => {
                     return (
                         <div className='flex justify-center'>
-                            <div key={i} className="w-8/12  rounded-md ">
-                                <img
-                                    className="flex h-96 rounded-md shadow-lg shadow-[#040c16]"
-                                    src={e}
-                                    alt="Not found"
-                                />
+                            <div key={i} className="w-11/12">
+                            
+                            <li key={id}>{c}</li> 
+                           
                             </div>
                         </div>
                     );
@@ -45,4 +42,4 @@ const Carousel1 = () => {
     );
 };
 
-export default Carousel1;
+export default Carousel2

@@ -85,6 +85,11 @@ function rootReducer(state = initialState, action){
                 ...state,
                 plains: action.payload
             };
+        case "CLEAR_STATE":
+            return {
+                ...state,
+                detail: []
+            }
 
         case "GET_PLAINS_DESTACADOS": 
          let res = action.payload.slice().sort(function (a, b) {
