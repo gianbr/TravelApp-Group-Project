@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.css";
 import StarRating from "./StartRating";
 import {Link} from "react-router-dom"
