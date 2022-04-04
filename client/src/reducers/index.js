@@ -3,7 +3,8 @@ const initialState = {
     plains : [],
     plainsCopy : [],
     destination: [],
-    detail: []
+    detail: [],
+    plainsDestacados: []
     
 };
 
@@ -89,6 +90,26 @@ function rootReducer(state = initialState, action){
                 ...state,
                 detail: []
             }
+
+        case "GET_PLAINS_DESTACADOS": 
+         let res = action.payload.slice().sort(function (a, b) {
+                if (a.score > b.score) {
+                    return -1;
+                }
+                if (b.score > a.score) {
+                    return 1;
+                }
+                return 0
+            })
+            let respuesta = 
+            [res[res.findIndex(e => e.location === "Mendoza")],
+            res[res.findIndex(e => e.location === "Buenos Aires")],
+            res[res.findIndex(e => e.location === "Río Negro")],
+            res[res.findIndex(e => e.location === "Misiones")]]
+        return {   
+            ...state,
+            plainsDestacados: respuesta
+        }    
             
         default:
             return state;

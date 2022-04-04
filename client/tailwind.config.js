@@ -6,4 +6,10 @@ module.exports = {
        extend: {},
      },
      plugins: [],
+  style: {
+    postcss: {
+      plugins: [require("tailwindcss"), require("autoprefixer")],
+    },
+  },
    }
+   

@@ -17,6 +17,7 @@ function Details (){
     dispatch(getDetailId(id));
     dispatch(clearState())
   }, [dispatch, id]);
+ 
   
 
   return (
