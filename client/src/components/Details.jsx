@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import {getDetailId} from '../actions/index'
+import { getDetailId} from '../actions/index'
 import { useSelector,useDispatch} from 'react-redux';
-
+import Carousel from './Carousel';
 
 
 function Details (){
@@ -14,14 +14,14 @@ function Details (){
   useEffect(() => {
     dispatch(getDetailId(id));
   }, [dispatch, id]);
+ 
   
 
   return (
+
     <div>
       <h3>{detail.title}</h3>
-      {detail.images?.map((e) => (
-        <img src={e} alt={e} key={e}/>
-      ))} 
+      <Carousel />
       <h3>{detail.location} </h3>
       <h3>{detail.city}</h3>
       <h3>{detail.description}</h3>
@@ -40,6 +40,7 @@ function Details (){
           {c}</li> 
           ))}
     </div>
+
     )
 };
   export default Details;

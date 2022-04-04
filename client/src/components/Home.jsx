@@ -16,6 +16,7 @@ function Home(){
           <h1>Descubre la cultura y vive una aventura.</h1>
         </div>
       </div>
+    
       <Destacados />
       <Footer />
       </div>

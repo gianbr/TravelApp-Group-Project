@@ -66,9 +66,22 @@ export function orderByPrice(payload) {
 
 // Ordenamiento por Estrellas o Puntuacion
 
-export function orderByScore(payload) {
-  return {
-    type: "ORDER_BY_SCORE",
-    payload,
-  };
-}
+        export function orderByScore(payload) {
+            return {
+                type: "ORDER_BY_SCORE",
+                payload
+            }
+        }
+
+        export function getPlainsDestacados() {
+          return async function (dispatch) {
+            var json = await axios.get('http://localhost:8800/getplains');
+        //console.log(json.data)
+             return dispatch({
+            type: "GET_PLAINS_DESTACADOS",
+            payload: json.data
+        })
+    }
+};
+
+
