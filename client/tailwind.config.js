@@ -5,11 +5,12 @@ module.exports = {
      theme: {
        extend: {},
      },
-     plugins: [],
+     plugins: [
+
+     ],
   style: {
     postcss: {
       plugins: [require("tailwindcss"), require("autoprefixer")],
     },
   },
    }
-   

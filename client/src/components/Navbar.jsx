@@ -9,8 +9,6 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { HiOutlineMenuAlt4 } from 'react-icons/hi';
 
 function Navbar (){
-const dispatch = useDispatch();
-const [name, setName] = useState("");
 const [nav, setNav] = useState(false);
 const [logo, setLogo] = useState(false)
   
@@ -18,17 +16,6 @@ const [logo, setLogo] = useState(false)
     setNav(!nav);
     setLogo(!logo)
   };
-
-  const handleInputChange = (e) => {
-    e.preventDefault();
-    setName(e.target.value);
-  };
-   
-  const handleClick = (e) => {
-    e.preventDefault();
-      dispatch(searchDestination(name));
-
-  }; console.log(name)
 
   return(
     <div className='flex w-full justify-between items-center h-20 px-4 absolute z-10 text-white'>
@@ -55,19 +42,8 @@ const [logo, setLogo] = useState(false)
               <li> <Link to='/'>HOME</Link> </li>
               <li> <Link to='/destination'>DESTINOS</Link> </li>
               <li> <Link to='/about'>ACERCA DE</Link> </li>
-              <li> <Link to='/contact'>CONTACTO</Link></li>
+              <li> <Link to='/servicios'>SERVICIOS</Link></li>
               <li> <Link to='login'>LOGIN</Link> </li>
-                              {/* SEARCHBAR */}
-        <div className='flex flex-col'>
-        <form className=' w-full flex justify-between items-center max-w-[700px] mx-auto rounded-2xl border-none text-black bg-emerald-300 py-1'>
-        <div>
-          <input className=' px-3 py-2 font-semibold bg-transparent text-black focus:outline-none rounded-2xl border-none' 
-          type='text' placeholder='Search Destinations' onChange={e => handleInputChange(e)}/> </div>
-            <div onClick={e => handleClick(e)}>
-              <AiOutlineSearch size={25} className='icon mr-2' style={{color: '#000000 '}}  />
-            </div>
-          </form>
-                    </div>
                 </ul>
             </div>
         </div>
