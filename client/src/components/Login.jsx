@@ -20,20 +20,19 @@ return (
             </div>
 
         <div className='flex flex-col mb-4'>
-            <label>Username</label>
+            <label>Usuario</label>
             <input className='border relative bg-gray-100 p-2' type="text" />
             </div>
         
         <div className='flex flex-col '>
-            <label>Password</label>
+            <label>Contraseña</label>
             <input className='border relative bg-gray-100 p-2' type="password" />
             </div>
             
-        <button className='w-full py-3 mt-8 bg-teal-400 hover:bg-indigo-500 relative text-white'>Sign In</button>
+        <button className='w-full py-3 mt-8 bg-teal-400 hover:bg-indigo-500 relative text-white'>Iniciar Sesion</button>
            
         <div>
-        <p className='flex items-center mt-2'><input className='mr-2' type="checkbox" />Remember Me</p>
-        <Link> <p className='text-center text-black mt-8'>Not a member? Sign up now</p> </Link> 
+        <Link> <p className='text-center text-black mt-8'>No tienes una cuenta? Registrate aqui</p> </Link> 
             </div>
             
             </form>

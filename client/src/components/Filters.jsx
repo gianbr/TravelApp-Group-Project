@@ -29,12 +29,11 @@ function handleLocationFilter(e) {
 };
 
     return(
-     <div className=' max-w-7xl mx-auto pt-1 py-3 px-3 sm:px-6 lg:px-8 bg-teal-500 flex items-center justify-between flex-wrap'>
-        <div><h1 className='mr-4' style={{color: '#ffff'}}>TRAVEL APP</h1></div>
+     <div className=' max-w-7xl mx-auto pt-1 py-3 px-3 sm:px-6 lg:px-8 bg-indigo-300 flex justify-center'>
                     {/* FILTERS */}
-               
+                    <button> <Link to='/' > <FaHome className='mr-2 ml-1' style={{color: '#ffff'}} size={25}/> </Link> </button>
                 {/* FILTRADO POR PROVINCIA */}
-        <select className='mr-2 flex items-center justify-center px-4 py-2 border border-teal-500	border-color: rgb(20 184 166); rounded-md shadow-sm text-base font-medium text-black' onChange={e => handleLocationFilter(e)}>  
+        <select className='mr-2 flex justify-start px-4 py-2 border border-indigo-300	border-color: rgb(20 184 166); rounded-md shadow-sm text-base font-medium text-black' onChange={e => handleLocationFilter(e)}>  
             <option value="All">Provincia</option>
             <option value="Misiones">Misiones</option>
             <option value="Mendoza">Mendoza</option>
@@ -43,20 +42,19 @@ function handleLocationFilter(e) {
                
                 {/* ORDENAMIENTO POR PRECIO */}
                 </select>
-        <select className="mr-2 flex items-center justify-center px-4 py-2 border border-teal-500	border-color: rgb(20 184 166); rounded-md shadow-sm text-base font-medium text-black" onChange={e => handleOrderByPrice(e)}>  
+        <select className="mr-2 flex items-center justify-center px-4 py-2 border border-indigo-300	border-color: rgb(20 184 166); rounded-md shadow-sm text-base font-medium text-black" onChange={e => handleOrderByPrice(e)}>  
             <option value="All">Precio</option>
             <option value= "asc">Menor - Mayor</option>
             <option value= "desc">Mayor - Menor</option>
                 </select>
             
                 {/* ORDENAMIENTO POR PUNTAJE  */}
-        <select className='mr-2 flex items-center justify-center px-4 py-2 border border-teal-500	border-color: rgb(20 184 166); rounded-md shadow-sm text-base font-medium text-black' onChange={e => handleOrderByScore(e)}>  
+        <select className='mr-2 flex items-center justify-center px-4 py-2 border border-indigo-300	border-color: rgb(20 184 166); rounded-md shadow-sm text-base font-medium text-black' onChange={e => handleOrderByScore(e)}>  
             <option value="All">Puntaje</option>
             <option value= "asc">Menor - Mayor</option>
             <option value= "desc">Mayor - Menor</option>
                </select>
                {/* PAGINA PRINCIPAL */}
-        <button> <Link to='/' > <FaHome className='mr-4' style={{color: '#ffff'}} size={25}/> </Link> </button>
      </div>
     );
 };

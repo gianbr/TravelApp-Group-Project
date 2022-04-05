@@ -1,45 +1,38 @@
-import React from 'react';
-import {
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-} from 'react-icons/fa';
+import React from 'react'
+import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 
-function Footer(){
+const Footer = () => {
   return (
-    <div className='w-full bg-teal-500 py-16'>
-      <div className='max-w-[1240px] mx-auto flex flex-col px-4'>
-        <div className='sm:flex text-center justify-between items-center'>
-          <h1 style={{color: '#ffff'}}>TRAVEL APP.</h1>
-          {/* ICONOS */}
-          <div className='flex justify-between w-full sm:max-w-[280px] my-4'>
-            <FaFacebook className='icon' />
-            <FaTwitter className='icon' />
-            <FaInstagram className='icon' />
-          </div>
+    <div className='w-full mt-24 bg-indigo-300/90 text-gray-600 font-semibold py-y px-2'>
+        <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-2 border-b-2 border-gray-600 py-8'>
+            <div>
+                <h6 className='font-bold uppercase pt-2'>TRAVEL APP.</h6>
+                <ul>
+                  <li className='py-1'>
+                  <Link to='/destination'>Destinos</Link>
+                  </li>
+                  <li className='py-1'>
+                  <Link to='/servicios'>Servicios</Link>
+                  </li>
+                  <li className='py-1'>
+                  <Link to='/about'>Acerca de nosotros</Link>
+                  </li>
+                </ul>
+            </div>
         </div>
-                  {/* COMPONENTES */}
-        <div className='flex justify-between'>
-          <ul className='lg:flex' style={{color: '#ffff'}}>
-            <Link to='/about'>
-            <li>Acerca de</li>
-            </Link>
-            <Link to='/servicios'>
-            <li>Servicios</li>     
-            </Link>
-            <Link to='/destination'>
-            <li>Destinos</li>
-            </Link>
-          </ul>
-        {/* <p style={{color: '#ffff'}} className='items-center'> 2022 Travel App. All rights reserved</p> */}
-          <ul className='text-right lg:flex' style={{ color: '#ffff' }}>
-          <div className='sm:flex text-center justify-between items-center'>
-          </div>
-          </ul>
+
+        <div className='flex flex-col max-w-[1240px] px-2 py-4 mx-auto justify-between sm:flex-row text-center text-gray-600'>
+        <p className='py-4'>2022 TRAVEL APP, LLC. All rights reserved</p>
+        <div className='flex justify-between sm:w-[300px] pt-4 text-2xl'>
+            <FaFacebook />
+            <FaInstagram />
+            <FaTwitter />
+            <FaGithub />
         </div>
-      </div>
+        </div>
     </div>
   );
 };
+
 export default Footer;
