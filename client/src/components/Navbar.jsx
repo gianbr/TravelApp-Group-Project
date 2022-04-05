@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
-import { searchDestination } from "../actions";
-import { useDispatch } from "react-redux";
-import { AiOutlineSearch } from 'react-icons/ai';
 import { BsPerson } from 'react-icons/bs'
 import { FaShoppingCart } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai';
@@ -25,8 +22,8 @@ const [logo, setLogo] = useState(false)
         <ul className='hidden md:flex'>
         <li> <Link to='/'>HOME</Link> </li>
         <li> <Link to='/destination'>DESTINOS</Link> </li>
-        <li> <Link to='/about'>ACERCA DE </Link> </li>
         <li> <Link to='/servicios'>SERVICIOS</Link> </li>
+        <li> <Link to='/about'>ACERCA DE </Link> </li>
         </ul>
                       {/* ICONOS */}
         <div className='hidden md:flex'>
@@ -41,8 +38,8 @@ const [logo, setLogo] = useState(false)
             <h1 className='border-b'>TRAVEL APP</h1>
               <li> <Link to='/'>HOME</Link> </li>
               <li> <Link to='/destination'>DESTINOS</Link> </li>
-              <li> <Link to='/about'>ACERCA DE</Link> </li>
               <li> <Link to='/servicios'>SERVICIOS</Link></li>
+              <li> <Link to='/about'>ACERCA DE</Link> </li>
               <li> <Link to='login'>LOGIN</Link> </li>
                 </ul>
             </div>

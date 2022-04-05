@@ -22,10 +22,10 @@ function Details (){
 
   return (
     <div className='bg-slate-200'>      
-    <div  className='border-2 border-teal-500 mx-28  bg-white'>
+    <div  className='border-2 border-indig-300 mx-28  bg-gray-100/90'>
           
         <div>
-          <div className='bg-teal-500'>
+          <div className='bg-indigo-300'>
             <h3 className='ml-11 mt-4 font-bold text-3xl text-white'>{detail.city}, {detail.location}</h3>
           </div>
         
@@ -51,7 +51,7 @@ function Details (){
         <br/> 
       
       <div> 
-        <p className='bg-teal-500 text-white'><strong>INCLUYE: </strong></p>
+        <p className='bg-indigo-300 text-white'><strong>INCLUYE: </strong></p>
         {detail.included?.map((i,id) => (
             <div key={id}>
             <h4 className='ml-12'>-{i}</h4>
@@ -64,13 +64,13 @@ function Details (){
             </div>
       
       <br/>
-      <div className='mx-52 border-2 border-teal-600 mb-20 rounded-md bg-teal-500 text-white'>
+      <div className='mx-52 border-2 border-indigo-500 mb-20 rounded-md bg-indigo-300 text-white'>
       <p className='mt-3 ml-5'><strong>COMENTARIOS: </strong></p>
         <CarouselCom/>
       </div>
-      <div className='flex justify-end mr-2 mb-4 text-4xl font-mono text-teal-500'>
+      <div className='flex justify-end mr-2 mb-4 text-1xl font-mono text-teal-500'>
               <Link to="/destination">
-                  <button>VOLVER</button>
+                  <button className='rounded-2xl py-2 p-3 focus:outline-none focus:ring focus:ring-indigo-500 bg-indigo-400 hover:bg-indigo-300 relative text-white font-semibold'>VOLVER</button>
               </Link> 
             </div>
       </div>

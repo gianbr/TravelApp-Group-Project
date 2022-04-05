@@ -21,8 +21,8 @@ const Pagination = ({ page, setPage, plainsPerPage, plains, pagination }) => {
       <button
         onClick={back}
         disabled={page <= 1}
-        className="h-12 border-2 border-r-0 border-teal-500
-            px-4 rounded-l-lg bg-teal-500 hover:text-white"
+        className="h-12 border-2 border-r-0 border-indigo-400
+            px-4 rounded-l-lg bg-indigo-300 hover:text-white"
       >
         <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
           <path
@@ -36,8 +36,8 @@ const Pagination = ({ page, setPage, plainsPerPage, plains, pagination }) => {
         <button
           key={pg}
           onClick={() => pagination(pg)}
-          className={`h-12 border-2 border-r-0 border-teal-500
-              w-12 ${page === pg && "bg-teal-500 text-white"}`}
+          className={`h-12 border-2 border-r-0 border-indigo-400
+              w-12 ${page === pg && "bg-indigo-400 text-white"}`}
         >
           {pg}
         </button>
@@ -45,8 +45,8 @@ const Pagination = ({ page, setPage, plainsPerPage, plains, pagination }) => {
       <button
         onClick={Next}
         disabled={page >= totalPages}
-        className="h-12 border-2  border-teal-500
-              px-4 rounded-r-lg hover:bg-teal-500 hover:text-white"
+        className="h-12 border-2  border-indigo-400
+              px-4 rounded-r-lg hover:bg-indigo-300 hover:text-white"
       >
         <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
           <path
