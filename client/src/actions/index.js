@@ -79,15 +79,37 @@ export function postPlain(data) {
                 payload
             }
         }
-        export function getPlainsDestacados() {
-          return async function (dispatch) {
-            var json = await axios.get('http://localhost:8800/getplains');
+export function getPlainsDestacados() {
+    return async function (dispatch) {
+        var json = await axios.get('http://localhost:8800/getplains');
         //console.log(json.data)
-             return dispatch({
+        return dispatch({
             type: "GET_PLAINS_DESTACADOS",
             payload: json.data
         })
     }
-};
+
+}
+
+    export function signin(data) {
+        return async function (dispatch) {
+            let response = await axios.post('http://localhost:8800/signin',data);
+            return dispatch({
+                type: "SIGNIN",
+                payload: response.data,
+            });
+        }
+            
+    };
+
+    export function signup(data) {
+    return async function (dispatch) {
+        let response = await axios.post('http://localhost:8800/signup', data);
+        return dispatch({
+            type: "SIGNUP",
+            payload: response.data,
+        });
+    }
+}
 
 
