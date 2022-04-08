@@ -1,13 +1,17 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect} from "react";
+import { useSelector,useDispatch } from "react-redux";
 import Destino from "./Destino";
 import Filters from "./Filters";
 import Pagination from "./Pagination";
 import Searchbar from "./Searchbar";
+//import NotFound from '../assets/mapa.webp'
+import { getPlains } from "../actions"
+
 
 function Destinations() {
   const plains = useSelector((state) => state.plains);
-  
+  const dispatch = useDispatch();
+
   const [page, setPage] = useState(1);
   const plainsPerPage = 6;
   const end = page * plainsPerPage;
@@ -17,6 +21,11 @@ function Destinations() {
   const pagination = (page) => {
     setPage(page);
   };
+
+  useEffect(() => {
+    dispatch(getPlains());
+  }, [dispatch]);
+
 
   return (
     <div>
@@ -28,7 +37,9 @@ function Destinations() {
         
       </div>
       {/* CONTAINER DE LA CARTA - PAQUETE */}
-      <div className="container mx-auto">
+
+        
+        <div className="container mx-auto">
         <div className="py-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {currentPlains?.map((destination) => {
             return (
@@ -51,7 +62,7 @@ function Destinations() {
             plainsPerPage={plainsPerPage}
             plains={plains.length}
             pagination={pagination}
-          />
+            />
           </div>
       </div>
     </div>

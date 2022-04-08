@@ -1,12 +1,19 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import beachVid from '../assets/production ID_4205697.mp4'
 import Navbar from "./Navbar";
 import Destacados from "./Destacados";
 import Footer from "./Footer";
 
 
-function Home(){
+function Home() {
+  
+  useEffect(() => { 
+    window.scrollTo(0, 0)
+  }
+    , []); 
+  
     return (
+      
       <div>
       <div className='w-full h-screen relative'>
         <Navbar />

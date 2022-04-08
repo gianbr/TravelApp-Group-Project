@@ -28,11 +28,10 @@ const Carousel2 = () => {
             >
                 {detail.comments?.map((c, i) => {
                     return (
-                        <div className='flex justify-center'>
-                            <div key={i} className="w-11/12">
-                            
-                            <li key={id}>{c}</li> 
-                           
+                        <div key={i} className='flex justify-center'>
+                            <div className="w-11/12">
+
+                            <div>{c}</div> 
                             </div>
                         </div>
                     );
