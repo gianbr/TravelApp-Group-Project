@@ -1,6 +1,7 @@
 
 const axios = require('axios');
 
+
 export function searchDestination(name) {
     return async function (dispatch) {
         let response = await axios.get('http://localhost:8800/getplains?location=' + name);
@@ -37,7 +38,7 @@ export function getDetailId(id) {
 
 export function postPlain(data) {
     return async function (dispatch) {
-      let response = await axios.post("http://localhost:8800/postPlains", data);
+      let response = await axios.post("http://localhost:8800/postPlains", data, {Headers: {Authorization: "Bearer " + localStorage.getItem('token')}});
       //console.log('agus', response.data)
       return dispatch({
         type: "POST_PLAIN",
@@ -93,15 +94,27 @@ export function getPlainsDestacados() {
 
     export function signin(data) {
         return async function (dispatch) {
-            let response = await axios.post('http://localhost:8800/auth/signin', data);
-            console.log('juthIn', response.data)
-            return dispatch({
-                type: "SIGNIN",
-                payload: response.data,
-            });
+            try {
+                let response = await axios.post('http://localhost:8800/auth/signin', data);
+                console.log('juthIn', response.data)
+                window.localStorage.setItem('token', response.data.token);
+                window.localStorage.setItem('user', response.data.username);
+                window.localStorage.setItem('id', response.data.id);
+                return dispatch({
+                    type: "SIGNIN",
+                    payload: response.data,
+                }, window.location.href = '/userPanel'
+                );
+
+            } catch (error) {
+                console.log(error)
+                return alert('Usuario o contraseña incorrectos')
+            }
+                
+            }
         }
             
-    };
+    
 
     export function signup(data) {
     return async function (dispatch) {

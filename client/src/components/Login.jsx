@@ -1,7 +1,6 @@
 import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import loginImg from '../assets/login.jpeg'
-import { useHistory} from 'react-router-dom'
 import { signin } from '../actions';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -9,7 +8,6 @@ import { useState } from 'react';
 
 function Login() {
     const dispatch = useDispatch();
-    const history = useHistory();
     const [data, setData] = useState({
       email: "",
       password: "",
@@ -19,8 +17,8 @@ function Login() {
 const handleSubmit = async (e) => {
       e.preventDefault();
         dispatch(signin(data),
-        console.log("albi",data),
-          history.push("/userPanel"));
+        console.log("albi",data))
+          
       }
   
   

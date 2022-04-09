@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import {Link, useHistory } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import beachVid from '../assets/production ID_4205697.mp4'
 import Destacados from "./Destacados";
 import Footer from "./Footer";
@@ -8,9 +8,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { HiOutlineMenuAlt4 } from 'react-icons/hi';
 //import { RiLogoutBoxRLine } from 'react-icons/ri'
 
-
+const username = window.localStorage.getItem("user");
 function UserPanel(){
-const history = useHistory();
 
 /* const handleLogout = () => {
   localStorage.removeItem("token");
@@ -38,7 +37,7 @@ const [logo, setLogo] = useState(false)
         </ul>
                       {/* ICONOS */}
         <div className='hidden md:flex'>
-        <p className="text-xl mb-4">welcome </p>
+        <p className="text-xl mb-4">Welcome, {username} </p>
           {/*   <RiLogoutBoxRLine  onClick={handleLogout} className='mr-2' size={20}/> */}
           <Link to='/shopping'> <FaShoppingCart className='mr-2' size={20}/> </Link>
         </div>
