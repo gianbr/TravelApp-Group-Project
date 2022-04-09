@@ -93,7 +93,8 @@ export function getPlainsDestacados() {
 
     export function signin(data) {
         return async function (dispatch) {
-            let response = await axios.post('http://localhost:8800/signin',data);
+            let response = await axios.post('http://localhost:8800/auth/signin', data);
+            console.log('juthIn', response.data)
             return dispatch({
                 type: "SIGNIN",
                 payload: response.data,
@@ -104,12 +105,14 @@ export function getPlainsDestacados() {
 
     export function signup(data) {
     return async function (dispatch) {
-        let response = await axios.post('http://localhost:8800/signup', data);
+        let response = await axios.post('http://localhost:8800/auth/signup',data);
+        console.log('juthUP', response.data)
         return dispatch({
             type: "SIGNUP",
             payload: response.data,
         });
     }
-}
+};
+
 
 
