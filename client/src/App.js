@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import About from "./components/About.jsx";
 import Servicios from "./components/Servicios.jsx";
 import Details from "./components/Details";
+import Shopping from "./components/Shopping";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
           <Route exact path="/destination/:id">
             {" "}
             <Details />
+          </Route>
+          <Route exact path="/shopping">
+            <Shopping />
           </Route>
         </Switch>
       </Router>
