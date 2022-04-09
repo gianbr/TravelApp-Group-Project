@@ -68,8 +68,9 @@ authRoute.post("/signin", async (req, res) => {
   const token = jwt.sign({ id: userFound._id }, config.SECRET, {
     expiresIn: "86400s", //1 dia
   });
+  const user = await User.findById(userFound._id);
   console.log(userFound);
-  res.json({ token });
+  res.json({ token: token, username: user.username, id: user._id });
 });
 
 module.exports = authRoute;
