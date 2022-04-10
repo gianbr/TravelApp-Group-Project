@@ -1,5 +1,6 @@
 const axios = require("axios");
 
+
 export function searchDestination(name) {
 	return async function (dispatch) {
 		let response = await axios.get(
@@ -36,18 +37,15 @@ export function getDetailId(id) {
 }
 
 export function postPlain(data) {
-	return async function (dispatch) {
-		let response = await axios.post(
-			"http://localhost:8800/postPlains",
-			data
-		);
-		//console.log('agus', response.data)
-		return dispatch({
-			type: "POST_PLAIN",
-			payload: response.data,
-		});
-	};
-}
+    return async function (dispatch) {
+      let response = await axios.post("http://localhost:8800/postPlains", data, {Headers: {Authorization: "Bearer " + localStorage.getItem('token')}});
+      //console.log('agus', response.data)
+      return dispatch({
+        type: "POST_PLAIN",
+        payload: response.data,
+      });
+    };
+  }
 
 // filtrado por provincia
 
@@ -93,7 +91,58 @@ export function getPlainsDestacados() {
 	};
 }
 
-// CARRITO
+        export function clearState(payload) {
+            return {
+                type: "CLEAR_STATE",
+                payload
+            }
+        }
+export function getPlainsDestacados() {
+    return async function (dispatch) {
+        var json = await axios.get('http://localhost:8800/getplains');
+        //console.log(json.data)
+        return dispatch({
+            type: "GET_PLAINS_DESTACADOS",
+            payload: json.data
+        })
+    }
+
+}
+
+    export function signin(data) {
+        return async function (dispatch) {
+            try {
+                let response = await axios.post('http://localhost:8800/auth/signin', data);
+                console.log('juthIn', response.data)
+                window.localStorage.setItem('token', response.data.token);
+                window.localStorage.setItem('user', response.data.username);
+                window.localStorage.setItem('id', response.data.id);
+                return dispatch({
+                    type: "SIGNIN",
+                    payload: response.data,
+                }, window.location.href = '/userPanel'
+                );
+
+            } catch (error) {
+                console.log(error)
+                return alert('Usuario o contraseña incorrectos')
+            }
+                
+            }
+        }
+            
+    
+
+    export function signup(data) {
+    return async function (dispatch) {
+        let response = await axios.post('http://localhost:8800/auth/signup',data);
+        console.log('juthUP', response.data)
+        return dispatch({
+            type: "SIGNUP",
+            payload: response.data,
+        });
+    }
+};
 
 export const addItem = (item) => ({
 	type: "ADD_ITEM",

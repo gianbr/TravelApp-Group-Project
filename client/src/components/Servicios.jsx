@@ -1,5 +1,5 @@
 import React from "react";
-import {useState } from 'react';
+import {useState, useEffect } from 'react';
 import { useDispatch} from "react-redux";
 import { postPlain } from "../actions";
 import swal from 'sweetalert';
@@ -21,10 +21,10 @@ export default function CreateForm(){
         included:[{body: ''}],
         description:[{body: ''}]
     });
-
-    // useEffect(() => {
-
-    // } , []);
+    useEffect(() => { 
+      window.scrollTo(0, 0)
+    }
+      , []); 
     function handleImages(e){
         if(e.target.value){
             setPlain({

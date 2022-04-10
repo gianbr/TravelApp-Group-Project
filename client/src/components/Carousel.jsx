@@ -29,8 +29,8 @@ const Carousel1 = () => {
             >
                 {detail.images?.map((e, i) => {
                     return (
-                        <div className='flex justify-center'>
-                            <div key={i} className="w-8/12  rounded-md ">
+                        <div key={i} className='flex justify-center'>
+                            <div className="w-8/12  rounded-md ">
                                 <img
                                     className="flex h-96 rounded-md shadow-lg shadow-[#040c16]"
                                     src={e}

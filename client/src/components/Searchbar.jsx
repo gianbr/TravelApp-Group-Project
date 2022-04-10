@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getPlains } from "../actions"
 import { searchDestination } from "../actions";
 import { AiOutlineSearch } from "react-icons/ai";
+import swal from 'sweetalert';
 
 function Searchbar (){
     const [name, setName] = useState("");
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getPlains());
-      }, [dispatch]);
     
       const handleInputChange = (e) => {
         e.preventDefault();
@@ -22,7 +19,8 @@ function Searchbar (){
         if (name) {
           dispatch(searchDestination(name));
           setName("");
-        }
+        } else{swal( {title: "No encontrado", icon: "warning"} );
+      }
       };
 
       return(

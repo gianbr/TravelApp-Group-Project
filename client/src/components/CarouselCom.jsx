@@ -15,32 +15,28 @@ const Carousel2 = () => {
 		dispatch(getDetailId(id));
 	}, [dispatch, id]);
 
-	return (
-		<div>
-			<Carousel
-				useKeyboardArrows
-				infiniteLoop
-				autoPlay
-				interval={6000}
-				showThumbs={false}
-			>
-				{detail.comments?.map((c, i) => {
-					return (
-						<div className="flex justify-center">
-							<div
-								key={i}
-								className="w-11/12"
-							>
-								<li key={id}>
-									{c}
-								</li>
-							</div>
-						</div>
-					);
-				})}
-			</Carousel>
-		</div>
-	);
+    return (
+        <div>
+            <Carousel
+                useKeyboardArrows
+                infiniteLoop
+                autoPlay
+                interval={6000}
+                showThumbs={false}
+            >
+                {detail.comments?.map((c, i) => {
+                    return (
+                        <div key={i} className='flex justify-center'>
+                            <div className="w-11/12">
+
+                            <div>{c}</div> 
+                            </div>
+                        </div>
+                    );
+                })}
+            </Carousel>
+        </div>
+    );
 };
 
 export default Carousel2;
