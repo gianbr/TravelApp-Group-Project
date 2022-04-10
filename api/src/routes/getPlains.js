@@ -9,9 +9,7 @@ getPlains.get("/", (req, res, next) => {
     location = location.toLocaleLowerCase();
     Plain.find().then((result) => {
       if (result) {
-        let respuesta = result.filter((r) =>
-          r.location.toLocaleLowerCase().includes(location)
-        );
+        let respuesta = result.filter((r) => r.location.toLocaleLowerCase().includes(location));
         if (respuesta.length > 0) {
           return res.json(
             respuesta.map((r) => {
@@ -28,7 +26,7 @@ getPlains.get("/", (req, res, next) => {
             })
           );
         } else {
-          return res.status(404).send({ error: "Not Found" });
+          return res.json([]);
         }
       }
     });
