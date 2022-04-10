@@ -1,24 +1,25 @@
+import { addItemToCart } from "../cart-utils/index";
+import { removeItemFromCart } from "../cart-utils/index";
 
 const initialState = {
     plains : [],
     plainsCopy : [],
     destination: [],
     detail: [],
-    plainsDestacados: []
-    
+    plainsDestacados: [],
+    users: {},
+    cartPlains: [],
 };
 
 function rootReducer(state = initialState, action){
     switch (action.type) {
         case "GET_PLAINS": 
-        //console.log(action.payload)
             return {
                 ...state,
                 plains: action.payload,
                 plainsCopy: action.payload
             }
         case 'GET_DETAIL':
-            console.log('alba',action.payload)
                 return {
                     ...state,
                     detail: action.payload
@@ -91,8 +92,8 @@ function rootReducer(state = initialState, action){
                 detail: []
             }
 
-        case "GET_PLAINS_DESTACADOS": 
-         let res = action.payload.slice().sort(function (a, b) {
+        case "GET_PLAINS_DESTACADOS":
+            let res = action.payload.slice().sort(function (a, b) {
                 if (a.score > b.score) {
                     return -1;
                 }
@@ -101,15 +102,44 @@ function rootReducer(state = initialState, action){
                 }
                 return 0
             })
-            let respuesta = 
-            [res[res.findIndex(e => e.location === "Mendoza")],
-            res[res.findIndex(e => e.location === "Buenos Aires")],
-            res[res.findIndex(e => e.location === "Río Negro")],
-            res[res.findIndex(e => e.location === "Misiones")]]
-        return {   
-            ...state,
-            plainsDestacados: respuesta
-        }    
+            let respuesta =
+                [res[res.findIndex(e => e.location === "Mendoza")],
+                res[res.findIndex(e => e.location === "Buenos Aires")],
+                res[res.findIndex(e => e.location === "Río Negro")],
+                res[res.findIndex(e => e.location === "Misiones")]]
+            return {
+                ...state,
+                plainsDestacados: respuesta
+            };
+        case 'SIGNIN':
+            return {
+                ...state,
+                users: action.payload
+            };
+            case 'SIGNUP':
+                return {
+                    ...state,
+                    users: action.payload
+                };
+        
+        		case "ADD_ITEM":
+			return {
+				...state,
+				cartPlains: addItemToCart(
+					state.cartPlains,
+					action.payload
+				),
+			};
+        
+        case "REMOVE_ITEM":
+			return {
+				...state,
+				cartPlains: removeItemFromCart(
+					state.cartPlains,
+					action.payload
+				)
+			}
+                
             
         default:
             return state;
@@ -117,3 +147,4 @@ function rootReducer(state = initialState, action){
 };
 export default rootReducer;
 
+	

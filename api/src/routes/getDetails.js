@@ -18,6 +18,7 @@ getDetails.get("/:id", async (req, res, next) => {
       score: details.score,
       included: details.included.map((i) => i.body),
       description: details.description.body,
+      date: details.date,
     });
   } catch (error) {
     next(error);

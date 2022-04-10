@@ -1,13 +1,15 @@
 require("../connections/mongo");
 const Router = require("express");
-const postPlains = Router();
+const { default: mongoose } = require("mongoose");
+const updatePlain = Router();
 const Plain = require("../models/Planes");
 const authJwt = require("../middlewares/authjwt");
 
-postPlains.post(
-  "/",
+updatePlain.patch(
+  "/:id",
   [authJwt.verifyToken, authJwt.isAdmin],
-  async (req, res, nex) => {
+  async (req, res, next) => {
+    const { id } = req.params;
     const {
       title,
       location,
@@ -19,8 +21,9 @@ postPlains.post(
       description,
       date,
     } = req.body;
-
-    const plainCreated = await Plain.insertMany({
+    if (!mongoose.Types.ObjectId.isValid(id))
+      return res.status(404).json({ message: "No plain with that id" });
+    const updatedPlain = {
       title,
       location,
       city,
@@ -30,11 +33,11 @@ postPlains.post(
       included,
       description,
       date,
-    });
-    res.json(plainCreated);
+      _id: id,
+    };
+    await Plain.findByIdAndUpdate(id, updatedPlain, { new: true });
+    res.json(updatedPlain);
   }
 );
 
-module.exports = postPlains;
-
-//router.post("/postPlains", [authJwt.verifyToken, authJwt.isAdmin], postPlains); //necesita token
+module.exports = updatePlain;
