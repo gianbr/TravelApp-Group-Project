@@ -119,12 +119,13 @@ export function getPlainsDestacados() {
     export function signup(data) {
     return async function (dispatch) {
         let response = await axios.post('http://localhost:8800/auth/signup',data);
-        console.log('juthUP', response.data)
+        //console.log('juthUP', response.data)
         return dispatch({
             type: "SIGNUP",
             payload: response.data,
-        });
-    }
+        }, window.location.href = '/login'
+        );
+    };
 };
 
 

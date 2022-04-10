@@ -1,13 +1,13 @@
 import { React,useState } from 'react'
-import { FcGoogle } from 'react-icons/fc'
 import loginImg from '../assets/login.jpeg'
-import {  useHistory } from 'react-router-dom'
 import { signup } from '../actions'
 import { useDispatch,} from 'react-redux';
+import swal from 'sweetalert';
+import { validate } from './validate';
 
 
 const Register = () => {
-  const history = useHistory();
+  const [errors, setErrors] = useState({})
   const dispatch = useDispatch();
   const [data, setData] = useState({
     username: "",
@@ -16,19 +16,26 @@ const Register = () => {
   });
 
   const handleSubmit = async (e) => {
+    if(!data.email || !data.password || !data.username ){
+     return swal({title: "¡Rellene los campos para continuar!", icon: "error"});
+  }else { 
     e.preventDefault();
       dispatch(signup(data),
-        history.push("/userPanel"));
-        console.log("andre",data) 
-    }
+      console.log("submit",data))
+    };
+  };
 
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setData({ ...data, [name]: value });
-      console.log("changeRegister",e.target.value)
-     
-  }
+const handleChange = (e) => {
+    setData({
+      ...data, 
+      [e.target.name] : e.target.value
+  });
+   setErrors(validate({
+       ...data, 
+       [e.target.name] : e.target.value
+  }));
+  };
   
 
 return (
@@ -38,26 +45,26 @@ return (
     
       <form className='max-w-[400px] w-full mx-auto bg-white p-8'>
         <h2 className='text-4xl font-bold text-center py-4'>TRAVEL APP.</h2>
-        
-        <div className='flex justify-between py-8'>
-        <p className='border shadow-lg hover:shadow-xl px-6 py-2 relative flex items-center'><FcGoogle className='mr-2' /> Google</p>
-        </div>
+
         <div className='flex flex-col mb-4'>
             <label>Usuario</label>
             <input onChange={handleChange} className='border relative bg-gray-100 p-2' name='username' type="text" />
+            {errors.username && (<p>{errors.username}</p>)}
             </div>
 
         <div className='flex flex-col mb-4'>
             <label>Correo</label>
             <input onChange={handleChange} className='border relative bg-gray-100 p-2' name='email' type="text" />
+            {errors.email && (<p>{errors.email}</p>)}
             </div>
         
         <div className='flex flex-col '>
             <label>Contraseña</label>
             <input onChange={handleChange} className='border relative bg-gray-100 p-2' name='password'  type="password" />
+            {errors.password && (<p>{errors.password}</p>)}
             </div>
         <div onClick={handleSubmit} >
-        <button className='w-full py-3 mt-8 bg-teal-400 hover:bg-indigo-500 relative text-white'>Registrate</button>
+        <button className='w-full py-3 mt-8 bg-teal-400 hover:bg-indigo-500 relative text-white'>Ingresa tus datos</button>
           
             </div>
            

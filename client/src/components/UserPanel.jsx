@@ -6,16 +6,19 @@ import Footer from "./Footer";
 import { FaShoppingCart } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai';
 import { HiOutlineMenuAlt4 } from 'react-icons/hi';
-//import { RiLogoutBoxRLine } from 'react-icons/ri'
+import { RiLogoutBoxRLine } from 'react-icons/ri'
 
 const username = window.localStorage.getItem("user");
 function UserPanel(){
 
-/* const handleLogout = () => {
+const handleLogout = () => {
+  console.log(localStorage)
   localStorage.removeItem("token");
-	history.push('/');
+  window.location.replace('/');
+  // Asigna una url a la ventana actual, lo que genera que se cargue la urlDestino. 
+  // El usuario no puede volver atrás con el botón back del navegador.
 };  
- */
+
 const [nav, setNav] = useState(false);
 const [logo, setLogo] = useState(false)
   
@@ -37,8 +40,8 @@ const [logo, setLogo] = useState(false)
         </ul>
                       {/* ICONOS */}
         <div className='hidden md:flex'>
-        <p className="text-xl mb-4">Welcome, {username} </p>
-          {/*   <RiLogoutBoxRLine  onClick={handleLogout} className='mr-2' size={20}/> */}
+        <p className="mr-2">Welcome, {username} </p>
+            <RiLogoutBoxRLine  onClick={handleLogout} className='mr-2' size={20}/>
           <Link to='/shopping'> <FaShoppingCart className='mr-2' size={20}/> </Link>
         </div>
                         {/* HAMBURGUER */}
