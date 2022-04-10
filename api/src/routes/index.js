@@ -14,10 +14,11 @@ router.use("/setplainsdb", setPlainsDb);
 router.use("/getplains", getPlains); //libre acceso cualquiera puede consultar
 router.use("/postPlains", postPlains);
 router.use("/auth", authRoute);
+router.use("/getDetails", getDetails);
+router.use("/updateplain", updatePlain);
+router.use("/deleteplain", deletePlain);
 router.use("/updateuser", updateUser);
 router.use("/getusers", getUsers);
-router.use("/getDetails", getDetails);
-router.use("/", updatePlain);
-router.use("/", deletePlain);
+
 
 module.exports = router;

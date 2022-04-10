@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import loginImg from '../assets/login.jpeg'
 import { signin } from '../actions';
 import { useDispatch } from 'react-redux';
@@ -27,8 +27,8 @@ const handleSubmit = async (e) => {
   };
 };
   
-  
 const handleChange = (e) => {
+  console.log(e.target.value)
   setData({
     ...data, 
     [e.target.name] : e.target.value
@@ -38,11 +38,13 @@ const handleChange = (e) => {
      [e.target.name] : e.target.value
 }));
 };
+
   
 return (
   <div className='relative w-full h-screen bg-zinc-900/90'>
     <img className='absolute w-full h-full object-cover mix-blend-overlay' src={loginImg} alt="/" />
     <div className='flex justify-center items-center h-full'>
+      <Link to='/' className='absolute top-0'><button>home</button></Link>
     
     <form  className='max-w-[400px] w-full mx-auto bg-white p-8'>
         <h2 className='text-4xl font-bold text-center py-4'>TRAVEL APP.</h2>
