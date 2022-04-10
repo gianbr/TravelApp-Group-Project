@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <div className='w-full mt-24 bg-indigo-300/90 text-gray-600 font-semibold py-y px-2'>
+    <div className='w-full bg-indigo-300/90 text-gray-600 font-semibold py-y px-2'>
         <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-2 border-b-2 border-gray-600 py-8'>
             <div>
                 <h6 className='font-bold uppercase pt-2'>TRAVEL APP.</h6>

@@ -17,9 +17,9 @@ function Destinations() {
   const start = end - plainsPerPage;
   const currentPlains = plains?.slice(start, end);
 
-  const pagination = (page) => {
-    setPage(page);
-  };
+	const pagination = (page) => {
+		setPage(page);
+	};
 
   useEffect(() => {
     dispatch(getPlains());
