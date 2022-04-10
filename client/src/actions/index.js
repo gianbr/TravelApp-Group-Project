@@ -6,7 +6,6 @@ export function searchDestination(name) {
 		let response = await axios.get(
 			"http://localhost:8800/getplains?location=" + name
 		);
-		console.log("alba", response.data);
 		return dispatch({
 			type: "SEARCH_DESTINATION",
 			payload: response.data,
@@ -27,7 +26,7 @@ export function getPlains() {
 
 export function getDetailId(id) {
 	return async function (dispatch) {
-		let response = await axios.get("http://localhost:8800/" + id);
+		let response = await axios.get("http://localhost:8800/getDetails" + id);
 		//console.log('juth', response.data)
 		return dispatch({
 			type: "GET_DETAIL",
@@ -102,7 +101,7 @@ export function getPlainsDestacados() {
                 return dispatch({
                     type: "SIGNIN",
                     payload: response.data,
-                }, window.location.href = '/userPanel'
+                }, window.location.href = '/'
                 );
 
             } catch (error) {
@@ -118,12 +117,22 @@ export function getPlainsDestacados() {
     export function signup(data) {
     return async function (dispatch) {
         let response = await axios.post('http://localhost:8800/auth/signup',data);
-        console.log('juthUP', response.data)
+        //console.log('juthUP', response.data)
         return dispatch({
             type: "SIGNUP",
             payload: response.data,
-        });
-    }
+        }, window.location.href = '/login'
+        );
+    };
+};
+
+export const Logout = () => {
+	return (dispatch) => {
+	  	  dispatch({
+		type: "LOGOUT",
+	  });
+  
+	};
 };
 
 export const addItem = (item) => ({

@@ -1,5 +1,6 @@
 import { addItemToCart } from "../cart-utils/index";
 import { removeItemFromCart } from "../cart-utils/index";
+import { toast } from "react-toastify";
 
 const initialState = {
     plains : [],
@@ -9,6 +10,7 @@ const initialState = {
     plainsDestacados: [],
     users: {},
     cartPlains: [],
+    userLogout: {},
 };
 
 function rootReducer(state = initialState, action){
@@ -121,6 +123,10 @@ function rootReducer(state = initialState, action){
                     ...state,
                     users: action.payload
                 };
+                case 'LOGOUT':
+                 localStorage.clear();
+
+                return { ...state, users: null,  };
         
         		case "ADD_ITEM":
 			return {
