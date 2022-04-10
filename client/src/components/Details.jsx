@@ -43,6 +43,7 @@ function Details() {
 				price: detail.price,
 				image: detail.images,
 				city: detail.city,
+				Date: detail.date,
 				location: detail.location,
 				id,
 			})

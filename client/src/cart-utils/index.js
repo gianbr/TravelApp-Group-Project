@@ -26,6 +26,6 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
     );
     
     if (existingCartItem.quantity > 0) { 
-        return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
+        return cartItems.filter((cartItem) => cartItem.date !== cartItemToRemove.date, cartItem => cartItem.date !== cartItemToRemove.date);
     }
 }

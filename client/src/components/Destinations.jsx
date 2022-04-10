@@ -18,12 +18,6 @@ function Destinations() {
   const start = end - plainsPerPage;
   const currentPlains = plains?.slice(start, end);
 
-	const [page, setPage] = useState(1);
-	const plainsPerPage = 6;
-	const end = page * plainsPerPage;
-	const start = end - plainsPerPage;
-	const currentPlains = plains?.slice(start, end);
-
 	const pagination = (page) => {
 		setPage(page);
 	};
