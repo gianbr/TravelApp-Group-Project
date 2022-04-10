@@ -16,7 +16,7 @@ router.use("/postPlains", postPlains);
 router.use("/auth", authRoute);
 router.use("/updateuser", updateUser);
 router.use("/getusers", getUsers);
-router.use("/", getDetails);
+router.use("/getDetails", getDetails);
 router.use("/", updatePlain);
 router.use("/", deletePlain);
 
