@@ -13,7 +13,7 @@ authRoute.use((req, res, next) => {
 });
 
 //Registro
-authRoute.post("/signup", [verifySignUp.checkDuplicateUserNameOrEmail, verifySignUp.checkRolesExisted], async (req, res) => {
+authRoute.post("/signup", [verifySignUp.checkStatusBanUser, verifySignUp.checkDuplicateUserNameOrEmail, verifySignUp.checkRolesExisted], async (req, res) => {
   try {
     const { username, email, password, roles } = req.body;
 
@@ -46,7 +46,7 @@ authRoute.post("/signup", [verifySignUp.checkDuplicateUserNameOrEmail, verifySig
 });
 
 //Iniciar sesion
-authRoute.post("/signin", async (req, res) => {
+authRoute.post("/signin", [verifySignUp.checkStatusBanUser], async (req, res) => {
   const userFound = await User.findOne({ email: req.body.email }).populate("roles"); //me devuelve los roles en formato string con su id
   if (!userFound) return res.status(400).json({ message: "User not found" });
 
@@ -58,8 +58,9 @@ authRoute.post("/signin", async (req, res) => {
     expiresIn: "86400s", //1 dia
   });
   const user = await User.findById(userFound._id);
+  const roles = await Role.find({ _id: { $in: user.roles } });
   console.log(userFound);
-  res.json({ token: token, username: user.username, id: user._id });
+  res.json({ token: token, username: user.username, id: user._id, roles });
 });
 
 module.exports = authRoute;
