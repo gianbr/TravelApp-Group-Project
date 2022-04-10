@@ -48,7 +48,7 @@ function Shopping() {
                                                 <div class="flex flex-col justify-between ml-4 flex-grow w-1/5"> {/* DATOS DEL PRODUCTO */}
                                                     <span class="font-bold text-sm">{item.name}</span>
                                                     <span class="text-gray-500 text-xs">{item.city}, {item.location}</span>
-                                                    <h5 onClick={(e) => handleRemove(item)} class="font-semibold hover:text-red-500 text-red-500 text-xs">Quitar</h5>
+                                                    <h5 onClick={(e) => handleRemove(item)} class="font-semibold hover:text-red-500 text-red-500 text-xs cursor-pointer">Quitar</h5>
                                                 </div>
 
                                             <div class="flex justify-center w-1/5"> {/* QUANTITY */}
@@ -81,29 +81,6 @@ function Shopping() {
                     </div>
                 </div>
             </div>
-            {/* <div className='w-full h-screen relative'>
-                <Navbar />
-                <div className='absolute w-full h-full top-0 left-0 bt-0 bg-gray-900'></div>
-                <div className='absolute top-0 w-full h-full flex flex-col justify-center text-center text-white p-4'>
-                    <div className='w-80'>
-                        <h1>Carrito:</h1>
-                        <ul className="bg-indigo-300 mb-5">
-                            {cart.map((e) => {
-                                return (
-                                    <>
-                                        {console.log(e.images)}
-                                        <img src={e.image[0]} alt="" />
-                                        <li>Nombre: {e.name}</li>
-                                        <li>Fecha: {e.date}</li>
-                                        <li>Precio: {e.price}</li>
-                                        <li>Cantidad: {e.quantity}</li>
-                                    </>
-                                )
-                            })}
-                        </ul>
-                    </div>   
-                </div>
-            </div> */}
             <Footer />
         </div>
     )

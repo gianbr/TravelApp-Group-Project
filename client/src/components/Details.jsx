@@ -28,8 +28,11 @@ function Details() {
 	}, [dispatch, id]);
 
 	const handleDate = (date) => {
-		console.log(date)
+		// console.log(typeof date)
 		let dateJson = JSON.stringify(date);
+		// console.log(typeof dateJson)
+		// console.log(dateJson)
+		// console.log(disabled);
 		setItem((prevState) => {
 			return { ...prevState, date: dateJson };
 		});
@@ -55,7 +58,7 @@ function Details() {
 			if (e.target.value <= detail.stock && e.target.value > 0) {
 				setDisabled(false);
 			}
-			return { ...prevState, [e.target.name]: e.target.value };
+			return { ...prevState, [e.target.name]: parseInt(e.target.value) };
 		});
 	}
 

@@ -29,7 +29,7 @@ const daysCases = (array) => {
 };
 
 function Calendario({ handleDate, detailsDates }) {
-	const [startDate, setStartDate] = useState(new Date());
+	const [startDate, setStartDate] = useState();
 	const days = detailsDates ? daysCases(detailsDates) : null;
 
 	useEffect(() => {
