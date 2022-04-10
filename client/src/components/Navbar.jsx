@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom'
-import { BsPerson } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
+//import { BsPerson } from 'react-icons/bs'
 import { FaShoppingCart } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai';
 import { HiOutlineMenuAlt4 } from 'react-icons/hi';
+//import { useUser } from '../hooks/useUser';
+import { Logout } from '../actions';
+import { useDispatch } from 'react-redux';
 
 function Navbar (){
+const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 const [nav, setNav] = useState(false);
-const [logo, setLogo] = useState(false)
-  
+const [logo, setLogo] = useState(false);
+const dispatch = useDispatch();
+// const [data, setData] = useState({
+//   email: "",
+//   password: "",
+// });
+// const {isLoggedIn} = useUser();
   const handleNav = () => {
-    setNav(!nav);
+      setNav(!nav);
     setLogo(!logo)
+  };
+
+  const logout = () => {
+    dispatch(Logout());
+    window.location.replace('/');
+    setUser(null);
   };
 
   return(
@@ -27,9 +42,29 @@ const [logo, setLogo] = useState(false)
         </ul>
                       {/* ICONOS */}
         <div className='hidden md:flex'>
-          <Link to='/login'>  <BsPerson className='mr-2' size={20} /> </Link>
           <Link to='/shopping'> <FaShoppingCart className='mr-2' size={20}/> </Link>
+          {/* {user?.result?(<Link to='/login'> <BsPerson className='mr-2' size={20}/> </Link>):(<Link to='/' onClick={logout}> <AiOutlineClose className='mr-2' size={20}/> </Link>)}     */}
         </div>
+
+        {user !== null ? (
+            // <p>{user?.name}</p>
+            <Link>
+            <button>Sign In</button>
+            </Link>
+        ) : (
+          <Link>
+            <button onClick={logout}>Logout</button>
+          </Link>
+          
+        )}
+
+
+
+
+
+
+
+
                         {/* HAMBURGUER */}
         <div onClick={handleNav} className='md:hidden'> 
         { nav ? <AiOutlineClose size={20}/> : <HiOutlineMenuAlt4 size={20}/>} </div>

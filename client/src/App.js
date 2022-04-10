@@ -7,8 +7,7 @@ import About from "./components/About.jsx";
 import Servicios from "./components/Servicios.jsx";
 import Details from "./components/Details";
 import Shopping from "./components/Shopping";
-import Register from "./components/Register";
-import UserPanel from "./components/UserPanel"; 
+import Register from "./components/Register"; 
 
 function App() {
   return (
@@ -40,9 +39,6 @@ function App() {
           </Route>
           <Route exact path="/register">
              <Register />
-           </Route>
-           <Route exact path="/userPanel">
-            <UserPanel />
            </Route>
         </Switch>
       </Router>
