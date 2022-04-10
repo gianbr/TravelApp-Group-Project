@@ -15,9 +15,14 @@ authRoute.use((req, res, next) => {
   next();
 });
 
+//Registro
 authRoute.post(
   "/signup",
-  [verifySignUp.checkDuplicateUserNameOrEmail, verifySignUp.checkRolesExisted],
+  [
+    verifySignUp.checkStatusBanUser,
+    verifySignUp.checkDuplicateUserNameOrEmail,
+    verifySignUp.checkRolesExisted,
+  ],
   async (req, res) => {
     try {
       const { username, email, password, roles } = req.body;
@@ -51,26 +56,34 @@ authRoute.post(
   }
 );
 
-authRoute.post("/signin", async (req, res) => {
-  const userFound = await User.findOne({ email: req.body.email }).populate(
-    "roles"
-  ); //me devuelve los roles en formato string con su id
-  if (!userFound) return res.status(400).json({ message: "User not found" });
+//Iniciar sesion
+authRoute.post(
+  "/signin",
+  [verifySignUp.checkStatusBanUser],
+  async (req, res) => {
+    const userFound = await User.findOne({ email: req.body.email }).populate(
+      "roles"
+    ); //me devuelve los roles en formato string con su id
+    if (!userFound) return res.status(400).json({ message: "User not found" });
 
-  const matchPassword = await User.comparePassword(
-    req.body.password,
-    userFound.password
-  );
+    const matchPassword = await User.comparePassword(
+      req.body.password,
+      userFound.password
+    );
 
-  if (!matchPassword)
-    return res.status(401).json({ token: null, message: "Password incorrect" });
+    if (!matchPassword)
+      return res
+        .status(401)
+        .json({ token: null, message: "Password incorrect" });
 
-  const token = jwt.sign({ id: userFound._id }, config.SECRET, {
-    expiresIn: "86400s", //1 dia
-  });
-  const user = await User.findById(userFound._id);
-  console.log(userFound);
-  res.json({ token: token, username: user.username, id: user._id });
-});
+    const token = jwt.sign({ id: userFound._id }, config.SECRET, {
+      expiresIn: "86400s", //1 dia
+    });
+    const user = await User.findById(userFound._id);
+    const roles = await Role.find({ _id: { $in: user.roles } });
+    console.log(userFound);
+    res.json({ token: token, username: user.username, id: user._id, roles });
+  }
+);
 
 module.exports = authRoute;
