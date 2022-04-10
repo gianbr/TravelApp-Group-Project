@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-//import { BsPerson } from 'react-icons/bs'
+import { BsPerson } from 'react-icons/bs'
 import { FaShoppingCart } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai';
 import { HiOutlineMenuAlt4 } from 'react-icons/hi';
@@ -43,7 +43,8 @@ const dispatch = useDispatch();
                       {/* ICONOS */}
         <div className='hidden md:flex'>
           <Link to='/shopping'> <FaShoppingCart className='mr-2' size={20}/> </Link>
-          {/* {user?.result?(<Link to='/login'> <BsPerson className='mr-2' size={20}/> </Link>):(<Link to='/' onClick={logout}> <AiOutlineClose className='mr-2' size={20}/> </Link>)}     */}
+          {/* {user?.result?():(<Link to='/' onClick={logout}> <AiOutlineClose className='mr-2' size={20}/> </Link>)}     */}
+          <Link to='/login'> <BsPerson className='mr-2' size={20}/> </Link>
         </div>
 
         {user !== null ? (

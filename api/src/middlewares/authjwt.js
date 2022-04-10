@@ -8,11 +8,11 @@ const User = require("../models/User");
 const verifyToken = async (req, res, next) => {
   //si pasa esta funcion conttinua sibno le puedo tirar un error   aca verifico si el token existe
   try {
-    const token = req.headers["x-access-token"];
+    // const token = req.headers["x-access-token"];
     // console.log("hola");
     // console.log(req.get("Authorization"));
-    // const toni = req.get("Authorization");
-    // const token = toni.replace("Bearer ", "");
+    const toni = req.get("Authorization");
+    const token = toni.replace("Bearer ", "");
 
     // console.log(token);
     const isCustomAuth = token.length < 500;
@@ -36,6 +36,7 @@ const verifyToken = async (req, res, next) => {
     // console.log("duda", decodedData);
     next();
   } catch (error) {
+    // console.log(error)
     return res.status(401).json({ message: "Token invalid" });
   }
 };

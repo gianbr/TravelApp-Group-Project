@@ -26,7 +26,7 @@ export function getPlains() {
 
 export function getDetailId(id) {
 	return async function (dispatch) {
-		let response = await axios.get("http://localhost:8800/getDetails" + id);
+		let response = await axios.get("http://localhost:8800/getDetails/" + id);
 		//console.log('juth', response.data)
 		return dispatch({
 			type: "GET_DETAIL",
@@ -37,7 +37,7 @@ export function getDetailId(id) {
 
 export function postPlain(data) {
     return async function (dispatch) {
-      let response = await axios.post("http://localhost:8800/postPlains", data, {Headers: {Authorization: "Bearer " + localStorage.getItem('token')}});
+      let response = await axios.post("http://localhost:8800/postPlains", data, {headers: {Authorization: "Bearer " + localStorage.getItem('token')}});
       //console.log('agus', response.data)
       return dispatch({
         type: "POST_PLAIN",
