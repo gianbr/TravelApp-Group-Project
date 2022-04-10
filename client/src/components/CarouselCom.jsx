@@ -1,21 +1,19 @@
-
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
-import { useParams } from 'react-router-dom'
-import { getDetailId } from '../actions/index'
-import "react-responsive-carousel/lib/styles/carousel.min.css"; 
-import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from "react-router-dom";
+import { getDetailId } from "../actions/index";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useSelector, useDispatch } from "react-redux";
+import "./CarouselCom.css";
 
 const Carousel2 = () => {
-    const { id } = useParams();
-    const dispatch = useDispatch();
-    const detail = useSelector((state) => state.detail);
+	const { id } = useParams();
+	const dispatch = useDispatch();
+	const detail = useSelector((state) => state.detail);
 
-
-    useEffect(() => {
-        dispatch(getDetailId(id));
-    }, [dispatch, id]);
-
+	useEffect(() => {
+		dispatch(getDetailId(id));
+	}, [dispatch, id]);
 
     return (
         <div>
@@ -41,4 +39,4 @@ const Carousel2 = () => {
     );
 };
 
-export default Carousel2
+export default Carousel2;

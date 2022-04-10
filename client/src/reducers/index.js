@@ -1,3 +1,5 @@
+import { addItemToCart } from "../cart-utils/index";
+import { removeItemFromCart } from "../cart-utils/index";
 
 const initialState = {
     plains : [],
@@ -5,8 +7,8 @@ const initialState = {
     destination: [],
     detail: [],
     plainsDestacados: [],
-    users: {}
-    
+    users: {},
+    cartPlains: [],
 };
 
 function rootReducer(state = initialState, action){
@@ -119,6 +121,24 @@ function rootReducer(state = initialState, action){
                     ...state,
                     users: action.payload
                 };
+        
+        		case "ADD_ITEM":
+			return {
+				...state,
+				cartPlains: addItemToCart(
+					state.cartPlains,
+					action.payload
+				),
+			};
+        
+        case "REMOVE_ITEM":
+			return {
+				...state,
+				cartPlains: removeItemFromCart(
+					state.cartPlains,
+					action.payload
+				)
+			}
                 
             
         default:
@@ -127,3 +147,4 @@ function rootReducer(state = initialState, action){
 };
 export default rootReducer;
 
+	
