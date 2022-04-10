@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Carousel from "./Carousel";
 import CarouselCom from "./CarouselCom";
 import Calendario from "./Calendario";
+import { v4 as uuid } from 'uuid';
 
 function Details() {
 	const { id } = useParams();
@@ -15,6 +16,8 @@ function Details() {
 	const [disabled, setDisabled] = useState(true);
 
 	const history = useHistory();
+
+	const cartId = uuid();
 
 	useEffect(() => {
 		dispatch(getDetailId(id));
@@ -30,11 +33,14 @@ function Details() {
 	const handleDate = (date) => {
 		// console.log(typeof date)
 		let dateJson = JSON.stringify(date);
+		// console.log(dateJson)
+		let dateJsonSliced = dateJson.slice(1, 11)
+		// console.log(dateJsonSliced)
 		// console.log(typeof dateJson)
 		// console.log(dateJson)
 		// console.log(disabled);
 		setItem((prevState) => {
-			return { ...prevState, date: dateJson };
+			return { ...prevState, date: dateJsonSliced };
 		});
 	};
 
@@ -47,7 +53,8 @@ function Details() {
 				image: detail.images,
 				city: detail.city,
 				location: detail.location,
-				id,
+				cartId: cartId,
+				id
 			})
 		);
 		history.push("/destination");
