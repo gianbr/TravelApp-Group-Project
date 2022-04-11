@@ -2,7 +2,7 @@ const axios = require("axios");
 
 export function searchDestination(name) {
   return async function (dispatch) {
-    let response = await axios.get("/getplains?location=" + name);
+    let response = await axios.get("http://localhost:8800/getplains?location=" + name);
     return dispatch({
       type: "SEARCH_DESTINATION",
       payload: response.data,
@@ -12,7 +12,7 @@ export function searchDestination(name) {
 
 export function getPlains() {
   return async function (dispatch) {
-    var json = await axios.get("/getplains");
+    var json = await axios.get("http://localhost:8800/getplains");
     //console.log(json.data)
     return dispatch({
       type: "GET_PLAINS",
@@ -23,7 +23,7 @@ export function getPlains() {
 
 export function getDetailId(id) {
   return async function (dispatch) {
-    let response = await axios.get("/getDetails/" + id);
+    let response = await axios.get("http://localhost:8800/getDetails/" + id);
     //console.log('juth', response.data)
     return dispatch({
       type: "GET_DETAIL",
@@ -34,7 +34,7 @@ export function getDetailId(id) {
 
 export function postPlain(data) {
   return async function (dispatch) {
-    let response = await axios.post("/postPlains", data, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } });
+    let response = await axios.post("http://localhost:8800/postPlains", data, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } });
     //console.log('agus', response.data)
     return dispatch({
       type: "POST_PLAIN",
@@ -78,7 +78,7 @@ export function clearState(payload) {
 }
 export function getPlainsDestacados() {
   return async function (dispatch) {
-    var json = await axios.get("/getplains");
+    var json = await axios.get("http://localhost:8800/getplains");
     //console.log(json.data)
     return dispatch({
       type: "GET_PLAINS_DESTACADOS",
@@ -144,3 +144,35 @@ export const removeItem = (item) => ({
   type: "REMOVE_ITEM",
   payload: item,
 });
+
+export function updatePlain(id, plains) {
+	return async function (dispatch) {
+	  try {
+		const { data } = await axios.patch("http://localhost:8800/", id, plains);
+		console.log("update", data);
+		return dispatch({
+		  type: "UPDATE_PLAIN",
+		  payload: data,
+		});
+	  } catch (error) {
+		console.log(error);
+	  }
+	};
+  }
+  
+  export function deletePlain(id) {
+	return async function (dispatch) {
+	  try {
+		await axios.delete("http://localhost:8800/deletePlain/" + id, {
+		  headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+		});
+		console.log("delete", id);
+		return dispatch({
+		  type: "DELETE_PLAIN",
+		  payload: id,
+		});
+	  } catch (error) {
+		console.log(error);
+	  }
+	};
+  }

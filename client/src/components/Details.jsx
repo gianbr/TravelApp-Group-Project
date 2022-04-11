@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { getDetailId, clearState, addItem } from "../actions/index";
+import { getDetailId, clearState, addItem, deletePlain } from "../actions/index";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Carousel from "./Carousel";
@@ -69,9 +69,50 @@ function Details() {
 		});
 	}
 
+	const handleDelete = (id) => {
+		const sure = window.confirm("Are you sure you want to delete this?");
+		if (sure) {
+			dispatch(deletePlain(id));
+			console.log(id);
+			alert("Deleted Successfully!");
+			history.push("/destination");
+		}
+	};
+
 	return (
 		<div className="bg-slate-200">
 			<div className="border-2 border-indig-300 mx-28  bg-gray-100/90">
+				<div className="h-5 relative">
+					<button className="absolute top-0.5 left-3 bg-indigo-300 hover:bg-blue-300 text-white font-bold py-1 px-3 rounded-full">
+						<Link to={`/servicios/${id}`}>
+							<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-5 w-5"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							>
+							<path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+							</svg>
+						</Link>
+					</button>
+					<button
+					onClick={() => handleDelete(id)}
+					className="absolute top-0.5 right-3 bg-indigo-300 hover:bg-blue-300 text-white font-bold py-1 px-3 rounded-full"
+					>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="h-5 w-5"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+					>
+						<path
+						fillRule="evenodd"
+						d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+						clipRule="evenodd"
+						/>
+					</svg>
+					</button>
+				</div>
 				<div>
 					<div className="bg-indigo-300">
 						<h3 className="ml-11 mt-4 font-bold text-3xl text-white">
