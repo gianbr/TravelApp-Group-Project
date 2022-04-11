@@ -2,7 +2,9 @@ const axios = require("axios");
 
 export function searchDestination(name) {
   return async function (dispatch) {
-    let response = await axios.get("/getplains?location=" + name);
+    let response = await axios.get(
+      "http://localhost:8800/getplains?location=" + name
+    );
     return dispatch({
       type: "SEARCH_DESTINATION",
       payload: response.data,
@@ -12,7 +14,7 @@ export function searchDestination(name) {
 
 export function getPlains() {
   return async function (dispatch) {
-    var json = await axios.get("/getplains");
+    var json = await axios.get("http://localhost:8800/getplains");
     //console.log(json.data)
     return dispatch({
       type: "GET_PLAINS",
@@ -23,7 +25,7 @@ export function getPlains() {
 
 export function getDetailId(id) {
   return async function (dispatch) {
-    let response = await axios.get("/getDetails/" + id);
+    let response = await axios.get("http://localhost:8800/getDetails/" + id);
     //console.log('juth', response.data)
     return dispatch({
       type: "GET_DETAIL",
@@ -34,7 +36,9 @@ export function getDetailId(id) {
 
 export function postPlain(data) {
   return async function (dispatch) {
-    let response = await axios.post("/postPlains", data, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } });
+    let response = await axios.post("http://localhost:8800/postPlains", data, {
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    });
     //console.log('agus', response.data)
     return dispatch({
       type: "POST_PLAIN",
@@ -78,7 +82,7 @@ export function clearState(payload) {
 }
 export function getPlainsDestacados() {
   return async function (dispatch) {
-    var json = await axios.get("/getplains");
+    var json = await axios.get("http://localhost:8800/getplains");
     //console.log(json.data)
     return dispatch({
       type: "GET_PLAINS_DESTACADOS",
@@ -90,7 +94,10 @@ export function getPlainsDestacados() {
 export function signin(data) {
   return async function (dispatch) {
     try {
-      let response = await axios.post("http://localhost:8800/auth/signin", data);
+      let response = await axios.post(
+        "http://localhost:8800/auth/signin",
+        data
+      );
       window.localStorage.setItem("token", response.data.token);
       window.localStorage.setItem("user", response.data.username);
       window.localStorage.setItem("id", response.data.id);
@@ -112,7 +119,10 @@ export function signin(data) {
 export function signup(data) {
   return async function (dispatch) {
     try {
-      let response = await axios.post("http://localhost:8800/auth/signup", data);
+      let response = await axios.post(
+        "http://localhost:8800/auth/signup",
+        data
+      );
       //console.log('juthUP', response.data)
       return dispatch(
         {
@@ -144,3 +154,30 @@ export const removeItem = (item) => ({
   type: "REMOVE_ITEM",
   payload: item,
 });
+
+export function getProvince() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:8800/apiLugares/provincias");
+      //console.log(json.data)
+      return dispatch({
+        type: "GET_PROVINCE",
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getCity(id) {
+  return async function (dispatch) {
+    var json = await axios.get(
+      "http://localhost:8800/apiLugares/ciudades/" + id
+    );
+    //console.log(json.data)
+    return dispatch({
+      type: "GET_CITY",
+      payload: json.data,
+    });
+  };
+}

@@ -8,6 +8,7 @@ const updatePlain = require("./updatePlain");
 const deletePlain = require("./deletePlain");
 const updateUser = require("./updateUser");
 const getUsers = require("./getUsers");
+const apiLugares = require("./apiLugares");
 const router = Router();
 
 router.use("/setplainsdb", setPlainsDb);
@@ -19,6 +20,6 @@ router.use("/updateplain", updatePlain);
 router.use("/deleteplain", deletePlain);
 router.use("/updateuser", updateUser);
 router.use("/getusers", getUsers);
-
+router.use("/apiLugares", apiLugares);
 
 module.exports = router;
