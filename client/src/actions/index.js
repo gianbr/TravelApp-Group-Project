@@ -90,7 +90,7 @@ export function getPlainsDestacados() {
 export function signin(data) {
   return async function (dispatch) {
     try {
-      let response = await axios.post("/auth/signin", data);
+      let response = await axios.post("http://localhost:8800/auth/signin", data);
       window.localStorage.setItem("token", response.data.token);
       window.localStorage.setItem("user", response.data.username);
       window.localStorage.setItem("id", response.data.id);
@@ -112,7 +112,7 @@ export function signin(data) {
 export function signup(data) {
   return async function (dispatch) {
     try {
-      let response = await axios.post("/auth/signup", data);
+      let response = await axios.post("http://localhost:8800/auth/signup", data);
       //console.log('juthUP', response.data)
       return dispatch(
         {
