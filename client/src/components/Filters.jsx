@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { FaShoppingCart } from 'react-icons/fa'
 
 
-export default function Filters () {
+export default function Filters ({setPage}) {
 const dispatch = useDispatch()
 
 useEffect (()=>{
@@ -17,16 +17,19 @@ useEffect (()=>{
 function handleOrderByPrice (e) {
   e.preventDefault();
   dispatch(orderByPrice(e.target.value))
+  setPage(1)
 };
 
 function handleOrderByScore (e) {
   e.preventDefault();
   dispatch(orderByScore(e.target.value))
+  setPage(1)
 };
 
 function handleLocationFilter(e) {
   e.preventDefault();
   dispatch(filterByProvince(e.target.value))
+  setPage(1)
 };
 
     return(

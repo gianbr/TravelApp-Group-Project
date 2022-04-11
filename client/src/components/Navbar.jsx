@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { BsPerson } from 'react-icons/bs'
 import { FaShoppingCart } from 'react-icons/fa'
@@ -7,9 +7,10 @@ import { HiOutlineMenuAlt4 } from 'react-icons/hi';
 //import { useUser } from '../hooks/useUser';
 import { Logout } from '../actions';
 import { useDispatch } from 'react-redux';
+import __ from 'lodash'
 
-function Navbar (){
-const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+function Navbar ({user}){
+// const [human, setHuman] = useState(JSON.parse(localStorage.getItem(user)));
 const [nav, setNav] = useState(false);
 const [logo, setLogo] = useState(false);
 const dispatch = useDispatch();
@@ -26,8 +27,38 @@ const dispatch = useDispatch();
   const logout = () => {
     dispatch(Logout());
     window.location.replace('/');
-    setUser(null);
+    // setUser(null);
   };
+
+  const showServices = () => {
+    if(!__.isEmpty(user)){
+      let roles = user.roles.map(role => role.name);
+      if(roles.includes('admin')){
+        return(
+          <>
+            <li> <Link to='/servicios'>SERVICIOS</Link> </li>
+          </>
+        )
+      }
+    }
+  }
+
+  const showLogin = () => {
+    if(__.isEmpty(user)){
+      return(
+        <>
+          <Link to='/login'> <BsPerson className='mr-2' size={20}/> </Link>
+        </>
+      )
+    }else{
+      return(
+        <>
+          <span className='mx-5 fw-500'>Hola, {user.username.toUpperCase()} ♥</span>
+          <Link onClick={logout} to='/'>LOGOUT</Link>
+        </>
+      )
+    }
+  }
 
   return(
     <div className='flex w-full justify-between items-center h-20 px-4 absolute z-10 text-white'>
@@ -35,35 +66,16 @@ const dispatch = useDispatch();
         <h1 onClick={handleNav} className={logo ? 'hidden' : 'block'}>TRAVEL APP.</h1>
         </div>
         <ul className='hidden md:flex'>
-        <li> <Link to='/'>HOME</Link> </li>
-        <li> <Link to='/destination'>DESTINOS</Link> </li>
-        <li> <Link to='/servicios'>SERVICIOS</Link> </li>
-        <li> <Link to='/about'>ACERCA DE </Link> </li>
+          <li> <Link to='/'>HOME</Link> </li>
+          <li> <Link to='/destination'>DESTINOS</Link> </li>
+          <li> <Link to='/about'>ACERCA DE </Link> </li>
+          {showServices()}
         </ul>
                       {/* ICONOS */}
         <div className='hidden md:flex'>
           <Link to='/shopping'> <FaShoppingCart className='mr-2' size={20}/> </Link>
-          {/* {user?.result?():(<Link to='/' onClick={logout}> <AiOutlineClose className='mr-2' size={20}/> </Link>)}     */}
-          <Link to='/login'> <BsPerson className='mr-2' size={20}/> </Link>
+        {showLogin()}
         </div>
-
-        {user !== null ? (
-            // <p>{user?.name}</p>
-            <Link>
-            <button>Sign In</button>
-            </Link>
-        ) : (
-          <Link>
-            <button onClick={logout}>Logout</button>
-          </Link>
-          
-        )}
-
-
-
-
-
-
 
 
                         {/* HAMBURGUER */}
