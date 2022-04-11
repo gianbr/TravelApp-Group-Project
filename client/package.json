@@ -27,6 +27,7 @@
     "redux-thunk": "^2.4.1",
     "sweetalert": "^2.1.2",
     "uuidv4": "^6.2.13",
+    "util": "^0.12.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
