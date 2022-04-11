@@ -94,15 +94,15 @@ export function getPlainsDestacados() {
         return async function (dispatch) {
             try {
                 let response = await axios.post('http://localhost:8800/auth/signin', data);
-                console.log('juthIn', response.data)
                 window.localStorage.setItem('token', response.data.token);
                 window.localStorage.setItem('user', response.data.username);
                 window.localStorage.setItem('id', response.data.id);
+				window.localStorage.setItem('test', JSON.stringify(response.data));
                 return dispatch({
                     type: "SIGNIN",
                     payload: response.data,
                 }, window.location.href = '/'
-                );
+			);
 
             } catch (error) {
                 console.log(error)
@@ -115,16 +115,20 @@ export function getPlainsDestacados() {
     
 
     export function signup(data) {
-    return async function (dispatch) {
-        let response = await axios.post('http://localhost:8800/auth/signup',data);
-        //console.log('juthUP', response.data)
-        return dispatch({
-            type: "SIGNUP",
-            payload: response.data,
-        }, window.location.href = '/login'
-        );
-    };
-};
+    	return async function (dispatch) {
+        	try {
+				let response = await axios.post('http://localhost:8800/auth/signup',data);
+        	//console.log('juthUP', response.data)
+				return dispatch({
+					type: "SIGNUP",
+					payload: response.data,
+					}, window.location.href = '/login'
+				);
+			} catch (error) {
+				alert('Credenciales en uso')
+			}
+    	};
+	};
 
 export const Logout = () => {
 	return (dispatch) => {

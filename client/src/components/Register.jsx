@@ -4,6 +4,7 @@ import { signup } from '../actions'
 import { useDispatch,} from 'react-redux';
 import swal from 'sweetalert';
 import { validate } from './validate';
+import { Link } from 'react-router-dom';
 
 
 const Register = () => {
@@ -41,7 +42,9 @@ const handleChange = (e) => {
 return (
   <div className='relative w-full h-screen bg-zinc-900/90'>
     <img className='absolute w-full h-full object-cover mix-blend-overlay' src={loginImg} alt="/" />
-    <div className='flex justify-center items-center h-full'>
+    <div className='flex flex-col justify-evenly items-center h-full'>
+
+    <Link to='/' className='rounded-2xl py-2 p-3 focus:outline-none focus:ring focus:ring-indigo-500 bg-teal-400 hover:bg-indigo-500 relative text-white font-semibold'><button>Inicio</button></Link>
     
       <form className='max-w-[400px] w-full mx-auto bg-white p-8'>
         <h2 className='text-4xl font-bold text-center py-4'>TRAVEL APP.</h2>
