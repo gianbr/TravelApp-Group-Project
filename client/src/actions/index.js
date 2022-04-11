@@ -90,11 +90,11 @@ export function getPlainsDestacados() {
 export function signin(data) {
   return async function (dispatch) {
     try {
-      let response = await axios.post("/auth/signin", data);
-      console.log("juthIn", response.data);
+      let response = await axios.post("http://localhost:8800/auth/signin", data);
       window.localStorage.setItem("token", response.data.token);
       window.localStorage.setItem("user", response.data.username);
       window.localStorage.setItem("id", response.data.id);
+      window.localStorage.setItem("test", JSON.stringify(response.data));
       return dispatch(
         {
           type: "SIGNIN",
@@ -111,15 +111,19 @@ export function signin(data) {
 
 export function signup(data) {
   return async function (dispatch) {
-    let response = await axios.post("/auth/signup", data);
-    //console.log('juthUP', response.data)
-    return dispatch(
-      {
-        type: "SIGNUP",
-        payload: response.data,
-      },
-      (window.location.href = "/login")
-    );
+    try {
+      let response = await axios.post("http://localhost:8800/auth/signup", data);
+      //console.log('juthUP', response.data)
+      return dispatch(
+        {
+          type: "SIGNUP",
+          payload: response.data,
+        },
+        (window.location.href = "/login")
+      );
+    } catch (error) {
+      alert("Credenciales en uso");
+    }
   };
 }
 

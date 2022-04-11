@@ -33,7 +33,7 @@ function Destinations() {
           <h1>TRAVEL APP.</h1>
         </div>
         <Searchbar />
-        <Filters />
+        <Filters setPage={setPage}/>
       </div>
       {/* CONTAINER DE LA CARTA - PAQUETE */}
 
