@@ -8,11 +8,8 @@ const jwt = require("jsonwebtoken");
 const config = require("../config");
 
 authRoute.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Headers",
-    "x-access-token, Origin, Content-Type, Accept"
-  );
-  next();
+  res.header("Access-Control-Allow-Headers", "x-access-token, Origin, Content-Type, Accept");
+  return next();
 });
 
 //Registro

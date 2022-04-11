@@ -39,10 +39,12 @@ const checkRolesExisted = (req, res, next) => {
 };
 const checkStatusBanUser = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
-  if (user.banned) {
-    return res.status(400).json({ message: "This user has an active ban" });
+  if (user) {
+    if (user.banned) {
+      return res.status(400).json({ message: "This user has an active ban" });
+    }
   }
-  next();
+  return next();
 };
 
 const checkUsernameAndEmail = async (req, res, next) => {
