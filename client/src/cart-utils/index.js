@@ -10,8 +10,8 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
                 return cartItem.date === cartItemToAdd.date
                     ? {
                             ...cartItem,
-                            quantity: cartItem.quantity + 1,
-                      }
+                            quantity: cartItem.quantity + cartItemToAdd.quantity,
+                    }
                     : cartItem;
             });
         }
@@ -22,10 +22,22 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 
 export const removeItemFromCart = (cartItems, cartItemToRemove) => {
     const existingCartItem = cartItems.find(
-        (cartItem) => cartItem.id === cartItemToRemove.id
+        (cartItem) => cartItem.cartId === cartItemToRemove.cartId
     );
     
+<<<<<<< HEAD
     if (existingCartItem.quantity > 0) { 
         return cartItems.filter((cartItem) => cartItem.date !== cartItemToRemove.date, cartItem => cartItem.date !== cartItemToRemove.date);
     }
+=======
+    if (existingCartItem.quantity === 1) {
+        return cartItems.filter((cartItem) => cartItem.cartId !== cartItemToRemove.cartId);
+      }
+    
+      return cartItems.map((cartItem) => {
+        return cartItem.cartId === cartItemToRemove.cartId
+          ? { ...cartItem, quantity: cartItem.quantity - 1 }
+          : cartItem;
+      });
+>>>>>>> f41ff4823880e8cfed99f39adba5d54528569db1
 }

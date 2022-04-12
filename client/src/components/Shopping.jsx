@@ -42,19 +42,21 @@ function Shopping() {
                                     <>
                                         <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5"> {/* TODO EL PRODUCTO */}
 
-                                                <div class="w-80 w-1/5 mx-auto">
+                                                <div class="w-1/5 mx-auto">
                                                     <img class="h-24" src={item.image[0]} alt=""/>
                                                 </div>
                                                 <div class="flex flex-col justify-between ml-4 flex-grow w-1/5"> {/* DATOS DEL PRODUCTO */}
+                                                <Link to={'/destination/' + item.id} style={{lineHeight:'0.5'}}>
                                                     <span class="font-bold text-sm">{item.name}</span>
+                                                </Link>
                                                     <span class="text-gray-500 text-xs">{item.city}, {item.location}</span>
-                                                    <h5 onClick={(e) => handleRemove(item)} class="font-semibold hover:text-red-500 text-red-500 text-xs">Quitar</h5>
+                                                    <h5 onClick={(e) => handleRemove(item)} class="font-semibold hover:text-red-500 text-red-500 text-xs cursor-pointer">Quitar</h5>
                                                 </div>
 
                                             <div class="flex justify-center w-1/5"> {/* QUANTITY */}
                                                 <span class="mx-2 border text-center w-8">{item.quantity}</span>
                                             </div>
-                                            <span class="text-center w-1/5 font-semibold text-sm">{item.date.slice(1, 11)}</span>
+                                            <span class="text-center w-1/5 font-semibold text-sm">{item.date}</span>
                                             <span class="text-center w-1/5 font-semibold text-sm">${item.price * item.quantity}</span> {/* PRECIO MULTIPLICADO */}
                                         </div>
                                     </>
@@ -81,29 +83,6 @@ function Shopping() {
                     </div>
                 </div>
             </div>
-            {/* <div className='w-full h-screen relative'>
-                <Navbar />
-                <div className='absolute w-full h-full top-0 left-0 bt-0 bg-gray-900'></div>
-                <div className='absolute top-0 w-full h-full flex flex-col justify-center text-center text-white p-4'>
-                    <div className='w-80'>
-                        <h1>Carrito:</h1>
-                        <ul className="bg-indigo-300 mb-5">
-                            {cart.map((e) => {
-                                return (
-                                    <>
-                                        {console.log(e.images)}
-                                        <img src={e.image[0]} alt="" />
-                                        <li>Nombre: {e.name}</li>
-                                        <li>Fecha: {e.date}</li>
-                                        <li>Precio: {e.price}</li>
-                                        <li>Cantidad: {e.quantity}</li>
-                                    </>
-                                )
-                            })}
-                        </ul>
-                    </div>   
-                </div>
-            </div> */}
             <Footer />
         </div>
     )

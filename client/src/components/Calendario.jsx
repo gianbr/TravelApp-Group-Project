@@ -33,6 +33,7 @@ function Calendario({ handleDate, detailsDates }) {
 	const days = detailsDates ? daysCases(detailsDates) : null;
 
 	useEffect(() => {
+		console.log(startDate)
 		handleDate(startDate); //  //Definida en ExcursionDetail para construir el item que sera agregado al cart
 		// eslint-disable-next-line
 	}, [startDate]);
