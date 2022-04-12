@@ -7,8 +7,8 @@ import About from "./components/About.jsx";
 import Servicios from "./components/Servicios.jsx";
 import Details from "./components/Details";
 import Shopping from "./components/Shopping";
-import Register from "./components/Register"; 
-
+import Register from "./components/Register";
+import ResetPassword from "./components/ResetPassword";
 function App() {
   return (
     <div>
@@ -38,8 +38,11 @@ function App() {
             <Shopping />
           </Route>
           <Route exact path="/register">
-             <Register />
-           </Route>
+            <Register />
+          </Route>
+          <Route exact path="/resetpassword">
+            <ResetPassword />
+          </Route>
         </Switch>
       </Router>
     </div>
