@@ -1,6 +1,6 @@
 [
   {
-    "title": "Excursión a las cataratas del Iguazú, paseo en barco, tren, camión de safari",
+    "title": "Excursión a las cataratas del Iguazú",
     "location": "Misiones",
     "city": "Puerto Iguazú",
     "price": 21330,
@@ -48,7 +48,7 @@
     ]
   },
   {
-    "title": "Visita a las ruinas de San Ignacio y a las minas de Wanda Tour de día completo",
+    "title": "Ruinas de San Ignacio y minas de Wanda",
     "location": "Misiones",
     "city": "San Ignacio",
     "price": 3050,
@@ -84,7 +84,7 @@
     "date": ["lunes", "martes", "miercoles", "viernes", "sabado", "domingo"]
   },
   {
-    "title": "Vuelo panorámico en helicóptero por las Cataratas del Iguazú con traslados opcionales",
+    "title": "Vuelo en helicóptero por las Cataratas del Iguazú",
     "location": "Misiones",
     "city": "Puerto Iguazú",
     "price": 15000,
@@ -124,7 +124,7 @@
     "date": ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado"]
   },
   {
-    "title": "Escapada de un día al Parque Nacional Iberá desde San Ignacio",
+    "title": "Escapada al Parque Nacional Iberá desde San Ignacio",
     "location": "Misiones",
     "city": "San Ignacio",
     "price": 10000,
@@ -282,7 +282,7 @@
     "date": ["martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
   },
   {
-    "title": "Un día en la vida de un gaucho mendocino en Los Andes",
+    "title": "Vida de gaucho en Los Andes",
     "location": "Mendoza",
     "city": "Mendoza",
     "price": 24445,
@@ -325,7 +325,7 @@
     "date": ["domingo"]
   },
   {
-    "title": "Kayak Montaña y Asado",
+    "title": "Kayak, Montaña y Asado",
     "location": "Mendoza",
     "city": "Mendoza",
     "price": 16667,
@@ -487,7 +487,7 @@
   },
 
   {
-    "title": "¡Pasea por el Tigre y el Delta!",
+    "title": "Paseo por el Tigre y el Delta",
     "location": "Buenos Aires",
     "city": "Tigre",
     "price": 6000,
@@ -581,7 +581,7 @@
   },
 
   {
-    "title": "¡Descubre Bs As como un local en bici!",
+    "title": "Descubre Bs As como un local en bici",
     "location": "Buenos Aires",
     "city": "Ciudad Autonóma de Buenos Aires",
     "price": 3000,
@@ -632,7 +632,7 @@
     ]
   },
   {
-    "title": "Recorrido en auto y trekking por Bari",
+    "title": "Recorrido en auto y trekking por Bariloche",
     "location": "Río Negro",
     "city": "San Carlos de Bariloche",
     "price": 12200,
@@ -667,7 +667,7 @@
     "date": ["lunes", "martes", "miercoles", "jueves", "sabado", "domingo"]
   },
   {
-    "title": "Tesoros para Explorar la Patagonia",
+    "title": "Tesoros para explorar en La Patagonia",
     "location": "Río Negro",
     "city": "San Carlos de Bariloche",
     "price": 22700,
@@ -703,7 +703,7 @@
     "date": ["lunes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
   },
   {
-    "title": "Trekking & visita a cerveceria local",
+    "title": "Trekking y visita a cerveceria local",
     "location": "Río Negro",
     "city": "San Carlos de Bariloche",
     "price": 14900,
