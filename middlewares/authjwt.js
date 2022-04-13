@@ -19,7 +19,10 @@ const verifyToken = async (req, res, next) => {
 
     let decodedData;
 
-    if (!token) return res.status(403).json({ message: "No token, authorization denied" });
+    if (!token)
+      return res
+        .status(403)
+        .json({ message: "No token, authorization denied" });
 
     if (token && isCustomAuth) {
       decodedData = jwt.verify(token, config.SECRET);
@@ -27,7 +30,7 @@ const verifyToken = async (req, res, next) => {
       // console.log("28", req.userId);
     } else {
       decodedData = jwt.decode(token);
-      req.userId = decodedData?.id;
+      req.userId = decodedData?.sub;
     }
 
     const user = await User.findById(req.userId, { password: 0 });
