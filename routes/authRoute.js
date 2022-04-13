@@ -86,7 +86,7 @@ authRoute.post(
     const user = await User.findById(userFound._id);
     const roles = await Role.find({ _id: { $in: user.roles } });
     console.log(userFound);
-    res.json({ token: token, username: user.username, id: user._id });
+    res.json({ token: token, username: user.username, id: user._id, roles });
   }
 );
 
