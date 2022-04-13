@@ -155,6 +155,15 @@ export const removeItem = (item) => ({
   payload: item,
 });
 
+export const addItemFromCart = (item) => ({
+  type: "ADD_ITEM_IN_CART",
+  payload: item,
+})
+
+export const removeAllItemsFromCart = (item) => ({
+  type: "REMOVE_ALL_ITEMS_IN_CART",
+  payload: item,
+})
 
 export function updatePlain(id, plains) {
 	return async function (dispatch) {

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
-import { removeItem } from '../actions/index'
+import { removeItem, addItemFromCart, removeAllItemsFromCart } from '../actions/index'
+import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa'
 
 function Shopping() {
     const dispatch = useDispatch()
@@ -10,8 +11,17 @@ function Shopping() {
 
     const pricePack = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
 
+    const handleAdd = (e, producto) => {
+        console.log(producto)
+        dispatch(addItemFromCart(producto))
+    }
+
     const handleRemove = (product) => {
         dispatch(removeItem(product))
+    }
+
+    const handleRemoveAllCart = (product) => {
+        dispatch(removeAllItemsFromCart(product))
     }
 
     return (
@@ -48,11 +58,14 @@ function Shopping() {
                                                     <span class="font-bold text-sm">{item.name}</span>
                                                 </Link>
                                                     <span class="text-gray-500 text-xs">{item.city}, {item.location}</span>
-                                                    <h5 onClick={(e) => handleRemove(item)} class="font-semibold hover:text-red-500 text-red-500 text-xs cursor-pointer">Quitar</h5>
+                                                    <FaTrash className="text-red-500 text-2x1 cursor-pointer" onClick={() => handleRemoveAllCart(item)}/>
+                                                    {/* <h5 onClick={(e) => handleRemove(item)} class="font-semibold hover:text-red-500 text-red-500 text-xs cursor-pointer">Quitar</h5> */}
                                                 </div>
 
                                             <div class="flex justify-center w-1/5"> {/* QUANTITY */}
+                                                <FaMinus className="text-red-500 text-2xl cursor-pointer" onClick={(e) => handleRemove(item)} />
                                                 <span class="mx-2 border text-center w-8">{item.quantity}</span>
+                                                <FaPlus className="text-green-500 text-2xl cursor-pointer" onClick={(e) => handleAdd(e, item)} />
                                             </div>
                                             <span class="text-center w-1/5 font-semibold text-sm">{item.date}</span>
                                             <span class="text-center w-1/5 font-semibold text-sm">${item.price * item.quantity}</span> {/* PRECIO MULTIPLICADO */}

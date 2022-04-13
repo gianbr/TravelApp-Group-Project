@@ -56,6 +56,7 @@ function Details() {
 				city: detail.city,
 				location: detail.location,
 				cartId: cartId,
+				stock: detail.stock,
 				id
 			})
 		);

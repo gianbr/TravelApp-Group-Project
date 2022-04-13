@@ -6,9 +6,9 @@ const Destino = ({image, title, price, location,id }) => {
     // CARTA DE LINK DESTINATION
     return (
                     // CARTA
-        <div className="rounded-lg">
+        <div className="rounded-lg flex justify-center">
             <Link to={"/destination/" + id}>
-            <div className='w-96 h-[556px] border-2 bg-gray-100 border-opacity-100  overflow-hidden' >  {/* h-[556px] es el tamaño de la card */}
+            <div className='w-96 h-[556px] border-2 bg-gray-100 border-opacity-100' >  {/* h-[556px] es el tamaño de la card */}
                 <div className='w-96 h-96'> 
                     <img src={image} alt='vacation' className="w-96 h-96 rounded-lg shadow-lg shadow-[#040c16]" />
                 </div>
