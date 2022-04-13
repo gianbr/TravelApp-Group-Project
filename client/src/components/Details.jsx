@@ -54,7 +54,6 @@ function Details() {
 				price: detail.price,
 				image: detail.images,
 				city: detail.city,
-				Date: detail.date,
 				location: detail.location,
 				cartId: cartId,
 				id
@@ -183,13 +182,17 @@ function Details() {
 				</div>
 				<div>
 					<div className="bg-indigo-300">
-						<h3 className="ml-11 mt-4 font-bold text-3xl text-white">
-							{detail.city},{" "}
-							{detail.location}
+						<h3 className="ml-11 mt-4 p-2 font-bold text-3xl text-white text-center">
+							{detail.title}
 						</h3>
 					</div>
 
-					<div>
+					<div className="flex justify-between"> 
+						<div className="ml-5 mt-5">
+							
+							{detail.city},{" "}
+							{detail.location}
+						</div>
 						{detail.score <= 2 
 						? ( <h3 className="text-right mr-10"> Puntaje:{" "}<p className="text-red-500">{detail.score}</p></h3>) 
 						: (<h3 className="text-right mr-10">Puntaje:<p className="text-green-500">{detail.score}</p></h3>)

@@ -41,7 +41,7 @@ function Destinations() {
         <div className="py-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {currentPlains?.map((destination) => {
             return (
-              <div key={destination.id}>
+              <div className="h-[556px]" key={destination.id}> {/* h-[556px] es el tamaño de la card */}
                 <Destino image={destination.image} title={destination.title} location={destination.location} price={destination.price} id={destination.id} />
               </div>
             );
