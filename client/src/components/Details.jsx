@@ -64,9 +64,10 @@ function Details() {
 
 	const handleQuantity = (e) => {
 		setItem((prevState) => {
-			if (e.target.value <= detail.stock && e.target.value > 0) {
-				setDisabled(false);
-			}
+			if (e.target.value > detail.stock || e.target.value <= 0) {
+				setDisabled(true);
+				alert("El numero ingresado no es valido")
+			}else { setDisabled(false)}
 			return { ...prevState, [e.target.name]: parseInt(e.target.value) };
 		});
 	}
