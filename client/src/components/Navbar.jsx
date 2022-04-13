@@ -61,9 +61,9 @@ const dispatch = useDispatch();
   }
 
   return(
-    <div className='flex w-full justify-between items-center h-20 px-4 absolute z-10 text-white'>
-      <div>
-        <h1 onClick={handleNav} className={logo ? 'hidden' : 'block'}>TRAVEL APP.</h1>
+    <div className='flex w-full justify-between items-center h-20 px-4 absolute z-10 text-white '>
+      <div >
+        <h1>TRAVEL APP.</h1>
         </div>
         <ul className='hidden md:flex'>
           <li> <Link to='/'>HOME</Link> </li>
@@ -86,7 +86,7 @@ const dispatch = useDispatch();
             <h1 className='border-b'>TRAVEL APP</h1>
               <li> <Link to='/'>HOME</Link> </li>
               <li> <Link to='/destination'>DESTINOS</Link> </li>
-              <li> <Link to='/servicios'>SERVICIOS</Link></li>
+              {showServices()}
               <li> <Link to='/about'>ACERCA DE</Link> </li>
               <li> <Link to='login'>LOGIN</Link> </li>
                 </ul>

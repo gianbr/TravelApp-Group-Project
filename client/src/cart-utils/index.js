@@ -25,11 +25,6 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
         (cartItem) => cartItem.cartId === cartItemToRemove.cartId
     );
     
-<<<<<<< HEAD
-    if (existingCartItem.quantity > 0) { 
-        return cartItems.filter((cartItem) => cartItem.date !== cartItemToRemove.date, cartItem => cartItem.date !== cartItemToRemove.date);
-    }
-=======
     if (existingCartItem.quantity === 1) {
         return cartItems.filter((cartItem) => cartItem.cartId !== cartItemToRemove.cartId);
       }
@@ -39,5 +34,4 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
           ? { ...cartItem, quantity: cartItem.quantity - 1 }
           : cartItem;
       });
->>>>>>> f41ff4823880e8cfed99f39adba5d54528569db1
 }

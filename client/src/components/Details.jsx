@@ -64,13 +64,14 @@ function Details() {
 	};
 
 	const handleQuantity = (e) => {
-		setItem((prevState) => {
-			if (e.target.value <= detail.stock && e.target.value > 0) {
-				setDisabled(false);
-			}
-			return { ...prevState, [e.target.name]: parseInt(e.target.value) };
-		});
-	}
+        setItem((prevState) => {
+            if (e.target.value > detail.stock || e.target.value <= 0) {
+                setDisabled(true);
+                
+            }else { setDisabled(false)}
+            return { ...prevState, [e.target.name]: parseInt(e.target.value) };
+        });
+    }
 
 	const handleDelete = (id) => {
 		const sure = window.confirm("Are you sure you want to delete this?");

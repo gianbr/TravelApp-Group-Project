@@ -5,19 +5,24 @@ import { Link } from 'react-router-dom';
 const Destino = ({image, title, price, location,id }) => { 
     // CARTA DE LINK DESTINATION
       return (
-      <div className=''>
-        <div className="max-w-sm shadow-lg h-full border-2 bg-gray-100 border-gray-100 border-opacity-100 rounded-lg overflow-hidden">
-          <img src={image} alt="not found"  className='pt-2 group container rounded-md flex justify-center items-center mx-auto content-div' style={{ width:'300', height:'260px'}}/>
-           <div className='pt-2'>
-           <Link to={'/destination/' + id}>
-            <h3 className='font-semibold text-slate-700 leading-snug'>{title}</h3> </Link>
+                    // CARTA
+    <div className="rounded-lg">
+        <Link to={"/destination/" + id}>
+    <div className='w-96 border-2 bg-gray-100 border-opacity-100  overflow-hidden' style={{height:"100vh"}} >
+            <img src={image} alt='vacation' className="w-96 rounded-lg shadow-lg shadow-[#040c16]" style={{height:"70vh"}} />
+    <div className='px-6 py-4'>
+    <div>
+    <h2 className='text-base font-medium mb-1'>{title} </h2>
+    <p className='leading-relaxed mb-3'> <strong>Ubicación: {location} </strong> </p>
+    </div>
+    <div className='flex justify-between items-center'>
+               <p>  <strong>Precio: ${price}</strong> </p>
             </div>
-            <div className='py-4'>
-            <p className=' pt-4 text-center text-1xl mt-2 text-slate-600'>Locacion: {location}</p>
-            <p className='text-center text-1xl mt-2  text-slate-600'>Precio: ${price}</p>
-            </div>  
-          </div>
         </div>
+    </div>
+ 
+</Link>
+    </div> 
       );
   };
   export default Destino;

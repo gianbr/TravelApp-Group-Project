@@ -90,40 +90,6 @@ export function getPlainsDestacados() {
     });
   };
 }
-<<<<<<< HEAD
-    export function signin(data) {
-        return async function (dispatch) {
-            try {
-                let response = await axios.post('http://localhost:8800/auth/signin', data);
-                console.log('juthIn', response.data)
-                window.localStorage.setItem('token', response.data.token);
-                window.localStorage.setItem('user', response.data.username);
-                window.localStorage.setItem('id', response.data.id);
-                return dispatch({
-                    type: "SIGNIN",
-                    payload: response.data,
-                }, window.location.href = '/userPanel'
-                );
-
-            } catch (error) {
-                console.log(error)
-                return alert('Usuario o contraseña incorrectos')
-            }
-                
-            }
-        }
-            
-    
-
-    export function signup(data) {
-    return async function (dispatch) {
-        let response = await axios.post('http://localhost:8800/auth/signup',data);
-        console.log('juthUP', response.data)
-        return dispatch({
-            type: "SIGNUP",
-            payload: response.data,
-        });
-=======
 
 export function signin(data) {
   return async function (dispatch) {
@@ -167,7 +133,6 @@ export function signup(data) {
       );
     } catch (error) {
       alert("Credenciales en uso");
->>>>>>> f41ff4823880e8cfed99f39adba5d54528569db1
     }
   };
 }
