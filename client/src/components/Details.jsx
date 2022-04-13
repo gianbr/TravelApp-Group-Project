@@ -63,13 +63,14 @@ function Details() {
 	};
 
 	const handleQuantity = (e) => {
-		setItem((prevState) => {
-			if (e.target.value <= detail.stock && e.target.value > 0) {
-				setDisabled(false);
-			}
-			return { ...prevState, [e.target.name]: parseInt(e.target.value) };
-		});
-	}
+        setItem((prevState) => {
+            if (e.target.value > detail.stock || e.target.value <= 0) {
+                setDisabled(true);
+                
+            }else { setDisabled(false)}
+            return { ...prevState, [e.target.name]: parseInt(e.target.value) };
+        });
+    }
 
 	const handleDelete = (id) => {
 		const sure = window.confirm("Are you sure you want to delete this?");
@@ -181,13 +182,17 @@ function Details() {
 				</div>
 				<div>
 					<div className="bg-indigo-300">
-						<h3 className="ml-11 mt-4 font-bold text-3xl text-white">
-							{detail.city},{" "}
-							{detail.location}
+						<h3 className="ml-11 mt-4 p-2 font-bold text-3xl text-white text-center">
+							{detail.title}
 						</h3>
 					</div>
 
-					<div>
+					<div className="flex justify-between"> 
+						<div className="ml-5 mt-5">
+							
+							{detail.city},{" "}
+							{detail.location}
+						</div>
 						{detail.score <= 2 
 						? ( <h3 className="text-right mr-10"> Puntaje:{" "}<p className="text-red-500">{detail.score}</p></h3>) 
 						: (<h3 className="text-right mr-10">Puntaje:<p className="text-green-500">{detail.score}</p></h3>)

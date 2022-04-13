@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import Navbar from './Navbar'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
 import { removeItem } from '../actions/index'
@@ -25,7 +24,6 @@ function Shopping() {
                     <div class="w-3/4 bg-white px-10 py-10"> {/* CONTAINER ITEMS */}
                         <div class="flex justify-between border-b pb-8"> {/* ITEMS TITULOS */}
                             <h1 class="font-semibold text-2xl">Carrito de compras</h1>
-                            <h2 class="font-semibold text-2xl"></h2>
                             {cart.length == 1 
 						    ? ( <h2 class="font-semibold text-2xl">{cart.length} elemento</h2>) 
 						    : ( <h2 class="font-semibold text-2xl">{cart.length} elementos</h2>)
