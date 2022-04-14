@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
-const Destino = ({image, title, price, location,id }) => { 
+const Destino = ({image, title, price, location, id }) => { 
     // CARTA DE LINK DESTINATION
     return (
                     // CARTA

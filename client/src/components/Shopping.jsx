@@ -12,8 +12,13 @@ function Shopping() {
     const pricePack = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
 
     const handleAdd = (e, producto) => {
-        console.log(producto)
-        dispatch(addItemFromCart(producto))
+        if(producto.quantity + 1 > producto.stock){
+            alert('No hay stock suficiente')
+            console.log(producto.quantity)
+        }else{
+            dispatch(addItemFromCart(producto))
+            console.log("quantity", producto.quantity)
+        }
     }
 
     const handleRemove = (product) => {
@@ -54,9 +59,9 @@ function Shopping() {
                                                     <img class="h-24" src={item.image[0]} alt=""/>
                                                 </div>
                                                 <div class="flex flex-col justify-between ml-4 flex-grow w-1/5"> {/* DATOS DEL PRODUCTO */}
-                                                <Link to={'/destination/' + item.id} style={{lineHeight:'0.5'}}>
+                                                {/* <Link to={'/destination/' + item.id} style={{lineHeight:'0.5'}}> */}
                                                     <span class="font-bold text-sm">{item.name}</span>
-                                                </Link>
+                                                {/* </Link> */}
                                                     <span class="text-gray-500 text-xs">{item.city}, {item.location}</span>
                                                     <FaTrash className="text-red-500 text-2x1 cursor-pointer" onClick={() => handleRemoveAllCart(item)}/>
                                                     {/* <h5 onClick={(e) => handleRemove(item)} class="font-semibold hover:text-red-500 text-red-500 text-xs cursor-pointer">Quitar</h5> */}
