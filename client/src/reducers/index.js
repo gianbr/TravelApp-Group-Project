@@ -169,19 +169,19 @@ function rootReducer(state = initialState, action) {
         ...state,
         lugares: action.payload,
       };
-      
+
     case "UPDATE_PLAIN":
       return {
-          ...state,
-          update: state.plains.filter((plain) =>
+        ...state,
+        update: state.plains.filter((plain) =>
           plain._id === action.payload._id ? action.payload : plain
-          ),
+        ),
       };
-      
+
     case "DELETE_PLAIN":
       return {
-          ...state,
-          plains: state.plains.filter((plain) => plain._id !== action.payload),
+        ...state,
+        plains: state.plains.filter((plain) => plain._id !== action.payload),
       };
 
     default:
