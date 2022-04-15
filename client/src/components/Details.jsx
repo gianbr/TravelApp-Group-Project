@@ -21,10 +21,12 @@ function Details() {
   const [item, setItem] = useState({}); //Estado para construir item y agregarlo al carrito
   const [disabled, setDisabled] = useState(true);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("test")));
+  const cart = useSelector((state) => state.cartPlains);
 
   const history = useHistory();
 
   const cartId = uuid();
+  console.log("esto es el item: ", item);
 
   useEffect(() => {
     dispatch(getDetailId(id));
@@ -61,6 +63,7 @@ function Details() {
         city: detail.city,
         location: detail.location,
         cartId: cartId,
+        stock: detail.stock,
         id,
       })
     );
@@ -110,6 +113,101 @@ function Details() {
     }
   };
 
+  // const renderEditAndDeleteButton = () => {
+  //   if (!__.isEmpty(user)) {
+  //     let roles = user.roles.map((role) => role.name);
+  //     if (roles.includes("admin")) {
+  //       return (
+  //         <div className="flex justify-between">
+  //           <button className="absolute top-0.5 left-3 bg-indigo-300 hover:bg-blue-300 text-white font-bold py-1 px-3 rounded-full">
+  //             <Link to={`/editarservicios/${id}`}>
+  //               <svg
+  //                 xmlns="http://www.w3.org/2000/svg"
+  //                 className="h-5 w-5"
+  //                 viewBox="0 0 20 20"
+  //                 fill="currentColor"
+  //               >
+  //                 <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+  //               </svg>
+  //             </Link>
+  //           </button>
+  //           <button
+  //             onClick={() => handleDelete(id)}
+  //             className="absolute top-0.5 right-3 bg-indigo-300 hover:bg-blue-300 text-white font-bold py-1 px-3 rounded-full"
+  //           >
+  //             <svg
+  //               xmlns="http://www.w3.org/2000/svg"
+  //               className="h-5 w-5"
+  //               viewBox="0 0 20 20"
+  //               fill="currentColor"
+  //             >
+  //               <path
+  //                 fillRule="evenodd"
+  //                 d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+  //                 clipRule="evenodd"
+  //               />
+  //             </svg>
+  //           </button>
+  //         </div>
+  //       );
+  //     }
+  //   }
+  // };
+
+  // create a function that checks if the item in the cart has the same id and date as the detail
+  const checkIdDate = (cart) => {
+    return cart.find(
+      (cartItem) => cartItem.date === item.date && cartItem.id === id
+    );
+  };
+
+  const renderStock = () => {
+    const checkedIdDate = checkIdDate(cart);
+    if (checkedIdDate) {
+      return (
+        <h3 className="text-base leading-4 text-gray-800 m-2">
+          Máximo: {detail.stock - checkedIdDate.quantity} personas
+        </h3>
+      );
+    } else {
+      return (
+        <h3 className="text-base leading-4 text-gray-800 m-2">
+          Máximo: {detail.stock} personas
+        </h3>
+      );
+    }
+  };
+
+  const maxStockInput = () => {
+    const checkedIdDate = checkIdDate(cart);
+    if (checkedIdDate) {
+      return (
+        <input
+          className="border-solid border-2 border-indigo-300"
+          type="number"
+          name="quantity"
+          min={1}
+          max={detail.stock - checkedIdDate.quantity}
+          onChange={handleQuantity}
+          value={item.quantity}
+          disabled={detail.stock - checkedIdDate.quantity === 0 ? true : false}
+        />
+      );
+    } else {
+      return (
+        <input
+          className="border-solid border-2 border-indigo-300"
+          type="number"
+          name="quantity"
+          min={1}
+          max={detail.stock}
+          onChange={handleQuantity}
+          value={item.quantity}
+        />
+      );
+    }
+  };
+
   const renderEditAndDeleteButton = () => {
     if (!__.isEmpty(user)) {
       let roles = user.roles.map((role) => role.name);
@@ -117,7 +215,7 @@ function Details() {
         return (
           <div className="flex justify-between">
             <button className="absolute top-0.5 left-3 bg-indigo-300 hover:bg-blue-300 text-white font-bold py-1 px-3 rounded-full">
-              <Link to={`/editarservicios/${id}`}>
+              <Link to={`/servicios/${id}`}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -130,7 +228,7 @@ function Details() {
             </button>
             <button
               onClick={() => handleDelete(id)}
-              className="absolute top-0.5 right-3 bg-indigo-300 hover:bg-blue-300 text-white font-bold py-1 px-3 rounded-full"
+              className="absolute top-0.5 right-3 bg-red-500 hover:bg-red-400 text-white font-bold py-1 px-3 rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -237,19 +335,15 @@ function Details() {
             <h3 className="text-base leading-4 text-gray-800 m-2">
               Personas:{" "}
             </h3>
-            <input
-              onChange={(e) => handleQuantity(e)}
-              className="border-solid border-2 border-indigo-300"
-              type="number"
-              name="quantity"
-              min={1}
-              max={detail.stock}
-            />
+            {/* <input onChange={(e) => handleQuantity(e)} className="border-solid border-2 border-indigo-300" type="number" name="quantity" min={1} max={}/> */}
+            {maxStockInput()}
           </div>
           <div>
-            <h3 className="text-base leading-4 text-gray-800 m-2">
-              Máximo: {detail.stock} personas
-            </h3>
+            {/* <h3 className="text-base leading-4 text-gray-800 m-2">
+							Máximo:{" "}
+							{detail.stock} personas
+						</h3> */}
+            {renderStock()}
             <h3 className="text-base leading-4 text-gray-800 m-2">
               Precio: ${detail.price}
             </h3>

@@ -1,5 +1,7 @@
 import { addItemToCart } from "../cart-utils/index";
 import { removeItemFromCart } from "../cart-utils/index";
+import { addItemFromCartInCart } from "../cart-utils/index";
+import { removeAllItemsFromCart } from "../cart-utils/index";
 import { toast } from "react-toastify";
 
 const initialState = {
@@ -144,6 +146,19 @@ function rootReducer(state = initialState, action) {
         ...state,
         cartPlains: removeItemFromCart(state.cartPlains, action.payload),
       };
+
+    case "ADD_ITEM_IN_CART":
+      return {
+        ...state,
+        cartPlains: addItemFromCartInCart(state.cartPlains, action.payload),
+      };
+    
+    case "REMOVE_ALL_ITEMS_IN_CART":
+      return {
+        ...state,
+        cartPlains: removeAllItemsFromCart(state.cartPlains, action.payload),
+      };
+
     case "GET_PROVINCE":
       return {
         ...state,
