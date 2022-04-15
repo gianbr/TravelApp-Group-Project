@@ -9,8 +9,8 @@ var PlainSchema = new mongoose.Schema({
   comments: [{ body: String }],
   stock: Number,
   score: Number,
-  included: [{ name: String, body: String }],
-  description: { title: String, body: String },
+  included: String,
+  description: String,
   date: [String],
 });
 

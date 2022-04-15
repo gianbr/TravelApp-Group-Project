@@ -16,10 +16,12 @@ function Details() {
 	const [item, setItem] = useState({}); //Estado para construir item y agregarlo al carrito
 	const [disabled, setDisabled] = useState(true);
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem('test')));
+	const cart = useSelector((state) => state.cartPlains);
 
 	const history = useHistory();
 
 	const cartId = uuid();
+	console.log("esto es el item: ",item)
 
 	useEffect(() => {
 		dispatch(getDetailId(id));
@@ -56,6 +58,7 @@ function Details() {
 				city: detail.city,
 				location: detail.location,
 				cartId: cartId,
+				stock: detail.stock,
 				id
 			})
 		);
@@ -104,7 +107,61 @@ function Details() {
 		}
 	}
 
-	const renderEditAndDeleteButton = () => {
+	// create a function that checks if the item in the cart has the same id and date as the detail
+	const checkIdDate = (cart) => {
+		return cart.find((cartItem) => cartItem.date === item.date && cartItem.id === id)
+	}
+
+	const renderStock = () => {
+		const checkedIdDate = checkIdDate(cart);
+		if(checkedIdDate){
+			return(
+				<h3 className="text-base leading-4 text-gray-800 m-2">
+					Máximo:{" "}
+					{detail.stock - checkedIdDate.quantity} personas
+				</h3>
+			)
+		}else{
+			return (
+				<h3 className="text-base leading-4 text-gray-800 m-2">
+					Máximo:{" "}
+					{detail.stock} personas
+				</h3>
+			)
+		}
+	}
+
+	const maxStockInput = () => {
+		const checkedIdDate = checkIdDate(cart);
+		if(checkedIdDate){
+			return(
+				<input
+					className="border-solid border-2 border-indigo-300"
+					type="number"
+					name="quantity"
+					min={1}
+					max={detail.stock - checkedIdDate.quantity}
+					onChange={handleQuantity}
+					value={item.quantity}
+					disabled={detail.stock - checkedIdDate.quantity === 0 ? true : false}
+				/>
+			)
+		}else{
+			return(
+				<input
+					className="border-solid border-2 border-indigo-300"
+					type="number"
+					name="quantity"
+					min={1}
+					max={detail.stock}
+					onChange={handleQuantity}
+					value={item.quantity}
+				/>
+			)
+		}
+	}
+
+	const renderEditAndDeleteButton = () => {	
 		if (!__.isEmpty(user)) {
 			let roles = user.roles.map(role => role.name);
       		if(roles.includes('admin')){
@@ -124,7 +181,7 @@ function Details() {
 						</button>
 						<button
 						onClick={() => handleDelete(id)}
-						className="absolute top-0.5 right-3 bg-indigo-300 hover:bg-blue-300 text-white font-bold py-1 px-3 rounded-full"
+						className="absolute top-0.5 right-3 bg-red-500 hover:bg-red-400 text-white font-bold py-1 px-3 rounded-full"
 						>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -234,13 +291,15 @@ function Details() {
 					</div>
 					<div className="py-2 pr-2 flex items-center">
 						<h3 className="text-base leading-4 text-gray-800 m-2">Personas: </h3>
-						<input onChange={(e) => handleQuantity(e)} className="border-solid border-2 border-indigo-300" type="number" name="quantity" min={1} max={detail.stock}/>
+						{/* <input onChange={(e) => handleQuantity(e)} className="border-solid border-2 border-indigo-300" type="number" name="quantity" min={1} max={}/> */}
+						{maxStockInput()}
 					</div>
 					<div>
-						<h3 className="text-base leading-4 text-gray-800 m-2">
+						{/* <h3 className="text-base leading-4 text-gray-800 m-2">
 							Máximo:{" "}
 							{detail.stock} personas
-						</h3>
+						</h3> */}
+						{renderStock()}
 						<h3 className="text-base leading-4 text-gray-800 m-2">Precio: ${detail.price}</h3>
 					</div>
 				</div>
