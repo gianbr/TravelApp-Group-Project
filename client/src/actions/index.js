@@ -155,38 +155,43 @@ export const removeItem = (item) => ({
   payload: item,
 });
 
-
 export function updatePlain(id, plains) {
-	return async function (dispatch) {
-	  try {
-		const { data } = await axios.patch("http://localhost:8800/", id, plains);
-		console.log("update", data);
-		return dispatch({
-		  type: "UPDATE_PLAIN",
-		  payload: data,
-		});
-	  } catch (error) {
-		console.log(error);
-	  }
-	};
-  }
-  
-  export function deletePlain(id) {
-	return async function (dispatch) {
-	  try {
-		await axios.delete("http://localhost:8800/deletePlain/" + id, {
-		  headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-		});
-		console.log("delete", id);
-		return dispatch({
-		  type: "DELETE_PLAIN",
-		  payload: id,
-		});
-	  } catch (error) {
-		console.log(error);
-	  }
-	};
-  }
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.patch(
+        "http://localhost:8800/updateplain/" + id,
+        plains,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      console.log("update", data);
+      return dispatch({
+        type: "UPDATE_PLAIN",
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function deletePlain(id) {
+  return async function (dispatch) {
+    try {
+      await axios.delete("http://localhost:8800/deleteplain/" + id, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      console.log("delete", id);
+      return dispatch({
+        type: "DELETE_PLAIN",
+        payload: id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 export function getProvince() {
   return async function (dispatch) {

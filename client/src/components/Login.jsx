@@ -16,7 +16,7 @@ function Login() {
   });
 
   const handleSubmit = async (e) => {
-    if (errors !== {}) {
+    if (!Object.keys(errors)) {
       e.preventDefault();
       return swal({
         title: "¡Rellene los campos para continuar!",
