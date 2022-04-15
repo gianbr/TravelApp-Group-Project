@@ -215,7 +215,7 @@ function Details() {
         return (
           <div className="flex justify-between">
             <button className="absolute top-0.5 left-3 bg-indigo-300 hover:bg-blue-300 text-white font-bold py-1 px-3 rounded-full">
-              <Link to={`/servicios/${id}`}>
+              <Link to={`/editarservicios/${id}`}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
