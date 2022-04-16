@@ -1,6 +1,6 @@
 [
   {
-    "title": "Excursión a las cataratas del Iguazú, paseo en barco, tren, camión de safari",
+    "title": "Excursión a las cataratas del Iguazú",
     "location": "Misiones",
     "city": "Puerto Iguazú",
     "price": 21330,
@@ -19,24 +19,8 @@
     ],
     "stock": 30,
     "score": 4.9,
-    "included": [
-      {
-        "name": "Guia",
-        "body": "Guía profesional bilingüe"
-      },
-      {
-        "name": "Traslado",
-        "body": "Traslado de ida y vuelta al hotel"
-      },
-      {
-        "name": "Paseo en barco",
-        "body": "Paseo en barco + bolsa impermeable (para mantener sus pertenencias secas)"
-      }
-    ],
-    "description": {
-      "title": "Disfrute de un emocionante día de aventuras en las cataratas del Iguazú y la selva tropical",
-      "body": "Amantes de la aventura y la naturaleza (¡éste es el lugar ideal para usted!) Pase tiempo al aire libre y explore el lado argentino de las cataratas del Iguazú. Visite lugares a los que no podría llegar solo, como explorar la selva tropical subtropical en un camión y dar un paseo en barco de aventura para disfrutar de una vista de cerca de las cataratas. El viaje también incluye un emocionante paseo en tren ecológico."
-    },
+    "included": "Guia, Traslado, Paseo en barco",
+    "description": "Amantes de la aventura y la naturaleza (¡éste es el lugar ideal para usted!) Pase tiempo al aire libre y explore el lado argentino de las cataratas del Iguazú. Visite lugares a los que no podría llegar solo, como explorar la selva tropical subtropical en un camión y dar un paseo en barco de aventura para disfrutar de una vista de cerca de las cataratas. El viaje también incluye un emocionante paseo en tren ecológico.",
     "date": [
       "lunes",
       "martes",
@@ -48,7 +32,7 @@
     ]
   },
   {
-    "title": "Visita a las ruinas de San Ignacio y a las minas de Wanda Tour de día completo",
+    "title": "Ruinas de San Ignacio y minas de Wanda",
     "location": "Misiones",
     "city": "San Ignacio",
     "price": 3050,
@@ -67,24 +51,12 @@
     ],
     "stock": 48,
     "score": 4,
-    "included": [
-      {
-        "name": "Guia",
-        "body": "Guía profesional bilingüe"
-      },
-      {
-        "name": "Traslado",
-        "body": "Traslado de ida y vuelta al hotel"
-      }
-    ],
-    "description": {
-      "title": "Visita a las ruinas de San Ignacio y a las minas de Wanda Tour de día completo",
-      "body": "Explore las ruinas jesuitas de San Ignacio y las minas de Wanda en una excursión de un día desde Puerto Iguazú. Aprenda sobre la historia de los jesuitas y los pueblos nativos de la región y vea muchas piedras preciosas en las minas de Wanda."
-    },
+    "included": "Guia",
+    "description": "Explore las ruinas jesuitas de San Ignacio y las minas de Wanda en una excursión de un día desde Puerto Iguazú. Aprenda sobre la historia de los jesuitas y los pueblos nativos de la región y vea muchas piedras preciosas en las minas de Wanda.",
     "date": ["lunes", "martes", "miercoles", "viernes", "sabado", "domingo"]
   },
   {
-    "title": "Vuelo panorámico en helicóptero por las Cataratas del Iguazú con traslados opcionales",
+    "title": "Vuelo en helicóptero por las Cataratas del Iguazú",
     "location": "Misiones",
     "city": "Puerto Iguazú",
     "price": 15000,
@@ -103,28 +75,12 @@
     ],
     "stock": 4,
     "score": 4.5,
-    "included": [
-      {
-        "name": "Vuelo",
-        "body": "Vuelo de 10 minutos en helicóptero"
-      },
-      {
-        "name": "Traslado",
-        "body": "Traslado de ida y vuelta al hotel (si se ha elegido esta opción)"
-      },
-      {
-        "name": "Guía",
-        "body": "Guía profesional"
-      }
-    ],
-    "description": {
-      "title": "Vuelo panorámico en helicóptero",
-      "body": "Realice un vuelo panorámico en helicóptero sobre las Cataratas del Iguazú en esta excursión que le dejará boquiabierto. Disfrute de unas vistas panorámicas incomparables y de oportunidades para hacer fotos mientras el helicóptero pasa por encima de las cataratas de 82 metros (270 pies). Sobrevuele la selva circundante para disfrutar de las abundantes plantas y animales de camino a las cataratas y desde ellas. El transporte de ida y vuelta al hotel y el traslado al helipuerto están incluidos."
-    },
+    "included": "Vuelo, Traslado, Guía",
+    "description": "Realice un vuelo panorámico en helicóptero sobre las Cataratas del Iguazú en esta excursión que le dejará boquiabierto. Disfrute de unas vistas panorámicas incomparables y de oportunidades para hacer fotos mientras el helicóptero pasa por encima de las cataratas de 82 metros (270 pies). Sobrevuele la selva circundante para disfrutar de las abundantes plantas y animales de camino a las cataratas y desde ellas. El transporte de ida y vuelta al hotel y el traslado al helipuerto están incluidos.",
     "date": ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado"]
   },
   {
-    "title": "Escapada de un día al Parque Nacional Iberá desde San Ignacio",
+    "title": "Escapada al Parque Nacional Iberá desde San Ignacio",
     "location": "Misiones",
     "city": "San Ignacio",
     "price": 10000,
@@ -143,16 +99,8 @@
     ],
     "stock": 15,
     "score": 5,
-    "included": [
-      {
-        "name": "Almuerzo",
-        "body": "Almuerzo"
-      }
-    ],
-    "description": {
-      "title": "Escapada de un día al Parque Nacional Iberá desde San Ignacio",
-      "body": "Una excursión única para descubrir uno de los parques nacionales de América del Sur mejores conservados, es un lugar único donde podrá ver más de 300 especies de aves y animales en su hábitat natural."
-    },
+    "included": "Almuerzo",
+    "description": "Una excursión única para descubrir uno de los parques nacionales de América del Sur mejores conservados, es un lugar único donde podrá ver más de 300 especies de aves y animales en su hábitat natural.",
     "date": ["lunes", "martes", "miercoles", "jueves", "viernes", "domingo"]
   },
   {
@@ -175,20 +123,8 @@
     ],
     "stock": 50,
     "score": 4,
-    "included": [
-      {
-        "name": "Todos los impuestos y tasas",
-        "body": "Todos los impuestos y tasas"
-      },
-      {
-        "name": "Ingreso/entrada: Güiráoga",
-        "body": "Ingreso/entrada: Güiráoga"
-      }
-    ],
-    "description": {
-      "title": "Entrada a la reserva de animales salvajes Güirá Oga",
-      "body": "GüiráOga es un refugio en la provincia de Misiones para animales que han resultado atropellados o heridos en su hábitat natural. El regreso de los animales a la selva es el objetivo y la misión diaria del refugio. Para garantizar su supervivencia en la selva, aquí se aseguran de que estén lo suficientemente fuertes para lograrlo. Le invitamos a caminar por el refugio y ver cada una de las zonas donde se desarrolla su trabajo diario: la sección de veterinaria, el centro de cuarentena y la zona de nutrición, que es el corazón del refugio, donde se prepara toda la comida para los animales. A continuación, alrededor de las áreas de rehabilitación, los animales comienzan su recuperación compartiendo espacios al aire libre con el resto de animales. Por su comportamiento, es posible saber si están preparados para volver a la selva. También podrá ver la zona de cautividad, donde se ocupan de las crías. Gracias a las actividades del refugio, se ayuda a mantener nuestro deber con el medio ambiente."
-    },
+    "included": "Todos los impuestos y tasas, Ingreso/entrada: Güiráoga",
+    "description": "GüiráOga es un refugio en la provincia de Misiones para animales que han resultado atropellados o heridos en su hábitat natural. El regreso de los animales a la selva es el objetivo y la misión diaria del refugio. Para garantizar su supervivencia en la selva, aquí se aseguran de que estén lo suficientemente fuertes para lograrlo. Le invitamos a caminar por el refugio y ver cada una de las zonas donde se desarrolla su trabajo diario: la sección de veterinaria, el centro de cuarentena y la zona de nutrición, que es el corazón del refugio, donde se prepara toda la comida para los animales. A continuación, alrededor de las áreas de rehabilitación, los animales comienzan su recuperación compartiendo espacios al aire libre con el resto de animales. Por su comportamiento, es posible saber si están preparados para volver a la selva. También podrá ver la zona de cautividad, donde se ocupan de las crías. Gracias a las actividades del refugio, se ayuda a mantener nuestro deber con el medio ambiente.",
     "date": ["lunes", "martes", "jueves", "viernes", "sabado", "domingo"]
   },
   {
@@ -214,28 +150,8 @@
     ],
     "stock": 72,
     "score": 4.94,
-    "included": [
-      {
-        "name": "Comida",
-        "body": "Menú del día - Almuerzo completo . Postre a elección según el menú del día"
-      },
-      {
-        "name": "Bebidas",
-        "body": "Vino . Todas las degustaciones incluídas en el precio"
-      },
-      {
-        "name": "Entradas",
-        "body": "Todas las entradas a bodegas y degustaciones están incluídas"
-      },
-      {
-        "name": "Transporte",
-        "body": "Auto privado. Incluye transporte de ida y vuelta"
-      }
-    ],
-    "description": {
-      "title": "Cata de vinos en tres bodegas en Luján de Cuyo y en Maipú.",
-      "body": "Tendrás la oportunidad de apreciar diferentes tipos de viñedos y técnicas de elaboración.Después, visitaremos un pequeño restaurante. Toda la comida es casera. Tendremos un almuerzo que incluye bebida, entrada, plato principal y postre. "
-    },
+    "included": "Comida, Bebidas, Entradas, Transporte",
+    "description": "Tendrás la oportunidad de apreciar diferentes tipos de viñedos y técnicas de elaboración.Después, visitaremos un pequeño restaurante. Toda la comida es casera. Tendremos un almuerzo que incluye bebida, entrada, plato principal y postre.",
     "date": ["lunes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
   },
   {
@@ -261,28 +177,12 @@
     ],
     "stock": 21,
     "score": 5,
-    "included": [
-      {
-        "name": "Comida",
-        "body": "Vamos a tomar mate con tortafritas, empanadas de carne y maíz, ensalada de papas, ensalada de tomate y chocotorta."
-      },
-      {
-        "name": "Bebidas",
-        "body": "Mate . ¡Es la bebida más tradicional de este país, así que espero que les guste!Será lo primero con lo que te familiarizarás cuando nos conozcamos todos"
-      },
-      {
-        "name": "Fotografía",
-        "body": "Si quieres tener un recuerdo duradero, tendremos fotos con todo el proceso de cocción de la empanada"
-      }
-    ],
-    "description": {
-      "title": "La cocina argentina en tus manos... ¡y en tu paladar!",
-      "body": "De principio a fin, probarás la cultura argentina. Mate, tortafritas, empanadas, vino y chocotorta forman parte de nuestra vida.Podemos almorzar dentro de la casa o en el patio trasero. Ambas opciones nos permiten cumplir con el distanciamiento social"
-    },
+    "included": "Comida, Bebidas, Fotografía",
+    "description":"De principio a fin, probarás la cultura argentina. Mate, tortafritas, empanadas, vino y chocotorta forman parte de nuestra vida.Podemos almorzar dentro de la casa o en el patio trasero. Ambas opciones nos permiten cumplir con el distanciamiento social",
     "date": ["martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
   },
   {
-    "title": "Un día en la vida de un gaucho mendocino en Los Andes",
+    "title": "Vida de gaucho en Los Andes",
     "location": "Mendoza",
     "city": "Mendoza",
     "price": 24445,
@@ -304,28 +204,12 @@
     ],
     "stock": 88,
     "score": 4.98,
-    "included": [
-      {
-        "name": "Comida",
-        "body": "Almuerzo Típico 'Asado'.(opción vegetariana a pedido)"
-      },
-      {
-        "name": "Transporte",
-        "body": "Vehículo 4x4 -Transporte ida y vuelta desde la ciudad de Mendoza (2hs cada tramo)"
-      },
-      {
-        "name": "Equipo",
-        "body": "Montura y ponchos"
-      }
-    ],
-    "description": {
-      "title": "Viva como un Gaucho en Los Andes",
-      "body": "Para aquellos que deseen conocer las costumbres y tradiciones de Los Andes, con una de las primeras familias de la zona"
-    },
+    "included": "Comida, Transporte, Equipo",
+    "description": "Para aquellos que deseen conocer las costumbres y tradiciones de Los Andes, con una de las primeras familias de la zona",
     "date": ["domingo"]
   },
   {
-    "title": "Kayak Montaña y Asado",
+    "title": "Kayak, Montaña y Asado",
     "location": "Mendoza",
     "city": "Mendoza",
     "price": 16667,
@@ -347,16 +231,8 @@
     ],
     "stock": 80,
     "score": 5,
-    "included": [
-      {
-        "name": "Comida",
-        "body": "Almuerzo típico de los Mendocinos de un día en la montaña, Asado: Carnes y verduras a la parrilla con leña, mientras podremos degustar una copa de vino o cerveza típica de Mendoza, también habrán disponibles bebidas sin alcohol."
-      }
-    ],
-    "description": {
-      "title": "Te proponemos vivir una excelente aventura en “EL DIQUE POTRERILLOS”",
-      "body": "Experimentarás el navegar en kayak y disfrutar de un rico asado hecho en una parrilla con leña a las orillas del lago"
-    },
+    "included": "Comida",
+    "description": "Experimentarás el navegar en kayak y disfrutar de un rico asado hecho en una parrilla con leña a las orillas del lago",
     "date": ["lunes", "martes", "miercoles", "jueves", "viernes"]
   },
   {
@@ -382,16 +258,8 @@
     ],
     "stock": 76,
     "score": 5,
-    "included": [
-      {
-        "name": "Equipo",
-        "body": "Cascos y Motocicleta"
-      }
-    ],
-    "description": {
-      "title": "Para los arriesgados: Tour em moto por la ciudad de Mendoza",
-      "body": "Consiste en conocerla manejando unas motos increíbles y conociendo lugares soñados como caminos de alta montaña, paisajes entre viñedos y bodegas."
-    },
+    "included": "Equipo",
+    "description": "Consiste en conocerla manejando unas motos increíbles y conociendo lugares soñados como caminos de alta montaña, paisajes entre viñedos y bodegas.",
     "date": ["miercoles", "jueves", "viernes", "sabado", "domingo"]
   },
   {
@@ -419,28 +287,8 @@
     ],
     "stock": 10,
     "score": 4.5,
-    "included": [
-      {
-        "name": "Guía",
-        "body": "Guía turística e histórica por parte de nuestro personal"
-      },
-      {
-        "name": "Traslado",
-        "body": "Transporte para cada parada del recorrido"
-      },
-      {
-        "name": "Desayuno, Almuerzo, Cena",
-        "body": "Disfrutaras los exquisitos sabores de uno de los restaurantes más conocidos y cercanos al puerto "
-      },
-      {
-        "name": "Noche de Casino",
-        "body": "Unos números en el Casino no vienen mal ya entrada la noche. Igual no es necesario jugar para entrar y admirar la belleza de esta sala de juego que hizo, con películas y anécdotas emblemáticas, parte del adn de esta ciudad."
-      }
-    ],
-    "description": {
-      "title": "24 horas en Mar del Plata",
-      "body": "Increíble MarDel, no alcanzan los días ni las horas para recorrerla, pero esperamos que este día propuesto por nosotros te resulte muy útil para organizarse mejor en “la Feliz” y disfrutar algunas de las mejores propuestas que ofrece para quienes quieran tener un día inolvidable"
-    },
+    "included": "Guía, Traslado, Desayuno, Almuerzo, Cena, Noche de Casino",
+    "description":"Increíble MarDel, no alcanzan los días ni las horas para recorrerla, pero esperamos que este día propuesto por nosotros te resulte muy útil para organizarse mejor en “la Feliz” y disfrutar algunas de las mejores propuestas que ofrece para quienes quieran tener un día inolvidable",
     "date": ["lunes", "martes", "miercoles", "jueves", "viernes"]
   },
 
@@ -469,25 +317,13 @@
     ],
     "stock": 15,
     "score": 4,
-    "included": [
-      {
-        "name": "Guía",
-        "body": "Guía experimentado a caballo"
-      },
-      {
-        "name": "Almuerzo",
-        "body": "Nada mejor que disfrutar de un buen asado argentino para reponer energías"
-      }
-    ],
-    "description": {
-      "title": "Emoción, historia y vistas únicas en Tandil",
-      "body": "Gabriel Barletta, desde hace más de veinte años, se encarga de explicar a cada grupo de turistas que visita su campo todo lo que tiene que ver con sus caballos y la naturaleza de esta hermosa ciudad, ofreciendo una cabalgata como clásico a la hora de elegir un paseo, el valor agregado que tienen estas cabalgatas es que permiten un reconocimiento autóctono y exótico de las sierras, una especie de ecoturismo que logra que el visitante se sienta parte de la naturaleza, conociendo las sierras de otra forma, algo que no se entendería si se las recorre en automóvil "
-    },
+    "included": "Guía, Almuerzo",
+    "description": "Gabriel Barletta, desde hace más de veinte años, se encarga de explicar a cada grupo de turistas que visita su campo todo lo que tiene que ver con sus caballos y la naturaleza de esta hermosa ciudad, ofreciendo una cabalgata como clásico a la hora de elegir un paseo, el valor agregado que tienen estas cabalgatas es que permiten un reconocimiento autóctono y exótico de las sierras, una especie de ecoturismo que logra que el visitante se sienta parte de la naturaleza, conociendo las sierras de otra forma, algo que no se entendería si se las recorre en automóvil ",
     "date": ["viernes", "sabado", "domingo"]
   },
 
   {
-    "title": "¡Pasea por el Tigre y el Delta!",
+    "title": "Paseo por el Tigre y el Delta",
     "location": "Buenos Aires",
     "city": "Tigre",
     "price": 6000,
@@ -513,21 +349,8 @@
     ],
     "stock": 8,
     "score": 4.3,
-    "included": [
-      {
-        "name": "transporte",
-        "body": "Auto ida y vuelta a la ciudad de Tigre"
-      },
-      { "name": "Entradas", "body": "Paseo en Lancha" },
-      {
-        "name": "Bebidas",
-        "body": "No incluye bebidas alcoholicas"
-      }
-    ],
-    "description": {
-      "title": "Tour privado por el Tiigre y el Delta",
-      "body": "Salimos desde Palermo en un auto particular y nos vamos hacia la ciudad de Tigre. En la ciudad de Tigre haremos un recorrdio a pie por la conocida feria del Puerto de frutos, alli podremos disfrutar de los diseños y las comidas locales de acuerdo a nuestro horario de llegada.Finalmente, emprendemos un pequeño viaje de una hora en una lancha turistica por el delta que nos permitira visitar las islas del Delta y algunos sitios historicos"
-    },
+    "included": "Transporte, Entradas, Bebidas",
+    "description": "Salimos desde Palermo en un auto particular y nos vamos hacia la ciudad de Tigre. En la ciudad de Tigre haremos un recorrdio a pie por la conocida feria del Puerto de frutos, alli podremos disfrutar de los diseños y las comidas locales de acuerdo a nuestro horario de llegada.Finalmente, emprendemos un pequeño viaje de una hora en una lancha turistica por el delta que nos permitira visitar las islas del Delta y algunos sitios historicos",
     "date": ["sabado", "domingo"]
   },
 
@@ -555,20 +378,8 @@
     ],
     "stock": 6,
     "score": 4.7,
-    "included": [
-      {
-        "name": "Comida",
-        "body": "Picada con quesos, fiambres y snacks"
-      },
-      {
-        "name": "Bebidas",
-        "body": "Cervezas,aguas, gaseosas o vino, también mate, café o té"
-      }
-    ],
-    "description": {
-      "title": "Aprendé sobre nuestra hermosa ciudad desde un punto de vista diferente, nuestro hermoso Río de la Plata",
-      "body": "Aprenderás a navegar, compartiremos y ejercitaremos maniobras para que puedas disfrutar mejor la experiencia. Escucharás sorprendentes relatos de experiencias náuticas, travesías y naufragios.Conocerás la ciudad de Buenos Aires desde el río, reconoceremos lugares del la misma contando sus historias mientras tomamos fotografías.Tomaremos unos tragos y comeremos una picada a bordo.Podremos ver el maravilloso atardecer en el río"
-    },
+    "included": "Comida, Bebidas",
+    "description":"Aprenderás a navegar, compartiremos y ejercitaremos maniobras para que puedas disfrutar mejor la experiencia. Escucharás sorprendentes relatos de experiencias náuticas, travesías y naufragios.Conocerás la ciudad de Buenos Aires desde el río, reconoceremos lugares del la misma contando sus historias mientras tomamos fotografías.Tomaremos unos tragos y comeremos una picada a bordo.Podremos ver el maravilloso atardecer en el río",
     "date": [
       "lunes",
       "martes",
@@ -581,7 +392,7 @@
   },
 
   {
-    "title": "¡Descubre Bs As como un local en bici!",
+    "title": "Descubre Bs As como un local en bici",
     "location": "Buenos Aires",
     "city": "Ciudad Autonóma de Buenos Aires",
     "price": 3000,
@@ -607,20 +418,8 @@
     ],
     "stock": 6,
     "score": 4,
-    "included": [
-      {
-        "name": "Bebidas",
-        "body": "Mate (te local tradicional) y Alfajores (merienda tradicional local)"
-      },
-      {
-        "name": "Equipo",
-        "body": "Súper cómodas bicicletas urbanas con engranajes y suspensión & Casco"
-      }
-    ],
-    "description": {
-      "title": "Recorrido por la historia y la cultura local en bicicleta",
-      "body": "El tour en bicicleta, es la mejor manera de conocer de forma sustentable, la historia, los parques y grandes palacetes de estilo francés que Buenos Aires ofrece. En nuestra excursión, vamos a poder recorrer de una manera diferente y divertida, los barrios más importantes del norte de la Ciudad.Traer ropa cómoda y zapatillas.Aunque habrá paradas, tenga en cuenta que se andará en bicicleta por 3 horas aproximadamente."
-    },
+    "included": "Bebidas, Equipo",
+    "description": "El tour en bicicleta, es la mejor manera de conocer de forma sustentable, la historia, los parques y grandes palacetes de estilo francés que Buenos Aires ofrece. En nuestra excursión, vamos a poder recorrer de una manera diferente y divertida, los barrios más importantes del norte de la Ciudad.Traer ropa cómoda y zapatillas.Aunque habrá paradas, tenga en cuenta que se andará en bicicleta por 3 horas aproximadamente.",
     "date": [
       "lunes",
       "martes",
@@ -632,7 +431,7 @@
     ]
   },
   {
-    "title": "Recorrido en auto y trekking por Bari",
+    "title": "Recorrido en auto y trekking por Bariloche",
     "location": "Río Negro",
     "city": "San Carlos de Bariloche",
     "price": 12200,
@@ -654,20 +453,12 @@
     ],
     "stock": 7,
     "score": 5,
-    "included": [
-      {
-        "name": "name",
-        "body": "body"
-      }
-    ],
-    "description": {
-      "title": "Qué harás",
-      "body": "Recorreremos gran parte de Bariloche para llegar a senderos de dificultad baja (Cerrito llao llao), que nos guiarán a lugares espectaculares. Conocer lugares bellos de esta ciudad."
-    },
+    "included": "",
+    "description": "Recorreremos gran parte de Bariloche para llegar a senderos de dificultad baja (Cerrito llao llao), que nos guiarán a lugares espectaculares. Conocer lugares bellos de esta ciudad.",
     "date": ["lunes", "martes", "miercoles", "jueves", "sabado", "domingo"]
   },
   {
-    "title": "Tesoros para Explorar la Patagonia",
+    "title": "Tesoros para explorar en La Patagonia",
     "location": "Río Negro",
     "city": "San Carlos de Bariloche",
     "price": 22700,
@@ -690,20 +481,12 @@
     ],
     "stock": 5,
     "score": 4,
-    "included": [
-      {
-        "name": "Transporte",
-        "body": "Te llevamos hasta los senderos donde se inicia la exploración y te acompañamos en los mismos."
-      }
-    ],
-    "description": {
-      "title": "Qué harás",
-      "body": "Iremos en camino a explorar rincones de este paraíso natural, motivados por la búsqueda de tesoros que se encuentran escondidos allí. Prepárate a pasar un día intenso.Salimos a las 9.00 hs. Te pasaremos a buscar allí donde te hayas alojado. Haremos nuestra primer parada a orillas de los rápidos del Río Manso en búsqueda de nuestro primer tesoro escondido. Seguimos en vehículo hasta el comienzo del sendero a la Cascada de los Cesares (tres saltos de agua con mas de 70 mts de altura). Son unos 40' de trekking con una pendiente inicial pero luego mas suave. Alli tenemos otro tesoro que localizar.Buen lugar para almorzar. Luego desandamos el camino y caminamos rumbo a un puente colgante. Lo cruzamos y seguimos hasta el cruce del Arroyo Claro. Ahi cambiaremos el calzado por otro que pueda mojarse. Luego de esta aventura, llegamos a los Pozones del Arroyo Claro. Alli tenemos otro tesoro a descubrir.Prepara la cámara de fotos o tu celular... las fotos que te llevarás son en muchos casos muy originales... Nos gustan los lugares donde no llega el turismo tradicional, donde uno puede encontrarse a solas con la inmensidad de la naturaleza. Volveremos alrededor de las 19 hs. Otros aspectos destacables. El objetivo de las exploraciones es conocer en profundidad la naturaleza que nos rodea. Según las edades y el clima les sugeriré los mejores lugares para explorar tesoros."
-    },
+    "included": "Transporte",
+    "description": "Iremos en camino a explorar rincones de este paraíso natural, motivados por la búsqueda de tesoros que se encuentran escondidos allí. Prepárate a pasar un día intenso.Salimos a las 9.00 hs. Te pasaremos a buscar allí donde te hayas alojado. Haremos nuestra primer parada a orillas de los rápidos del Río Manso en búsqueda de nuestro primer tesoro escondido. Seguimos en vehículo hasta el comienzo del sendero a la Cascada de los Cesares (tres saltos de agua con mas de 70 mts de altura). Son unos 40' de trekking con una pendiente inicial pero luego mas suave. Alli tenemos otro tesoro que localizar.Buen lugar para almorzar. Luego desandamos el camino y caminamos rumbo a un puente colgante. Lo cruzamos y seguimos hasta el cruce del Arroyo Claro. Ahi cambiaremos el calzado por otro que pueda mojarse. Luego de esta aventura, llegamos a los Pozones del Arroyo Claro. Alli tenemos otro tesoro a descubrir.Prepara la cámara de fotos o tu celular... las fotos que te llevarás son en muchos casos muy originales... Nos gustan los lugares donde no llega el turismo tradicional, donde uno puede encontrarse a solas con la inmensidad de la naturaleza. Volveremos alrededor de las 19 hs. Otros aspectos destacables. El objetivo de las exploraciones es conocer en profundidad la naturaleza que nos rodea. Según las edades y el clima les sugeriré los mejores lugares para explorar tesoros.",
     "date": ["lunes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
   },
   {
-    "title": "Trekking & visita a cerveceria local",
+    "title": "Trekking y visita a cerveceria local",
     "location": "Río Negro",
     "city": "San Carlos de Bariloche",
     "price": 14900,
@@ -726,16 +509,8 @@
     ],
     "stock": 12,
     "score": 4,
-    "included": [
-      {
-        "name": "Bebidas",
-        "body": "1 Pinta a elección"
-      }
-    ],
-    "description": {
-      "title": "Qué harás",
-      "body": "Nos encontraremos en Av.Bustillo 15500 en el predio de Tom Wesley una antigua chacra de 35 hectáreas propiedad de la familia Wesley desde 1947. Desde allí tomaremos un sendero interno hacia la cumbre del Cerro Campanario, una de las mejores vistas 360° de Bariloche. Regresaremos por un camino alternativo a la chacra y visitaremos su fabrica de cerveza artesanal donde degustaremos cerveza de calidad y Gin local."
-    },
+    "included": "Bebidas",
+    "description": "Nos encontraremos en Av.Bustillo 15500 en el predio de Tom Wesley una antigua chacra de 35 hectáreas propiedad de la familia Wesley desde 1947. Desde allí tomaremos un sendero interno hacia la cumbre del Cerro Campanario, una de las mejores vistas 360° de Bariloche. Regresaremos por un camino alternativo a la chacra y visitaremos su fabrica de cerveza artesanal donde degustaremos cerveza de calidad y Gin local.",
     "date": ["lunes", "martes", "miercoles"]
   },
   {
@@ -761,11 +536,8 @@
     ],
     "stock": 9,
     "score": 5,
-    "included": [],
-    "description": {
-      "title": "Qué harás",
-      "body": "Nos ubicaremos en el lugar de observación, el cual es un pequeño observatorio astronómico ubicado en un paraje rural a 23 kms del centro y alejado de las luces urbanas, haremos una breve charla previa para después comenzar con la observación del cielo a simple vista y después con los telescopios. Te explicaré que estamos viendo en el cielo, conociendo estrellas, cúmulos, nebulosas y a veces galaxias, y ocasionalmente se podrá ver algún planeta o la luna. Te contaré algunas historias acerca de algunas constelaciones y responderé las preguntas que se quieran hacer. Si hay luna, cerraremos la actividad observándola. Un aspecto importante es que previo a la experiencia debemos contactar por mensajes o teléfono. Debido a la necesidad de buenas condiciones climáticas (cielo despejado y sin viento), se programarán fechas de acuerdo a los pronósticos climáticos. Los cambios repentinos del clima a veces obligan a la cancelación de la experiencia"
-    },
+    "included": "",
+    "description": "Nos ubicaremos en el lugar de observación, el cual es un pequeño observatorio astronómico ubicado en un paraje rural a 23 kms del centro y alejado de las luces urbanas, haremos una breve charla previa para después comenzar con la observación del cielo a simple vista y después con los telescopios. Te explicaré que estamos viendo en el cielo, conociendo estrellas, cúmulos, nebulosas y a veces galaxias, y ocasionalmente se podrá ver algún planeta o la luna. Te contaré algunas historias acerca de algunas constelaciones y responderé las preguntas que se quieran hacer. Si hay luna, cerraremos la actividad observándola. Un aspecto importante es que previo a la experiencia debemos contactar por mensajes o teléfono. Debido a la necesidad de buenas condiciones climáticas (cielo despejado y sin viento), se programarán fechas de acuerdo a los pronósticos climáticos. Los cambios repentinos del clima a veces obligan a la cancelación de la experiencia",
     "date": ["lunes", "martes", "miercoles"]
   },
   {
@@ -791,11 +563,8 @@
     ],
     "stock": 14,
     "score": 4,
-    "included": [],
-    "description": {
-      "title": "Qué harás",
-      "body": "Nos encontramos en el muelle, subimos al barco, lo alistamos y salimos a navegar rumbo a nuestra primer playa. Comenzaremos la navegación a través de las cristalinas aguas del Brazo Campanario hasta la bahía de Puerto Bueno, un paraje solitario donde tendremos el privilegio de un paisaje sorprendente. A través del viaje, en el cual los invitaremos a timonear la nave, iremos descubriendo playas y bahías que muy pocos conocen. Aprovecharemos esas paradas para compartir una infusión y disfrutar juntos del paisaje y sonidos de la naturaleza. Sin apuro, regresaremos nuevamente a puerto. La duración aproximada es de 3 horas."
-    },
+    "included": "",
+    "description": "Nos encontramos en el muelle, subimos al barco, lo alistamos y salimos a navegar rumbo a nuestra primer playa. Comenzaremos la navegación a través de las cristalinas aguas del Brazo Campanario hasta la bahía de Puerto Bueno, un paraje solitario donde tendremos el privilegio de un paisaje sorprendente. A través del viaje, en el cual los invitaremos a timonear la nave, iremos descubriendo playas y bahías que muy pocos conocen. Aprovecharemos esas paradas para compartir una infusión y disfrutar juntos del paisaje y sonidos de la naturaleza. Sin apuro, regresaremos nuevamente a puerto. La duración aproximada es de 3 horas.",
     "date": [
       "lunes",
       "martes",

@@ -1,10 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { postPlain, getCity, getProvince } from "../actions";
+import {
+  postPlain,
+  getCity,
+  getProvince,
+  getDetailId,
+  updatePlain,
+} from "../actions";
 import swal from "sweetalert";
 import regsVideo from "../assets/pexels-cottonbro-5329613.mp4";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { validate } from "./validate";
 import { useSelector } from "react-redux";
 import Form from "@rjsf/core";
@@ -91,10 +97,15 @@ const uiSchema = {
   },
 };
 
-export default function CreateForm() {
+export default function EditarServicios() {
   const dispatch = useDispatch();
+  const { id } = useParams();
   const [errors, setErrors] = useState({});
   const lugares = useSelector((state) => state.lugares);
+  const info = useSelector((state) => state.detail);
+
+  // console.log("info", plans);
+  // let included
 
   const [plain, setPlain] = useState({
     title: "",
@@ -106,10 +117,19 @@ export default function CreateForm() {
     included: "",
     description: "",
   });
-  console.log(plain);
+
+  console.log("esto es plain", plain);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    dispatch(getDetailId(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    setPlain(info);
+  }, [info]);
 
   const uploadImage = async (e) => {
     const file = e.target.files[0];
@@ -153,13 +173,14 @@ export default function CreateForm() {
       !plain.included ||
       !plain.description
     ) {
+      e.preventDefault();
       return swal({
         title: "¡Rellene los campos para continuar!",
         icon: "error",
       });
     } else {
       e.preventDefault();
-      dispatch(postPlain(plain));
+      dispatch(updatePlain(id, plain));
       swal({ title: "¡Servicio creado exitosamente!", icon: "success" });
     }
   }
@@ -182,13 +203,13 @@ export default function CreateForm() {
           onSubmit={handleSubmit}
         >
           <h2 className="text-4xl font-bold text-center">
-            Vive la aventura. Crea tu paquete.
+            Vive la aventura. Modifica tu paquete.
           </h2>
 
           <div className="flex flex-col py-2">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlForm="grid-first-name"
+              htmlform="grid-first-name"
             >
               Titulo
             </label>
@@ -198,12 +219,13 @@ export default function CreateForm() {
               id="grid-first-name"
               type="text"
               placeholder="Excursion/Paseo..."
+              value={plain.title}
               onChange={(e) => setPlain({ ...plain, title: e.target.value })}
             />
 
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlForm="grid-first-name"
+              htmlform="grid-first-name"
             >
               Imagenes
             </label>
@@ -220,7 +242,7 @@ export default function CreateForm() {
           <div className="flex flex-col py-2">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlForm="grid-first-name"
+              htmlform="grid-first-name"
             >
               Precio
             </label>
@@ -230,12 +252,13 @@ export default function CreateForm() {
               id="grid-first-name"
               type="number"
               placeholder="3000"
+              value={plain?.price}
               onChange={(e) => setPlain({ ...plain, price: e.target.value })}
             />
 
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlForm="grid-first-name"
+              htmlform="grid-first-name"
             >
               Incluido
             </label>
@@ -245,6 +268,7 @@ export default function CreateForm() {
               id="grid-first-name"
               type="text"
               placeholder="Guia/Bebidas..."
+              value={plain?.included}
               onChange={(e) => setPlain({ ...plain, included: e.target.value })}
             />
           </div>
@@ -267,7 +291,7 @@ export default function CreateForm() {
           <div className="flex flex-col py-2">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlForm="grid-first-name"
+              htmlform="grid-first-name"
             >
               Descripcion
             </label>
@@ -276,6 +300,7 @@ export default function CreateForm() {
               id="grid-first-name"
               type="text"
               placeholder="Experiencia unica..."
+              value={plain?.description}
               onChange={(e) =>
                 setPlain({ ...plain, description: e.target.value })
               }
@@ -283,7 +308,7 @@ export default function CreateForm() {
             {errors.description && <p>{errors.description}</p>}
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlForm="grid-first-name"
+              htmlform="grid-first-name"
             >
               Stock
             </label>
@@ -292,6 +317,7 @@ export default function CreateForm() {
               id="grid-first-name"
               type="number"
               placeholder="10"
+              value={plain?.stock}
               onChange={(e) => setPlain({ ...plain, stock: e.target.value })}
             />
             {errors.stock && <p>{errors.stock}</p>}
@@ -302,7 +328,7 @@ export default function CreateForm() {
               className="w-full max-w-[700px] mx-auto rounded-2xl py-2 pt-4 p-3 focus:outline-none focus:ring focus:ring-indigo-500 bg-indigo-400 hover:bg-indigo-300 relative text-white font-semibold"
               type="submit"
             >
-              Crea tu servicio
+              Modifica tu servicio
             </button>
           </div>
           <div className="pt-4">

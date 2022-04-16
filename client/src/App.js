@@ -9,6 +9,7 @@ import Details from "./components/Details";
 import Shopping from "./components/Shopping";
 import Register from "./components/Register";
 import ResetPassword from "./components/ResetPassword";
+import EditarServicios from "./components/EditarServicios";
 function App() {
   return (
     <div>
@@ -27,11 +28,13 @@ function App() {
           <Route exact path="/about">
             <About />
           </Route>
-          <Route exact path="/servicios">
+          <Route exact path="/servicios/">
             <Servicios />
           </Route>
+          <Route exact path="/editarservicios/:id">
+            <EditarServicios />
+          </Route>
           <Route exact path="/destination/:id">
-            {" "}
             <Details />
           </Route>
           <Route exact path="/shopping">
