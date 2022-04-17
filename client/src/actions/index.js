@@ -302,3 +302,27 @@ export function getCity(id) {
     });
   };
 }
+
+export function getIsAdmin() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("http://localhost:8800/checkAdmin/", {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      console.log("actionadmin", response.status);
+      if (response.status === 200) {
+        return dispatch({
+          type: "GET_IS_ADMIN",
+          payload: true,
+        });
+      } else {
+        return dispatch({
+          type: "GET_IS_ADMIN",
+          payload: false,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

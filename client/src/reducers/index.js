@@ -14,6 +14,7 @@ const initialState = {
   cartPlains: [],
   userLogout: {},
   lugares: [],
+  isAdmin: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -187,6 +188,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         plains: state.plains.filter((plain) => plain._id !== action.payload),
+      };
+    case "GET_IS_ADMIN":
+      console.log("isAdmin", action.payload);
+      return {
+        ...state,
+        isAdmin: action.payload,
       };
 
     default:
