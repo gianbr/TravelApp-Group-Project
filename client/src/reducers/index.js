@@ -134,6 +134,11 @@ function rootReducer(state = initialState, action) {
       localStorage.clear();
 
       return { ...state, users: null };
+    case "GOOGLE_LOGIN":
+      return {
+        ...state,
+        users: action.payload,
+      };
 
     case "ADD_ITEM":
       return {
@@ -152,7 +157,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         cartPlains: addItemFromCartInCart(state.cartPlains, action.payload),
       };
-    
+
     case "REMOVE_ALL_ITEMS_IN_CART":
       return {
         ...state,
