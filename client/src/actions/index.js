@@ -173,15 +173,18 @@ export function signin(data) {
       window.localStorage.setItem("id", response.data.id);
       window.localStorage.setItem("test", JSON.stringify(response.data));
       console.log("status", response.status);
-      return dispatch(
-        {
-          type: "SIGNIN",
-          payload: response.data,
-        }((window.location.href = "/"))
-      );
+      if (response.status === 200) {
+        return dispatch(
+          {
+            type: "SIGNIN",
+            payload: response.data,
+          }((window.location.href = "/"))
+        );
+      } else {
+        return alert("Usuario o contraseña incorrectos");
+      }
     } catch (error) {
       console.log(error);
-      return alert("Usuario o contraseña incorrectos");
     }
   };
 }

@@ -5,7 +5,7 @@ import { postPlain, getCity, getProvince, getIsAdmin } from "../actions";
 import swal from "sweetalert";
 import regsVideo from "../assets/pexels-cottonbro-5329613.mp4";
 import { Link } from "react-router-dom";
-import { validate } from "./validate";
+import { validarServicios } from "./validarServicios";
 import { useSelector } from "react-redux";
 import Form from "@rjsf/core";
 // import schema from "../../data/data2";
