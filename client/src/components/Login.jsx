@@ -28,7 +28,7 @@ function Login() {
   };
 
   const handleSubmit = async (e) => {
-    if (!data.email || !data.password) {
+    if (Object.keys(errors).length || !data.email || !data.password) {
       e.preventDefault();
       return swal({
         title: "¡Rellene los campos para continuar!",

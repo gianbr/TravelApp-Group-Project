@@ -1,4 +1,5 @@
 import { users } from "../reducers";
+import swal from "sweetalert";
 const axios = require("axios");
 //const userSet = require("../auth/utils/userSet");
 const jwt = require("jwt-decode");
@@ -162,18 +163,18 @@ export function googleLogIn(payload) {
 }
 
 export function signin(data) {
-  return async function (dispatch) {
-    try {
+  try {
+      return async function (dispatch) {
       let response = await axios.post(
         "http://localhost:8800/auth/signin",
         data
       );
-      window.localStorage.setItem("token", response.data.token);
-      window.localStorage.setItem("user", response.data.username);
-      window.localStorage.setItem("id", response.data.id);
-      window.localStorage.setItem("test", JSON.stringify(response.data));
       console.log("status", response.status);
       if (response.status === 200) {
+        window.localStorage.setItem("token", response.data.token);
+        window.localStorage.setItem("user", response.data.username);
+        window.localStorage.setItem("id", response.data.id);
+        window.localStorage.setItem("test", JSON.stringify(response.data));
         return dispatch(
           {
             type: "SIGNIN",
@@ -181,36 +182,40 @@ export function signin(data) {
           }((window.location.href = "/"))
         );
       } else {
-        return alert("Usuario o contraseña incorrectos");
+        return swal({
+          title: "¡Usuario o contraseña incorrectos!",
+          icon: "error",
+        });
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function signup(data) {
-  return async function (dispatch) {
-    try {
+  try {
+    return async function (dispatch) {
       let response = await axios.post(
         "http://localhost:8800/auth/signup",
         data
       );
       //console.log('juthUP', response.data)
-      return dispatch(
-        {
+      if(response.status === 200){
+        return dispatch({
           type: "SIGNUP",
           payload: response.data,
-        },
-        console.log(
-          "status2",
-          response.status
-        )((window.location.href = "/login"))
-      );
-    } catch (error) {
-      alert("Credenciales en uso");
-    }
-  };
+        }) ((window.location.href = "/login"))
+      }else{
+        return swal({
+          title: "¡Credenciales en uso!",
+          icon: "error",
+        });
+      }
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const Logout = () => {
