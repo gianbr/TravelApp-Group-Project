@@ -7,6 +7,7 @@ import {
   getProvince,
   getDetailId,
   updatePlain,
+  getIsAdmin,
 } from "../actions";
 import swal from "sweetalert";
 import regsVideo from "../assets/pexels-cottonbro-5329613.mp4";
@@ -103,6 +104,8 @@ export default function EditarServicios() {
   const [errors, setErrors] = useState({});
   const lugares = useSelector((state) => state.lugares);
   const info = useSelector((state) => state.detail);
+  const admin = useSelector((state) => state.isAdmin);
+  console.log("stateadmin", admin);
 
   // console.log("info", plans);
   // let included
@@ -125,6 +128,7 @@ export default function EditarServicios() {
 
   useEffect(() => {
     dispatch(getDetailId(id));
+    dispatch(getIsAdmin());
   }, [dispatch, id]);
 
   useEffect(() => {
