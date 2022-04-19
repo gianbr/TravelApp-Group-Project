@@ -31,7 +31,7 @@ function WishList() {
                     <div class="w-4/5 bg-white px-10 py-10"> {/* CONTAINER ITEMS */}
                         <div class="flex justify-between border-b pb-8"> {/* ITEMS TITULOS */}
                             <h1 class="font-semibold text-2xl">Whishlist </h1>
-                            {cart.length == 1 
+                            {cart.length === 1 
 						    ? ( <h2 class="font-semibold text-2xl">{cart.length} elemento</h2>) 
 						    : ( <h2 class="font-semibold text-2xl">{cart.length} elementos</h2>)
 						    }
