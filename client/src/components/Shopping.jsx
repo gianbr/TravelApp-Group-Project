@@ -73,7 +73,10 @@ function Shopping() {
                                                 <FaPlus className="text-green-500 text-2xl cursor-pointer" onClick={(e) => handleAdd(e, item)} />
                                             </div>
                                             <span class="text-center w-1/5 font-semibold text-sm">{item.date}</span>
-                                            <span class="text-center w-1/5 font-semibold text-sm">${item.price * item.quantity}</span> {/* PRECIO MULTIPLICADO */}
+                                            {item.quantity >= 3
+                                            ? <span class="text-center w-1/5 font-semibold text-sm">${item.price * item.quantity - 1000}</span>
+                                            : <span class="text-center w-1/5 font-semibold text-sm">${item.price * item.quantity}</span> 
+                                            }
                                         </div>
                                     </>
                                 )

@@ -334,3 +334,14 @@ export function getIsAdmin() {
     }
   };
 }
+
+
+export const addItemToWish = (item) => ({
+  type: "ADD_ITEM_TO_WISH",
+  payload: item,
+});
+
+export const removeAllItemsFromWish = (item) => ({
+  type: "REMOVE_ALL_ITEMS_IN_WISH",
+  payload: item,
+});

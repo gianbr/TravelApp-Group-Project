@@ -4,7 +4,7 @@ import { useDispatch} from "react-redux";
 import { getPlains ,filterByProvince, orderByPrice, orderByScore } from "../actions";
 import { FaHome } from 'react-icons/fa'
 import { Link } from "react-router-dom";
-import { FaShoppingCart } from 'react-icons/fa'
+import { FaShoppingCart, FaHeart } from 'react-icons/fa'
 
 
 export default function Filters ({setPage}) {
@@ -59,7 +59,8 @@ function handleLocationFilter(e) {
             <option value= "asc">Menor - Mayor</option>
             <option value= "desc">Mayor - Menor</option>
                </select>
-                  <button><Link to='/shopping'> <FaShoppingCart className='mr-2 text-white' size={20}/> </Link></button>
+                <button><Link to='/wishlist'> <FaHeart className='mr-2 text-white' size={20}/> </Link></button>
+                <button><Link to='/shopping'> <FaShoppingCart className='mr-2 text-white' size={20}/> </Link></button>
                {/* PAGINA PRINCIPAL */}
      </div>
     );
