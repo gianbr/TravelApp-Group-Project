@@ -4,6 +4,7 @@ import Footer from './Footer'
 import { Link } from 'react-router-dom'
 import { removeItem, addItemFromCart, removeAllItemsFromCart } from '../actions/index'
 import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa'
+import StripeCheckout from "react-stripe-checkout";
 
 function Shopping() {
     const dispatch = useDispatch()
@@ -94,7 +95,24 @@ function Shopping() {
                                 <span>Total</span>
                                 <span>${pricePack}</span>
                             </div>
-                            <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Comprar</button>
+                             <StripeCheckout
+                            name="Travel App"
+                            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6NodUpVl-Hyx0WuWpdC8oK_RLaHvMjgkXuw&usqp=CAU"
+                            billingAddress
+                            shippingAddress
+                            description={`Your total is $${pricePack}`}
+                            amount={cart.pricePack * 100}
+                            token={cart.Token}
+                             stripeKey={"pk_test_51KozaEEdecdMolzDGj0N5pUce6x6vdXr2HCEAhJbIEv8P9DTbNuVDj7sZUqQpWOrKjKT5dqFAfcDPKShleZLTZlY00zXf46T5K"}
+                            >   
+                             <button
+                               type="submit" 
+                               class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+                               Confirmar y pagar
+                               </button>
+                            </StripeCheckout>
+                             
+                             
                         </div>
                     </div>
                 </div>
