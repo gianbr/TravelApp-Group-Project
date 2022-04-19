@@ -14,12 +14,12 @@ const checkDuplicateUserNameOrEmail = async (req, res, next) => {
   const user = await User.findOne({ username: req.body.username });
   console.log(user);
   if (user) {
-    return res.status(400).json({ message: "Username already exists" });
+    return res.status(263).json({ message: "Username already exists" });
   }
 
   const userEmail = await User.findOne({ email: req.body.email });
   if (userEmail) {
-    return res.status(400).json({ message: "Email already exists" });
+    return res.status(263).json({ message: "Email already exists" });
   }
 
   next();
@@ -29,7 +29,7 @@ const checkRolesExisted = (req, res, next) => {
   if (req.body.roles) {
     for (let i = 0; i < req.body.roles.length; i++) {
       if (!ROLES.includes(req.body.roles[i])) {
-        return res.status(400).json({ message: `Role ${req.body.roles[i]} does not exist` });
+        return res.status(263).json({ message: `Role ${req.body.roles[i]} does not exist` });
       }
     }
   }
@@ -39,7 +39,7 @@ const checkStatusBanUser = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
   if (user) {
     if (user.banned) {
-      return res.status(400).json({ message: "This user has an active ban" });
+      return res.status(263).json({ message: "This user has an active ban" });
     }
   }
   return next();
@@ -54,16 +54,16 @@ const checkUsernameAndEmail = async (req, res, next) => {
   const user = await User.findOne({ username: req.body.username });
   console.log(user);
   if (!user) {
-    return res.status(400).json({ message: "Username not found " });
+    return res.status(263).json({ message: "Username not found " });
   }
 
   const userEmail = await User.findOne({ email: req.body.email });
   if (!userEmail) {
-    return res.status(400).json({ message: "Email not found" });
+    return res.status(263).json({ message: "Email not found" });
   }
 
   if (!req.body.password) {
-    return res.status(400).json({ message: "Password is required" });
+    return res.status(263).json({ message: "Password is required" });
   }
 
   next();

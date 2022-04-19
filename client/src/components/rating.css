@@ -1,0 +1,15 @@
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"]:checked ~ label {
+  color: rgb(255, 183, 0);
+}
+
+label {
+  color: grey;
+}
+
+label:hover,
+label:hover ~ label {
+  color: rgb(255, 183, 0);
+}

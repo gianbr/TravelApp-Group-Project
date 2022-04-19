@@ -6,7 +6,6 @@ import { validate } from "./validate";
 import Navbar from "./Navbar";
 import surfer from "../assets/surfer.svg";
 
-
 const Register = () => {
   const [errors, setErrors] = useState({});
   console.log(errors);
@@ -18,7 +17,7 @@ const Register = () => {
   });
 
   const handleSubmit = async (e) => {
-    if (!Object.keys(errors)) {
+    if (Object.keys(errors).length || !data.email || !data.password || !data.username) {
       e.preventDefault();
       return swal({
         title: "¡Rellene los campos para continuar!",
@@ -47,15 +46,17 @@ const Register = () => {
     <div className="w-full h-screen relative bg-indigo-300">
       <Navbar />
       <div className="flex justify-center items-center h-full shadow rounded-lg">
-      <div class="mb-4">
-                <img src={surfer} alt=""/>
-            </div>
+        <div class="mb-4">
+          <img src={surfer} alt="" />
+        </div>
         <form className="max-w-[400px] w-full mx-auto bg-white p-8">
           <h2 className="text-4xl font-bold text-center py-4">TRAVEL APP.</h2>
 
           <div className="flex flex-col mb-4">
             <label>Nombre</label>
-            <input onChange={handleChange} placeholder="Nombre"
+            <input
+              onChange={handleChange}
+              placeholder="Nombre"
               className="border relative bg-gray-100 p-2"
               name="username"
               type="text"
@@ -65,7 +66,9 @@ const Register = () => {
 
           <div className="flex flex-col mb-4">
             <label>Correo</label>
-            <input placeholder="Correo" onChange={handleChange}
+            <input
+              placeholder="Correo"
+              onChange={handleChange}
               className="border relative bg-gray-100 p-2"
               name="email"
               type="text"
@@ -75,7 +78,9 @@ const Register = () => {
 
           <div className="flex flex-col ">
             <label>Contraseña</label>
-            <input placeholder="Contraseña" onChange={handleChange}
+            <input
+              placeholder="Contraseña"
+              onChange={handleChange}
               className="border relative bg-gray-100 p-2"
               name="password"
               type="password"
