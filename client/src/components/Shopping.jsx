@@ -11,6 +11,23 @@ function Shopping() {
 
     const pricePack = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
 
+    const discount = () => {
+        if(pricePack >= 20000){
+            return pricePack - ((pricePack/100) * 5)
+        } else if (pricePack >= 30000) {
+            return pricePack - ((pricePack/100) * 7)
+        } else if (pricePack >= 40000) {
+            return pricePack - ((pricePack/100) * 10)            
+        } else if (pricePack >= 50000) {
+            return pricePack - ((pricePack/100) * 15)
+        } else if (pricePack >= 100000) {
+            return pricePack - ((pricePack/100) * 20)
+        } else if (pricePack >= 200000) {
+            return pricePack - ((pricePack/100) * 25)
+        } else {
+            return pricePack} 
+        }
+
     const handleAdd = (e, producto) => {
         if(producto.quantity + 1 > producto.stock){
             alert('No hay stock suficiente')
@@ -73,10 +90,10 @@ function Shopping() {
                                                 <FaPlus className="text-green-500 text-2xl cursor-pointer" onClick={(e) => handleAdd(e, item)} />
                                             </div>
                                             <span class="text-center w-1/5 font-semibold text-sm">{item.date}</span>
-                                            {item.quantity >= 3
-                                            ? <span class="text-center w-1/5 font-semibold text-sm">${item.price * item.quantity - 1000}</span>
-                                            : <span class="text-center w-1/5 font-semibold text-sm">${item.price * item.quantity}</span> 
-                                            }
+                                    
+                                             
+                                             <span class="text-center w-1/5 font-semibold text-sm">${item.price * item.quantity}</span> 
+                                            
                                         </div>
                                     </>
                                 )
@@ -95,7 +112,10 @@ function Shopping() {
                         <div class="border-t"> {/* TOTAL */}
                             <div class="flex font-semibold justify-between py-6 text-sm uppercase">
                                 <span>Total</span>
-                                <span>${pricePack}</span>
+                              
+                                <span> {discount()}</span>
+                                                            
+                                
                             </div>
                             <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Comprar</button>
                         </div>

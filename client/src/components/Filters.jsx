@@ -9,6 +9,7 @@ import { FaShoppingCart, FaHeart } from 'react-icons/fa'
 
 export default function Filters ({setPage}) {
 const dispatch = useDispatch()
+const user = localStorage.getItem("user");
 
 useEffect (()=>{
  dispatch(getPlains())
@@ -59,9 +60,18 @@ function handleLocationFilter(e) {
             <option value= "asc">Menor - Mayor</option>
             <option value= "desc">Mayor - Menor</option>
                </select>
+              {user ? (
+            <>
                 <button><Link to='/wishlist'> <FaHeart className='mr-2 text-white' size={20}/> </Link></button>
                 <button><Link to='/shopping'> <FaShoppingCart className='mr-2 text-white' size={20}/> </Link></button>
-               {/* PAGINA PRINCIPAL */}
+            </>
+             )
+             : (<div className="">
+             
+           </div>)
+              
+               }
+                {/* PAGINA PRINCIPAL */}
      </div>
     );
 };

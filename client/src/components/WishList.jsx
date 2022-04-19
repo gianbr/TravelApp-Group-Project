@@ -9,16 +9,20 @@ import { removeAllItemsFromWish } from '../actions/index'
 
 
 
+
 function WishList() {
     const dispatch = useDispatch()
     const cart = useSelector((state) => state.wishList);
+    const user = window.localStorage.getItem("user");
    
     const handleRemoveAllWish = (product) => {
         dispatch(removeAllItemsFromWish(product))
     }
  
     return (
-        <div> {/* RENDERIZADO */}   
+        <>        
+        {user ?(
+            <div> {/* RENDERIZADO */}   
             {/* <div className="bg-indigo-300 h-0">
                 <Navbar />
             </div> */}
@@ -80,6 +84,14 @@ function WishList() {
             </div>
             <Footer />
         </div>
+        ):
+        (
+            <h1>a mimir la siesta</h1>
+        )
+    }
+        </>
+
+        
     )
 }
 
