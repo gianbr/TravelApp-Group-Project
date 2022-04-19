@@ -1,4 +1,7 @@
+import { users } from "../reducers";
 const axios = require("axios");
+//const userSet = require("../auth/utils/userSet");
+const jwt = require("jwt-decode");
 
 export function searchDestination(name) {
   return async function (dispatch) {
@@ -31,6 +34,22 @@ export function getDetailId(id) {
       type: "GET_DETAIL",
       payload: response.data,
     });
+  };
+}
+export function getDashboardAdmin() {
+  return async function (dispatch) {
+    let response = await axios.get("http://localhost:8800/getDashboardAdmin");
+    if (response.status === 200) {
+      return dispatch({
+        type: "GET_DASHBOARD_ADMIN",
+        payload: response.data,
+      });
+    } else if (response.status === 401) {
+      return dispatch({
+        type: "GET_DASHBOARD_ADMIN",
+        payload: [{ error: "Unauthorized" }],
+      });
+    }
   };
 }
 
@@ -91,6 +110,57 @@ export function getPlainsDestacados() {
   };
 }
 
+export function setCurrentUser(users) {
+  return {
+    type: "SET_CURRENT_USER",
+    user: users,
+  };
+}
+export function googleLogIn(payload) {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:8800/auth/google",
+        payload
+      );
+      const token = res.data.token;
+      const role = res.data.role;
+      const id = res.data.id;
+      const username = res.data.username;
+      window.localStorage.setItem("jwtToken", token);
+      window.localStorage.setItem("user", username);
+      window.localStorage.setItem("id", id);
+      window.localStorage.setItem("test", JSON.stringify(res.data));
+      console.log("statusgoogle", res.status);
+      return dispatch(
+        {
+          type: "GOOGLE_LOGIN",
+          payload: res.data,
+        }(
+          // users(token);
+          // dispatch(
+          //   users({
+          //     token: token,
+          //     email: jwt.decode(token).email,
+          //     name: jwt.decode(token).name,
+          //     role: role,
+          //     id: id,
+          //   }),
+          (window.location.href = "/")
+        )
+      );
+      // return {
+      //   email: jwt.decode(token).email,
+      //   name: jwt.decode(token).name,
+      //   role: role,
+      //   id: id,
+      // };
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export function signin(data) {
   return async function (dispatch) {
     try {
@@ -102,12 +172,12 @@ export function signin(data) {
       window.localStorage.setItem("user", response.data.username);
       window.localStorage.setItem("id", response.data.id);
       window.localStorage.setItem("test", JSON.stringify(response.data));
+      console.log("status", response.status);
       return dispatch(
         {
           type: "SIGNIN",
           payload: response.data,
-        },
-        (window.location.href = "/")
+        }((window.location.href = "/"))
       );
     } catch (error) {
       console.log(error);
@@ -129,7 +199,10 @@ export function signup(data) {
           type: "SIGNUP",
           payload: response.data,
         },
-        (window.location.href = "/login")
+        console.log(
+          "status2",
+          response.status
+        )((window.location.href = "/login"))
       );
     } catch (error) {
       alert("Credenciales en uso");

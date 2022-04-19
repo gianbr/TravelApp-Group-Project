@@ -90,25 +90,115 @@ authRoute.post(
   }
 );
 
-const users = [];
+const origin =
+  "720796673981-us7jgj5e8ospme3qt22432hiedcni3vt.apps.googleusercontent.com";
 
-function upsert(array, item) {
-  const i = array.findIndex((_item) => _item.email === item.email);
-  if (i > -1) array[i] = item;
-  else array.push(item);
-}
-
-const client = new OAuth2Client(process.env.CLIENT_ID);
-//iniciar sesion con google
 authRoute.post("/google", async (req, res) => {
-  const { token } = req.body;
-  const ticket = await client.verifyIdToken({
-    idToken: token,
-    audience: process.env.CLIENT_ID,
-  });
-  const { name, email, picture } = ticket.getPayload();
-  upsert(users, { name, email, picture });
-  res.status(201).json({ name, email, picture });
+  console.log(req.body);
+  try {
+    const googleId = origin;
+
+    const googleClient = new OAuth2Client({
+      clientId: `${googleId}`,
+    });
+
+    const { token, roles } = req.body;
+
+    const ticket = await googleClient.verifyIdToken({
+      idToken: token,
+      audience: `${googleId}`,
+    });
+
+    const payload = ticket.getPayload();
+
+    console.log(payload);
+
+    const newUser = new User({
+      username: payload.name,
+      email: payload.email,
+      password: payload.at_hash, //guardo la contraseña encriptada
+    });
+
+    if (roles) {
+      //
+      const foundRoles = await Role.find({ name: { $in: roles } });
+      newUser.roles = foundRoles.map((role) => role._id); //me va a devolver un arreglo con los IDS
+    } else {
+      const role = await Role.findOne({ name: "user" });
+      newUser.roles = [role._id]; //si el usuario no tiene roles, le asigno el rol de user por defecto
+    }
+
+    const user = await User.findOne({ email: payload.email });
+    if (user)
+      return res.status(200).json({
+        token: token,
+        username: user.username,
+        id: user._id,
+      });
+    console.log("encontrado", user);
+    // return res.status(400).json({ message: "Email already exists" })
+    //guardo el usuario
+
+    const userNew = await newUser.save();
+    console.log("creado", userNew);
+    const jtoken = jwt.sign({ id: userNew._id }, config.SECRET, {
+      expiresIn: "86400s", //1 dia
+    });
+    return res.status(201).json({
+      token: jtoken,
+      username: userNew.username,
+      id: userNew._id,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
+// return res.status(200).json({
+//   token: jtoken,
+//   username: userNew.username,
+//   id: userNew._id });
+
+// const user = await User.find({where: {email: payload.email}, defaults: {
+//   password: payload.at_hash,
+//   name: payload.name,
+//   roleId: 1,
+//   activated: true,
+// }})
+
+// const jtoken = jwt.sign({email: user[0].email, name: user[0].name, role:user[0].roleId, id:user[0].id}, process.env.TOKENSECRET, {
+//   expiresIn: 1440
+// });
+
+// res.json({
+//   mensaje: 'Autenticación correcta',
+//   token: jtoken,
+//   id: user[0].id,
+//   role: user[0].roleId,
+//   name: user[0].name,
+//   email: user[0].email,
+// });
+
+// });
+
+// const users = [];
+
+// function upsert(array, item) {
+//   const i = array.findIndex((_item) => _item.email === item.email);
+//   if (i > -1) array[i] = item;
+//   else array.push(item);
+// }
+
+// const client = new OAuth2Client(process.env.CLIENT_ID);
+// //iniciar sesion con google
+// authRoute.post("/google", async (req, res) => {
+//   const { token } = req.body;
+//   const ticket = await client.verifyIdToken({
+//     idToken: token,
+//     audience: process.env.CLIENT_ID,
+//   });
+//   const { name, email, picture } = ticket.getPayload();
+//   upsert(users, { name, email, picture });
+//   res.status(201).json({ name, email, picture });
+// });
 
 module.exports = authRoute;

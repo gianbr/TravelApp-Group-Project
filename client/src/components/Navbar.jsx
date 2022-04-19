@@ -8,11 +8,13 @@ import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { Logout } from "../actions";
 import { useDispatch } from "react-redux";
 import __ from "lodash";
+import { useSelector } from "react-redux";
 
 function Navbar({ user }) {
   // const [human, setHuman] = useState(JSON.parse(localStorage.getItem(user)));
   const [nav, setNav] = useState(false);
   const [logo, setLogo] = useState(false);
+  const users= useSelector(state => state.users);
   const dispatch = useDispatch();
   // const [data, setData] = useState({
   //   email: "",
