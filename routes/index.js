@@ -10,6 +10,8 @@ const updateUser = require("./updateUser");
 const getUsers = require("./getUsers");
 const apiLugares = require("./apiLugares");
 const getCheckAdmin = require("./getCheckAdmin");
+const cart = require("./cart");
+const checkout = require("./checkout");
 const router = Router();
 
 router.use("/setplainsdb", setPlainsDb);
@@ -23,5 +25,7 @@ router.use("/updateuser", updateUser);
 router.use("/getusers", getUsers);
 router.use("/apiLugares", apiLugares);
 router.use("/checkAdmin", getCheckAdmin);
+router.use("/checkout", checkout);
+// router.use("/cart", cart);
 
 module.exports = router;
