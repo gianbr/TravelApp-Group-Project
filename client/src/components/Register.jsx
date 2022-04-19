@@ -1,10 +1,10 @@
 import { React, useState } from "react";
-import loginImg from "../assets/login.jpeg";
-import { signup } from "../actions";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert";
+import { signup } from "../actions";
 import { validate } from "./validate";
-import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
+import surfer from "../assets/surfer.svg";
 
 const Register = () => {
   const [errors, setErrors] = useState({});
@@ -17,7 +17,7 @@ const Register = () => {
   });
 
   const handleSubmit = async (e) => {
-    if (!Object.keys(errors)) {
+    if (Object.keys(errors).length || !data.email || !data.password || !data.username) {
       e.preventDefault();
       return swal({
         title: "¡Rellene los campos para continuar!",
@@ -43,27 +43,20 @@ const Register = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-zinc-900/90">
-      <img
-        className="absolute w-full h-full object-cover mix-blend-overlay"
-        src={loginImg}
-        alt="/"
-      />
-      <div className="flex flex-col justify-evenly items-center h-full">
-        <Link
-          to="/"
-          className="rounded-2xl py-2 p-3 focus:outline-none focus:ring focus:ring-indigo-500 bg-teal-400 hover:bg-indigo-500 relative text-white font-semibold"
-        >
-          <button>Inicio</button>
-        </Link>
-
+    <div className="w-full h-screen relative bg-indigo-300">
+      <Navbar />
+      <div className="flex justify-center items-center h-full shadow rounded-lg">
+        <div class="mb-4">
+          <img src={surfer} alt="" />
+        </div>
         <form className="max-w-[400px] w-full mx-auto bg-white p-8">
           <h2 className="text-4xl font-bold text-center py-4">TRAVEL APP.</h2>
 
           <div className="flex flex-col mb-4">
-            <label>Usuario</label>
+            <label>Nombre</label>
             <input
               onChange={handleChange}
+              placeholder="Nombre"
               className="border relative bg-gray-100 p-2"
               name="username"
               type="text"
@@ -74,6 +67,7 @@ const Register = () => {
           <div className="flex flex-col mb-4">
             <label>Correo</label>
             <input
+              placeholder="Correo"
               onChange={handleChange}
               className="border relative bg-gray-100 p-2"
               name="email"
@@ -85,6 +79,7 @@ const Register = () => {
           <div className="flex flex-col ">
             <label>Contraseña</label>
             <input
+              placeholder="Contraseña"
               onChange={handleChange}
               className="border relative bg-gray-100 p-2"
               name="password"
@@ -93,7 +88,7 @@ const Register = () => {
             {errors.password && <p>{errors.password}</p>}
           </div>
           <div onClick={handleSubmit}>
-            <button className="w-full py-3 mt-8 bg-teal-400 hover:bg-indigo-500 relative text-white">
+            <button className="w-full py-3 mt-6 bg-indigo-400 hover:bg-indigo-500 relative text-white">
               Ingresa tus datos
             </button>
           </div>

@@ -1,4 +1,8 @@
+import { users } from "../reducers";
+import swal from "sweetalert";
 const axios = require("axios");
+//const userSet = require("../auth/utils/userSet");
+const jwt = require("jwt-decode");
 
 export function searchDestination(name) {
   return async function (dispatch) {
@@ -31,6 +35,22 @@ export function getDetailId(id) {
       type: "GET_DETAIL",
       payload: response.data,
     });
+  };
+}
+export function getDashboardAdmin() {
+  return async function (dispatch) {
+    let response = await axios.get("http://localhost:8800/getDashboardAdmin");
+    if (response.status === 200) {
+      return dispatch({
+        type: "GET_DASHBOARD_ADMIN",
+        payload: response.data,
+      });
+    } else if (response.status === 401) {
+      return dispatch({
+        type: "GET_DASHBOARD_ADMIN",
+        payload: [{ error: "Unauthorized" }],
+      });
+    }
   };
 }
 
@@ -91,50 +111,111 @@ export function getPlainsDestacados() {
   };
 }
 
-export function signin(data) {
-  return async function (dispatch) {
+export function setCurrentUser(users) {
+  return {
+    type: "SET_CURRENT_USER",
+    user: users,
+  };
+}
+export function googleLogIn(payload) {
+  return async (dispatch) => {
     try {
-      let response = await axios.post(
-        "http://localhost:8800/auth/signin",
-        data
+      const res = await axios.post(
+        "http://localhost:8800/auth/google",
+        payload
       );
-      window.localStorage.setItem("token", response.data.token);
-      window.localStorage.setItem("user", response.data.username);
-      window.localStorage.setItem("id", response.data.id);
-      window.localStorage.setItem("test", JSON.stringify(response.data));
+      const token = res.data.token;
+      const role = res.data.role;
+      const id = res.data.id;
+      const username = res.data.username;
+      window.localStorage.setItem("jwtToken", token);
+      window.localStorage.setItem("user", username);
+      window.localStorage.setItem("id", id);
+      window.localStorage.setItem("test", JSON.stringify(res.data));
+      console.log("statusgoogle", res.status);
       return dispatch(
         {
-          type: "SIGNIN",
-          payload: response.data,
-        },
-        (window.location.href = "/")
+          type: "GOOGLE_LOGIN",
+          payload: res.data,
+        }(
+          // users(token);
+          // dispatch(
+          //   users({
+          //     token: token,
+          //     email: jwt.decode(token).email,
+          //     name: jwt.decode(token).name,
+          //     role: role,
+          //     id: id,
+          //   }),
+          (window.location.href = "/")
+        )
       );
+      // return {
+      //   email: jwt.decode(token).email,
+      //   name: jwt.decode(token).name,
+      //   role: role,
+      //   id: id,
+      // };
     } catch (error) {
       console.log(error);
-      return alert("Usuario o contraseña incorrectos");
     }
   };
 }
 
+export function signin(data) {
+  try {
+      return async function (dispatch) {
+      let response = await axios.post(
+        "http://localhost:8800/auth/signin",
+        data
+      );
+      console.log("status", response.status);
+      if (response.status === 200) {
+        window.localStorage.setItem("token", response.data.token);
+        window.localStorage.setItem("user", response.data.username);
+        window.localStorage.setItem("id", response.data.id);
+        window.localStorage.setItem("test", JSON.stringify(response.data));
+        return dispatch(
+          {
+            type: "SIGNIN",
+            payload: response.data,
+          }((window.location.href = "/"))
+        );
+      } else {
+        return swal({
+          title: "¡Usuario o contraseña incorrectos!",
+          icon: "error",
+        });
+      }
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export function signup(data) {
-  return async function (dispatch) {
-    try {
+  try {
+    return async function (dispatch) {
       let response = await axios.post(
         "http://localhost:8800/auth/signup",
         data
       );
       //console.log('juthUP', response.data)
-      return dispatch(
-        {
+      if(response.status === 200){
+        return dispatch({
           type: "SIGNUP",
           payload: response.data,
-        },
-        (window.location.href = "/login")
-      );
-    } catch (error) {
-      alert("Credenciales en uso");
-    }
-  };
+        }) ((window.location.href = "/login"))
+      }else{
+        return swal({
+          title: "¡Credenciales en uso!",
+          icon: "error",
+        });
+      }
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const Logout = () => {
@@ -227,5 +308,29 @@ export function getCity(id) {
       type: "GET_CITY",
       payload: json.data,
     });
+  };
+}
+
+export function getIsAdmin() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("http://localhost:8800/checkAdmin/", {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      console.log("actionadmin", response.status);
+      if (response.status === 200) {
+        return dispatch({
+          type: "GET_IS_ADMIN",
+          payload: true,
+        });
+      } else {
+        return dispatch({
+          type: "GET_IS_ADMIN",
+          payload: false,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

@@ -14,6 +14,7 @@ const initialState = {
   cartPlains: [],
   userLogout: {},
   lugares: [],
+  isAdmin: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -134,6 +135,11 @@ function rootReducer(state = initialState, action) {
       localStorage.clear();
 
       return { ...state, users: null };
+    case "GOOGLE_LOGIN":
+      return {
+        ...state,
+        users: action.payload,
+      };
 
     case "ADD_ITEM":
       return {
@@ -152,7 +158,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         cartPlains: addItemFromCartInCart(state.cartPlains, action.payload),
       };
-    
+
     case "REMOVE_ALL_ITEMS_IN_CART":
       return {
         ...state,
@@ -182,6 +188,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         plains: state.plains.filter((plain) => plain._id !== action.payload),
+      };
+    case "GET_IS_ADMIN":
+      console.log("isAdmin", action.payload);
+      return {
+        ...state,
+        isAdmin: action.payload,
       };
 
     default:

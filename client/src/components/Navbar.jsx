@@ -5,20 +5,23 @@ import { FaShoppingCart } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 //import { useUser } from '../hooks/useUser';
-import { Logout } from "../actions";
+import { Logout, getIsAdmin } from "../actions";
 import { useDispatch } from "react-redux";
 import __ from "lodash";
+import { useSelector } from "react-redux";
 
-function Navbar({ user }) {
-  // const [human, setHuman] = useState(JSON.parse(localStorage.getItem(user)));
+function Navbar() {
+  const user = window.localStorage.getItem("user");
   const [nav, setNav] = useState(false);
   const [logo, setLogo] = useState(false);
+  const admin = useSelector((state) => state.isAdmin);
+  console.log("adminNav", admin);
   const dispatch = useDispatch();
-  // const [data, setData] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-  // const {isLoggedIn} = useUser();
+
+  useEffect(() => {
+    dispatch(getIsAdmin());
+  }, [dispatch]);
+
   const handleNav = () => {
     setNav(!nav);
     setLogo(!logo);
@@ -28,46 +31,6 @@ function Navbar({ user }) {
     dispatch(Logout());
     window.location.replace("/");
     // setUser(null);
-  };
-
-  const showServices = () => {
-    if (!__.isEmpty(user)) {
-      let roles = user.roles?.map((role) => role.name);
-      if (roles?.includes("admin")) {
-        return (
-          <>
-            <li>
-              {" "}
-              <Link to="/servicios">SERVICIOS</Link>{" "}
-            </li>
-          </>
-        );
-      }
-    }
-  };
-
-  const showLogin = () => {
-    if (__.isEmpty(user)) {
-      return (
-        <>
-          <Link to="/login">
-            {" "}
-            <BsPerson className="mr-2" size={20} />{" "}
-          </Link>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <span className="mx-5 fw-500">
-            Hola, {user.username.toUpperCase()} ♥
-          </span>
-          <Link onClick={logout} to="/">
-            LOGOUT
-          </Link>
-        </>
-      );
-    }
   };
 
   return (
@@ -88,7 +51,7 @@ function Navbar({ user }) {
           {" "}
           <Link to="/about">ACERCA DE </Link>{" "}
         </li>
-        {showServices()}
+        <li> {admin ? <Link to="/servicios">SERVICIOS</Link> : null} </li>
       </ul>
       {/* ICONOS */}
       <div className="hidden md:flex">
@@ -96,7 +59,20 @@ function Navbar({ user }) {
           {" "}
           <FaShoppingCart className="mr-2" size={20} />{" "}
         </Link>
-        {showLogin()}
+        {!user ? (
+          <Link to="/login">
+            {" "}
+            <BsPerson className="mr-2" size={20} />{" "}
+          </Link>
+        ) : (
+          <>
+            <span className="mx-5 fw-500">Hola, {user.toUpperCase()} ♥</span>
+
+            <Link onClick={logout} to="/">
+              LOGOUT{" "}
+            </Link>
+          </>
+        )}
       </div>
 
       {/* HAMBURGUER */}
@@ -121,7 +97,7 @@ function Navbar({ user }) {
             {" "}
             <Link to="/destination">DESTINOS</Link>{" "}
           </li>
-          {showServices()}
+          <li> {admin ? <Link to="/servicios">SERVICIOS</Link> : null} </li>
           <li>
             {" "}
             <Link to="/about">ACERCA DE</Link>{" "}
