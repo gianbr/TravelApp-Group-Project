@@ -2,13 +2,35 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
-import { removeItem, addItemFromCart, removeAllItemsFromCart } from '../actions/index'
+import { removeItem, addItemFromCart, removeAllItemsFromCart, checkout } from '../actions/index'
 import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa'
+import StripeCheckout from "react-stripe-checkout";
 
 
+const KEY = process.env.REACT_APP_STRIPE;
 function Shopping() {
     const dispatch = useDispatch()
     const cart = useSelector((state) => state.cartPlains);
+    console.log(cart)
+    const onToken = (token) => {
+      const totalAmount = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
+      let plains = cart.map(c => {
+          return{
+              plainId: c.id,
+              quantity: c.quantity,
+              price: c.price,
+              date: c.date
+          }
+      })
+      const data = {
+        plains,
+        email: token.email,
+        amount: totalAmount,
+        token: token.id
+      };
+     // console.log(data);
+     handleCheckout(data);
+    };
 
     const pricePack = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
 
@@ -38,6 +60,9 @@ function Shopping() {
             dispatch(addItemFromCart(producto))
             console.log("quantity", producto.quantity)
         }
+    }
+    const handleCheckout = (info) => {
+        dispatch(checkout(info))
     }
 
     const handleRemove = (product) => {
@@ -128,7 +153,24 @@ function Shopping() {
                                 <span>$ {discount()}</span>                                                            
                                 
                             </div>
-                            <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Comprar</button>
+                             <StripeCheckout
+                            name="Travel App"
+                            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6NodUpVl-Hyx0WuWpdC8oK_RLaHvMjgkXuw&usqp=CAU"
+                            billingAddress
+                            shippingAddress
+                            description={`Your total is $${pricePack}`}
+                            amount={cart.pricePack * 100}
+                            token={onToken}  
+                            stripeKey={KEY}
+                            >   
+                             <button              
+                               type="submit" 
+                               class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+                               Confirmar y pagar
+                               </button>
+                            </StripeCheckout>
+                             
+                             
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,9 @@ const jwt = require("jsonwebtoken");
 const config = require("../config");
 const dotenv = require("dotenv");
 const { OAuth2Client } = require("google-auth-library");
+const nodemailer = require("nodemailer");
+const { google } = require("googleapis");
+const mail = require("../middlewares/mail");
 
 dotenv.config();
 
@@ -27,7 +30,7 @@ authRoute.post(
     verifySignUp.checkDuplicateUserNameOrEmail,
     verifySignUp.checkRolesExisted,
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     try {
       const { username, email, password, roles } = req.body;
 
@@ -53,11 +56,13 @@ authRoute.post(
         expiresIn: "86400s", //1 dia
       }); //genero el token, el payload es un objeto vacio, el segundo parametro es la clave secreta, el tercer parametro es un objeto con opciones
 
-      res.status(200).json({ token });
+      //res.json({ token });
+      next();
     } catch (error) {
       console.error(error);
     }
-  }
+  },
+  mail.sendMail
 );
 
 //Iniciar sesion
@@ -86,73 +91,85 @@ authRoute.post(
     const user = await User.findById(userFound._id);
     const roles = await Role.find({ _id: { $in: user.roles } });
     console.log(userFound);
-    res.status(200).json({ token: token, username: user.username, id: user._id, roles });
+    res
+      .status(200)
+      .json({ token: token, username: user.username, id: user._id, roles });
   }
 );
 
 const origin =
   "720796673981-us7jgj5e8ospme3qt22432hiedcni3vt.apps.googleusercontent.com";
 
-authRoute.post("/google", async (req, res) => {
-  console.log(req.body);
-  try {
-    const googleId = origin;
+authRoute.post(
+  "/google",
+  async (req, res, next) => {
+    console.log(req.body);
+    try {
+      const googleId = origin;
 
-    const googleClient = new OAuth2Client({
-      clientId: `${googleId}`,
-    });
-
-    const { token, roles } = req.body;
-
-    const ticket = await googleClient.verifyIdToken({
-      idToken: token,
-      audience: `${googleId}`,
-    });
-
-    const payload = ticket.getPayload();
-
-    console.log(payload);
-
-    const newUser = new User({
-      username: payload.name,
-      email: payload.email,
-      password: payload.at_hash, //guardo la contraseña encriptada
-    });
-
-    if (roles) {
-      //
-      const foundRoles = await Role.find({ name: { $in: roles } });
-      newUser.roles = foundRoles.map((role) => role._id); //me va a devolver un arreglo con los IDS
-    } else {
-      const role = await Role.findOne({ name: "user" });
-      newUser.roles = [role._id]; //si el usuario no tiene roles, le asigno el rol de user por defecto
-    }
-
-    const user = await User.findOne({ email: payload.email });
-    if (user)
-      return res.status(200).json({
-        token: token,
-        username: user.username,
-        id: user._id,
+      const googleClient = new OAuth2Client({
+        clientId: `${googleId}`,
       });
-    console.log("encontrado", user);
-    // return res.status(400).json({ message: "Email already exists" })
-    //guardo el usuario
 
-    const userNew = await newUser.save();
-    console.log("creado", userNew);
-    const jtoken = jwt.sign({ id: userNew._id }, config.SECRET, {
-      expiresIn: "86400s", //1 dia
-    });
-    return res.status(201).json({
-      token: jtoken,
-      username: userNew.username,
-      id: userNew._id,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
+      const { token, roles } = req.body;
+
+      const ticket = await googleClient.verifyIdToken({
+        idToken: token,
+        audience: `${googleId}`,
+      });
+
+      const payload = ticket.getPayload();
+
+      console.log(payload);
+
+      const newUser = new User({
+        username: payload.name,
+        email: payload.email,
+        password: payload.at_hash, //guardo la contraseña encriptada
+      });
+
+      if (roles) {
+        //
+        const foundRoles = await Role.find({ name: { $in: roles } });
+        newUser.roles = foundRoles.map((role) => role._id); //me va a devolver un arreglo con los IDS
+      } else {
+        const role = await Role.findOne({ name: "user" });
+        newUser.roles = [role._id]; //si el usuario no tiene roles, le asigno el rol de user por defecto
+      }
+
+      const user = await User.findOne({ email: payload.email });
+      if (user)
+        return res.status(200).json({
+          token: token,
+          username: user.username,
+          id: user._id,
+        });
+      console.log("encontrado", user);
+      // return res.status(400).json({ message: "Email already exists" })
+      //guardo el usuario
+
+      const userNew = await newUser.save();
+      console.log("creado", userNew);
+      const jtoken = jwt.sign({ id: userNew._id }, config.SECRET, {
+        expiresIn: "86400s", //1 dia
+      });
+      // return res.status(201).json({
+      //   token: jtoken,
+      //   username: userNew.username,
+      //   id: userNew._id,
+      // });
+      req.token = jtoken;
+      req.username = userNew.username;
+      req.id = userNew._id;
+      req.email = userNew.email;
+      next();
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  mail.sendMail
+);
+
 // return res.status(200).json({
 //   token: jtoken,
 //   username: userNew.username,

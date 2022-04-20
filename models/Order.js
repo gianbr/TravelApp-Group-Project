@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-
+const User = require("../models/User");
 const OrderSchema = new Schema(
   {
     userId: {
@@ -31,5 +31,15 @@ const OrderSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// OrderSchema.statics.findUserById = function (id, callback) {
+//   var query = this.findOne();
+
+//   User.findOne({ _id: id }, function (error, user) {
+//     query.where($or[{ userId: user._id }]).exec(callback);
+//   });
+
+//   return query;
+// };
 
 module.exports = model("Order", OrderSchema);

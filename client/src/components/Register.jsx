@@ -17,7 +17,12 @@ const Register = () => {
   });
 
   const handleSubmit = async (e) => {
-    if (Object.keys(errors).length || !data.email || !data.password || !data.username) {
+    if (
+      Object.keys(errors).length ||
+      !data.email ||
+      !data.password ||
+      !data.username
+    ) {
       e.preventDefault();
       return swal({
         title: "¡Rellene los campos para continuar!",

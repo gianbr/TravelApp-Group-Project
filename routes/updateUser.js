@@ -104,7 +104,7 @@ updateUser.put(
     }
   }
 );
-updateUser.put(
+updateUser.delete(
   "/delete/:id",
   [authJwt.verifyToken, authJwt.isAdmin],
   async (req, res, next) => {
