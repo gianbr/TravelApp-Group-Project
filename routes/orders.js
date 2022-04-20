@@ -9,7 +9,7 @@ const order = express.Router();
 order.get("/allorders", async (req, res) => {
   let allOrders = await Order.find();
   // console.log(allOrders);
-  if (!allOrders) {
+  if (!allOrders.length) {
     return res.json([]);
   }
   const orders = await Promise.all(
@@ -18,7 +18,6 @@ order.get("/allorders", async (req, res) => {
       let plains = await Promise.all(
         order.plains.map(async (p) => {
           let plain = await Plain.findById(p.plainId);
-          // console.log(plain);
           return { title: plain.title, price: plain.price };
         })
       );
@@ -31,6 +30,7 @@ order.get("/allorders", async (req, res) => {
       };
     })
   );
+  console.log(orders);
   return res.json(orders);
 });
 

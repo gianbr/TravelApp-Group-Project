@@ -49,6 +49,7 @@ updateUser.put(
     }
   }
 );
+
 updateUser.put(
   "/addban/:id",
   [authJwt.verifyToken, authJwt.isAdmin],
