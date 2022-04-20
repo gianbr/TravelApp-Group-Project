@@ -13,6 +13,7 @@ const getCheckAdmin = require("./getCheckAdmin");
 const cart = require("./cart");
 const checkout = require("./checkout");
 const order = require("./orders");
+const wishList = require("./wishList");
 const router = Router();
 
 router.use("/setplainsdb", setPlainsDb);
@@ -28,6 +29,7 @@ router.use("/apiLugares", apiLugares);
 router.use("/checkAdmin", getCheckAdmin);
 router.use("/checkout", checkout);
 router.use("/orders", order);
+router.use("/wishlist", wishList);
 // router.use("/cart", cart);
 
 module.exports = router;
