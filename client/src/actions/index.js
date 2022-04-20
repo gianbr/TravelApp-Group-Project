@@ -185,7 +185,7 @@ export function signin(data) {
         );
       } else {
         return swal({
-          title: "Usuario o contraseña incorrectos",
+          title: "¡Usuario o contraseña incorrectos!",
           icon: "error",
         });
       }
@@ -204,19 +204,13 @@ export function signup(data) {
       );
       //console.log('juthUP', response.data)
       if (response.status === 200) {
-        return dispatch(
-          {
-            type: "SIGNUP",
-            payload: response.data,
-          },
-          console.log(
-            "status2",
-            response.status
-          )((window.location.href = "/login"))
-        );
+        return dispatch({
+          type: "SIGNUP",
+          payload: response.data,
+        })((window.location.href = "/login"));
       } else {
         return swal({
-          title: "Credenciales en uso",
+          title: "¡Credenciales en uso!",
           icon: "error",
         });
       }

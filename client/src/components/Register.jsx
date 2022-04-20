@@ -19,9 +19,9 @@ const Register = () => {
   const handleSubmit = async (e) => {
     if (
       Object.keys(errors).length ||
-      !data.username ||
       !data.email ||
-      !data.password
+      !data.password ||
+      !data.username
     ) {
       e.preventDefault();
       return swal({

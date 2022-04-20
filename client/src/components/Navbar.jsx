@@ -33,30 +33,6 @@ function Navbar() {
     // setUser(null);
   };
 
-  // const showLogin = () => {
-  //   if (__.isEmpty(users)) {
-  //     return (
-  //       <>
-  //         <Link to="/login">
-  //           {" "}
-  //           <BsPerson className="mr-2" size={20} />{" "}
-  //         </Link>
-  //       </>
-  //     );
-  //   } else {
-  //     return (
-  //       <>
-  //         <span className="mx-5 fw-500">
-  //           Hola, {users.username.toUpperCase()} ♥
-  //         </span>
-  //         <Link onClick={logout} to="/">
-  //           LOGOUT
-  //         </Link>
-  //       </>
-  //     );
-  //   }
-  // };
-
   return (
     <div className="flex w-full justify-between items-center h-20 px-4 absolute z-10 text-white ">
       <div>
