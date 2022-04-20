@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import swal from "sweetalert";
-import { addReview } from "../actions";
+import { addReview, getIsAdmin } from "../actions";
 
 export default function UserReviews() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
+  const admin = useSelector((state) => state.isAdmin);
+  const user = localStorage.getItem("user");
   const [input, setInput] = useState({
     score: 0,
     comments: [{ body: "" }],
@@ -23,6 +25,9 @@ export default function UserReviews() {
       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
     </svg>
   );
+  useEffect(() => {
+    dispatch(getIsAdmin());
+  }, [dispatch]);
 
   function handleScore(e) {
     e.preventDefault(e);
@@ -60,15 +65,17 @@ export default function UserReviews() {
 
   return (
     <>
-      <div flex items-center>
-        <button
-          className="flex mb-20 mx-auto  bg-indigo-400 text-white active:bg-blue-300 font-bold uppercase text-sm px-3 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-          type="button"
-          onClick={() => setShowModal(true)}
-        >
-          Añadir experiencia
-        </button>
-      </div>
+      {user && !admin ? (
+        <div flex items-center>
+          <button
+            className="flex mb-20 mx-auto  bg-indigo-400 text-white active:bg-blue-300 font-bold uppercase text-sm px-3 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+            type="button"
+            onClick={() => setShowModal(true)}
+          >
+            Añadir experiencia
+          </button>
+        </div>
+      ) : null}
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
