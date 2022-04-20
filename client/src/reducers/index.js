@@ -2,7 +2,6 @@ import { addItemToCart } from "../cart-utils/index";
 import { removeItemFromCart } from "../cart-utils/index";
 import { addItemFromCartInCart } from "../cart-utils/index";
 import { removeAllItemsFromCart } from "../cart-utils/index";
-import { toast } from "react-toastify";
 
 const initialState = {
   plains: [],
@@ -14,6 +13,7 @@ const initialState = {
   cartPlains: [],
   userLogout: {},
   lugares: [],
+  checkout: [],
   isAdmin: false,
 };
 
@@ -195,6 +195,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         isAdmin: action.payload,
       };
+      case "CHECKOUT": 
+        return {
+          ...state,
+          checkout: action.payload,
+        }
     case "ADD_REVIEW":
       return {
         ...state,
