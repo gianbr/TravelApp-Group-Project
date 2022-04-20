@@ -2,13 +2,27 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
-import { removeItem, addItemFromCart, removeAllItemsFromCart } from '../actions/index'
+import { removeItem, addItemFromCart, removeAllItemsFromCart, checkout } from '../actions/index'
 import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa'
 import StripeCheckout from "react-stripe-checkout";
 
+
+const KEY = process.env.REACT_APP_STRIPE;
 function Shopping() {
     const dispatch = useDispatch()
     const cart = useSelector((state) => state.cartPlains);
+
+    const onToken = (token) => {
+     const totalAmount = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
+
+      const data = {
+        plains: cart,
+        email: token.email,
+        amount: totalAmount,
+        token: token.id
+      };
+      handleCheckout(data);
+    };
 
     const pricePack = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
 
@@ -20,6 +34,9 @@ function Shopping() {
             dispatch(addItemFromCart(producto))
             console.log("quantity", producto.quantity)
         }
+    }
+    const handleCheckout = (info) => {
+        dispatch(checkout(info))
     }
 
     const handleRemove = (product) => {
@@ -102,10 +119,10 @@ function Shopping() {
                             shippingAddress
                             description={`Your total is $${pricePack}`}
                             amount={cart.pricePack * 100}
-                            token={cart.Token}
-                             stripeKey={"pk_test_51KozaEEdecdMolzDGj0N5pUce6x6vdXr2HCEAhJbIEv8P9DTbNuVDj7sZUqQpWOrKjKT5dqFAfcDPKShleZLTZlY00zXf46T5K"}
+                            token={onToken}  
+                            stripeKey={KEY}
                             >   
-                             <button
+                             <button              
                                type="submit" 
                                class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
                                Confirmar y pagar
