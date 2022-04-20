@@ -13,6 +13,7 @@ import CarouselCom from "./CarouselCom";
 import Calendario from "./Calendario";
 import { v4 as uuid } from "uuid";
 import __ from "lodash";
+import UserReviews from "./UserReviews";
 
 function Details() {
   const { id } = useParams();
@@ -112,6 +113,9 @@ function Details() {
       );
     }
   };
+
+  console.log("score", detail?.score);
+  console.log("comments", detail?.comments?.length);
 
   // const renderEditAndDeleteButton = () => {
   //   if (!__.isEmpty(user)) {
@@ -295,14 +299,16 @@ function Details() {
             <div className="ml-5 mt-5">
               {detail.city}, {detail.location}
             </div>
-            {detail.score <= 2 ? (
+            {detail?.score?.toFixed(1) <= 2 ? (
               <h3 className="text-right mr-10">
                 {" "}
-                Puntaje: <p className="text-red-500">{detail.score}</p>
+                Puntaje:{" "}
+                <p className="text-red-500">{detail?.score?.toFixed(1)}</p>
               </h3>
             ) : (
               <h3 className="text-right mr-10">
-                Puntaje:<p className="text-green-500">{detail.score}</p>
+                Puntaje:
+                <p className="text-green-500">{detail?.score?.toFixed(1)}</p>
               </h3>
             )}
           </div>
@@ -351,12 +357,13 @@ function Details() {
         </div>
 
         <br />
-        <div className="mx-52 border-2 border-indigo-500 mb-20 rounded-md bg-indigo-300 text-white list-none">
+        <div className="mx-52 border-2 border-indigo-500 mb-5 rounded-md bg-indigo-300 text-white list-none">
           <p className="mt-3 ml-5">
             <strong>COMENTARIOS: </strong>
           </p>
           <CarouselCom />
         </div>
+        <UserReviews />
         <div className="flex justify-center gap-56 mb-4 text-1xl font-mono text-teal-500 mb-10">
           <Link to="/destination">
             <button className="rounded-2xl py-2 p-3 focus:outline-none focus:ring focus:ring-indigo-500 bg-indigo-400 hover:bg-indigo-300 relative text-white font-semibold">

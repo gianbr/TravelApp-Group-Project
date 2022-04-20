@@ -10,6 +10,7 @@ const updateUser = require("./updateUser");
 const getUsers = require("./getUsers");
 const apiLugares = require("./apiLugares");
 const getCheckAdmin = require("./getCheckAdmin");
+const postReview = require("./postReview");
 const router = Router();
 
 router.use("/setplainsdb", setPlainsDb);
@@ -23,5 +24,6 @@ router.use("/updateuser", updateUser);
 router.use("/getusers", getUsers);
 router.use("/apiLugares", apiLugares);
 router.use("/checkAdmin", getCheckAdmin);
+router.use("/postreview", postReview);
 
 module.exports = router;

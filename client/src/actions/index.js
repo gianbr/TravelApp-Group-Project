@@ -1,4 +1,5 @@
 import { users } from "../reducers";
+import swal from "sweetalert";
 const axios = require("axios");
 //const userSet = require("../auth/utils/userSet");
 const jwt = require("jwt-decode");
@@ -38,7 +39,9 @@ export function getDetailId(id) {
 }
 export function getDashboardAdmin() {
   return async function (dispatch) {
-    let response = await axios.get("http://localhost:8800/getDashboardAdmin");
+    let response = await axios.get("http://localhost:8800/getDashboardAdmin", {
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    });
     if (response.status === 200) {
       return dispatch({
         type: "GET_DASHBOARD_ADMIN",
@@ -117,8 +120,8 @@ export function setCurrentUser(users) {
   };
 }
 export function googleLogIn(payload) {
-  return async (dispatch) => {
-    try {
+  try {
+    return async (dispatch) => {
       const res = await axios.post(
         "http://localhost:8800/auth/google",
         payload
@@ -155,25 +158,25 @@ export function googleLogIn(payload) {
       //   role: role,
       //   id: id,
       // };
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function signin(data) {
-  return async function (dispatch) {
-    try {
+  try {
+    return async function (dispatch) {
       let response = await axios.post(
         "http://localhost:8800/auth/signin",
         data
       );
-      window.localStorage.setItem("token", response.data.token);
-      window.localStorage.setItem("user", response.data.username);
-      window.localStorage.setItem("id", response.data.id);
-      window.localStorage.setItem("test", JSON.stringify(response.data));
+      // window.localStorage.setItem("test", JSON.stringify(response.data));
       console.log("status", response.status);
       if (response.status === 200) {
+        window.localStorage.setItem("token", response.data.token);
+        window.localStorage.setItem("user", response.data.username);
+        window.localStorage.setItem("id", response.data.id);
         return dispatch(
           {
             type: "SIGNIN",
@@ -181,36 +184,46 @@ export function signin(data) {
           }((window.location.href = "/"))
         );
       } else {
-        return alert("Usuario o contraseña incorrectos");
+        return swal({
+          title: "Usuario o contraseña incorrectos",
+          icon: "error",
+        });
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function signup(data) {
-  return async function (dispatch) {
-    try {
+  try {
+    return async function (dispatch) {
       let response = await axios.post(
         "http://localhost:8800/auth/signup",
         data
       );
       //console.log('juthUP', response.data)
-      return dispatch(
-        {
-          type: "SIGNUP",
-          payload: response.data,
-        },
-        console.log(
-          "status2",
-          response.status
-        )((window.location.href = "/login"))
-      );
-    } catch (error) {
-      alert("Credenciales en uso");
-    }
-  };
+      if (response.status === 200) {
+        return dispatch(
+          {
+            type: "SIGNUP",
+            payload: response.data,
+          },
+          console.log(
+            "status2",
+            response.status
+          )((window.location.href = "/login"))
+        );
+      } else {
+        return swal({
+          title: "Credenciales en uso",
+          icon: "error",
+        });
+      }
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const Logout = () => {
@@ -327,5 +340,21 @@ export function getIsAdmin() {
     } catch (error) {
       console.log(error);
     }
+  };
+}
+
+export function addReview(id, data) {
+  return async function (dispatch) {
+    let response = await axios.patch(
+      "http://localhost:8800/postreview/" + id,
+      data,
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }
+    );
+    return dispatch({
+      type: "ADD_REVIEW",
+      payload: response.data,
+    })((window.location.href = "/destination/" + id));
   };
 }
