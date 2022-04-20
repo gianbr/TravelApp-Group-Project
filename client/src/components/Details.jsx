@@ -12,12 +12,9 @@ import Carousel from "./Carousel";
 import CarouselCom from "./CarouselCom";
 import Calendario from "./Calendario";
 import { v4 as uuid } from "uuid";
-<<<<<<< HEAD
 import swal from "sweetalert";
-=======
 import __ from "lodash";
 import UserReviews from "./UserReviews";
->>>>>>> c868d2ffd16fa7418710e1909ac77c250f891f09
 
 function Details() {
   const { id } = useParams();
