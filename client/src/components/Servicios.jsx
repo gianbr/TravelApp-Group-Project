@@ -7,95 +7,88 @@ import regsVideo from "../assets/pexels-cottonbro-5329613.mp4";
 import { Link } from "react-router-dom";
 import { validarServicios } from "./validarServicios";
 import { useSelector } from "react-redux";
-import Form from "@rjsf/core";
-// import schema from "../../data/data2";
-const schema = {
-  type: "object",
-  properties: {
-    country: {
-      type: "string",
-      title: "Provincia",
-      enum: ["Buenos Aires", "Río Negro", "Misiones", "Mendoza"],
-    },
+
+const selectLugares = [
+  {
+    "provincia": "Buenos Aires",
+    "ciudades": ["Tandíl", "Mar del Plata", "Tigre", "Nuñez", "CABA"]
   },
-  dependencies: {
-    country: {
-      oneOf: [
-        {
-          properties: {
-            country: {
-              enum: ["Buenos Aires"],
-            },
-            province: {
-              type: "string",
-              title: "Ciudad",
-              enum: ["Tandíl", "Mar del Plata", "Tigre", "Nuñez", "CABA"],
-            },
-          },
-        },
-        {
-          properties: {
-            country: {
-              enum: ["Río Negro"],
-            },
-            province: {
-              type: "string",
-              title: "State",
-              enum: [
-                "San Carlos de Bariloche",
-                "Viedma",
-                "Cipolletti",
-                "El Bolsón",
-              ],
-            },
-          },
-        },
-        {
-          properties: {
-            country: {
-              enum: ["Misiones"],
-            },
-            province: {
-              type: "string",
-              title: "State",
-              enum: ["Puerto Iguazú", "San Ignacio", "Posadas", "Oberá"],
-            },
-          },
-        },
-        {
-          properties: {
-            country: {
-              enum: ["Mendoza"],
-            },
-            province: {
-              type: "string",
-              title: "State",
-              enum: ["Mendoza", "Rivadavia", "Las Heras", "Godoy Cruz"],
-            },
-          },
-        },
-      ],
-    },
+  {
+    "provincia": "Río Negro",
+    "ciudades": ["San Carlos de Bariloche", "Viedma", "Cipolletti", "El Bolsón"]
   },
-};
-const uiSchema = {
-  "ui:widget": (props) => {
-    return (
-      <input
-        type="text"
-        className="custom"
-        placeholder="hola"
-        onChange={(event) => props.onChange(event.target.value)}
-      />
-    );
+  {
+    "provincia": "Misiones",
+    "ciudades": ["Puerto Iguazú", "San Ignacio", "Posadas", "Oberá"]
   },
-};
+  {
+    "provincia": "Mendoza",
+    "ciudades": ["Mendoza", "Rivadavia", "Las Heras", "Godoy Cruz"]
+  },
+]
 
 export default function CreateForm() {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const lugares = useSelector((state) => state.lugares);
   const admin = useSelector((state) => state.isAdmin);
+  const [provincia, setProvincia] = useState(-1);
+
+  const handleProvincia = (e) => {
+    const opcion = e.target.value
+    setProvincia(opcion)
+    if(parseInt(opcion) === -1) {
+      setPlain({
+        ...plain,
+        location: '',
+        city: ''
+      })
+    }else{
+      setPlain({
+        ...plain,
+        location: selectLugares[opcion].provincia
+      })
+    }
+  }
+
+  const handleCiudad = (e) => {
+    setPlain({
+      ...plain,
+      city: parseInt(e) === -1 ? '' : e
+    })
+  }
+  
+  const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+  
+  const daysCheckboxes = days.map((day) => {
+    return (
+      <div className="text-center px-2" key={day}>
+        <input
+          className="form-check-input"
+          type="checkbox"
+          value={day.toLocaleLowerCase()}
+          id={day}
+          name={day}
+          onChange={(e) => {
+            if(e.target.checked){
+              setPlain({
+                ...plain,
+                date: [...plain.date, e.target.value]
+              })
+            }else if(!e.target.checked){
+              setPlain({
+                ...plain,
+                date: plain.date.filter(d => d !== e.target.value)
+              })
+            }
+          }}
+        />
+        <label className="form-check-label" htmlFor={day}>
+          {day.slice(0, 3)}
+        </label>
+      </div>
+    );
+  })
 
   const [plain, setPlain] = useState({
     title: "",
@@ -106,8 +99,10 @@ export default function CreateForm() {
     stock: "",
     included: "",
     description: "",
+    date: [],
+    score: 0
   });
-  console.log(plain);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getIsAdmin());
@@ -131,19 +126,6 @@ export default function CreateForm() {
     });
   };
 
-  // const onsubmit = (event) => {
-  //   console.log(event);
-  //   alert(JSON.stringify(event.formData));
-  // };
-  // function handleChangeProvince(e){
-  //   if(e.target.value){
-  //     setPlain({})}
-  // }
-
-  // function handleChangeCity(){
-
-  // }
-
   function handleSubmit(e) {
     if (
       Object.keys(errors).length ||
@@ -152,10 +134,12 @@ export default function CreateForm() {
       !plain.location ||
       !plain.city ||
       !plain.stock ||
-      !plain.images ||
+      !plain.images.length ||
       !plain.included ||
-      !plain.description
+      !plain.description ||
+      !plain.date.length
     ) {
+      e.preventDefault();
       return swal({
         title: "¡Rellene los campos para continuar!",
         icon: "error",
@@ -259,7 +243,27 @@ export default function CreateForm() {
                   }
                 />
               </div>
-              <Form schema={schema} uiSchema={uiSchema} />
+
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Provincia
+              </label>
+              <select onChange={handleProvincia} name="provincia" id="provinciaId" className="appearance-none block w-full bg-gray-200 text-gray-700 border border-indigo-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
+                <option value={-1}>Seleccione una provincia</option>
+                {selectLugares.map((lugar, index) =>
+                    <option key={index} value={index}>
+                      {lugar.provincia}
+                    </option>)}
+              </select>
+
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Ciudad
+              </label>
+              <select onChange={(e) => handleCiudad(e.target.value)} name="ciudad" id="ciudadId" className="appearance-none block w-full bg-gray-200 text-gray-700 border border-indigo-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white">
+                <option value={-1}>Seleccione una ciudad</option>
+                {provincia > -1 && selectLugares[provincia].ciudades.map((ciudad, index) => 
+                    <option key={index} value={ciudad}>{ciudad}</option>)}
+              </select>
+
               <div>
                 <div className="flex flex-col py-2">
                   {errors.city && <p>{errors.city}</p>}
@@ -314,15 +318,11 @@ export default function CreateForm() {
                   className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   htmlForm="grid-first-name"
                 >
-                  Date
+                  Fechas
                 </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-indigo-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                  id="grid-first-name"
-                  type="number"
-                  placeholder="10"
-                  onChange={(e) => setPlain({ ...plain, date: e.target.value })}
-                />
+                <div className="flex mb-3">
+                  {daysCheckboxes}
+                </div>
                 {errors.date && <p>{errors.date}</p>}
               </div>
 
