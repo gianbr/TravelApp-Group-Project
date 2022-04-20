@@ -1,8 +1,6 @@
-import { users } from "../reducers";
 import swal from "sweetalert";
 const axios = require("axios");
 //const userSet = require("../auth/utils/userSet");
-const jwt = require("jwt-decode");
 
 export function searchDestination(name) {
   return async function (dispatch) {
@@ -352,3 +350,92 @@ export function addReview(id, data) {
     })((window.location.href = "/destination/" + id));
   };
 }
+
+export function getUsers() {
+	return async function (dispach) {
+		try {
+			const res = await axios.get('http://localhost:8800/getusers');
+		//	console.log(res);
+			return dispach({
+				type: 'GET_ALL_USERS',
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function getOrders() {
+	return async dispatch => {
+		try {
+			const res = await axios.get('http://localhost:8800/orders/allorders');
+			return dispatch({
+         type: 'GET_ALL_ORDERS', 
+         payload: res.data });
+		} catch (err) {
+			console.log(err);
+		}
+	};
+}
+
+export function rolAdmin(id, email) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.put("http://localhost:8800/updateuser/addadmin/" + id, email,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      console.log("El usuario ahora es admin", data);
+      return dispatch({
+        type: "UPDATE_USER",
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function bloquearUser(id, email) {
+  return async function (dispatch) {
+    let response = await axios.put("http://localhost:8800/updateuser/addban/" + id, email,
+    {
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    });
+    return dispatch({
+      type: "ADD_BAN",
+      payload: response.data,
+    })
+  }
+}
+
+export function desbloquearUser(id, email) {
+  return async function (dispatch) {
+    let response = await axios.put("http://localhost:8800/updateuser/removeban/" + id, email,
+    {
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    });
+    return dispatch({
+      type: "REMOVE_BAN",
+      payload: response.data,
+    })
+  }
+}
+export function deleteUser(id) {
+  return async function (dispatch) {
+    try {
+      await axios.delete("http://localhost:8800/updateuser/delete/" + id, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      console.log("Usuario eliminado", id);
+      return dispatch({
+        type: "DELETE_USER",
+        payload: id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

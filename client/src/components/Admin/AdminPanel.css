@@ -1,0 +1,125 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: auto;
+}
+.container h2 {
+    color: "gray-light";
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 0;
+}
+.container h3 {
+    margin: .4em;
+}
+
+.container h4 {
+    font-weight: 400;
+}
+.container h5 {
+    font-weight: 300;
+}
+
+.ControlButton {
+    border: 1px solid black;
+    border-radius: .5em;
+    margin: .5em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5em;
+    height: 2em;
+    background: #cecece;
+    border: 1px solid #AFAFAF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 1.1em;
+    transition: all .6s;
+}
+.ControlButton:hover {
+    background-color: #000000;
+    color: white;
+}
+.ItemCard{
+    width: 90%;
+    height: auto;
+    margin: .5em auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 1em;
+    border: 1px solid rgb(46, 46, 46);
+    padding-left: 15px;
+}
+.CreateButton{
+    margin-right: auto;
+    margin-left: auto;
+    max-width: auto;
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b39ddb;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+.CreateButton:hover {
+    background-color: white;
+    color: black;
+    opacity: 100%;
+    font-size: 1.05em;
+}
+.GestorCard{
+    padding: 2em;
+    margin: 2em auto;
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: #d1c4e9;
+    box-shadow: 6px 6px 6px rgba(77, 77, 77, 0.514);
+    transition: all .3s;
+}
+.GestorCard:hover {
+    padding: 3em;
+}
+
+.productDescriptionAdmin{
+    max-width: 35%;
+;
+}
+@media screen and (max-width:768px) {
+
+    .buttons{        
+        flex: 0 2 35%;
+        order:-1;
+    }
+    .priceStock{
+        display: flex;       
+    }
+    .priceStock input{        
+        margin-top: 1.5rem;
+    }
+    .GestorCard{
+        flex-direction: column;
+    } 
+    .GestorCard h3{
+        text-align: center;
+    }
+    .GestorCard .CreateButton{
+        width: 50%;
+        padding: 8px;
+        font-size: 80%;
+        text-align: center;
+    }    
+    .container h2 {
+        color: white;
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 0;
+        margin-top: 1em;
+    }
+}

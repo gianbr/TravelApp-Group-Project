@@ -11,6 +11,10 @@ import Register from "./components/Register";
 import ResetPassword from "./components/ResetPassword";
 import EditarServicios from "./components/EditarServicios";
 import UserReviews from "./components/UserReviews";
+import AdminPanel from "./components/Admin/AdminPanel";
+import User from "./components/Admin/Users";
+import Orders from "./components/Admin/Orders";
+
 function App() {
   return (
     <div>
@@ -49,6 +53,15 @@ function App() {
           </Route>
           <Route exact path="/reviews/:id">
             <UserReviews />
+          </Route>
+          <Route exact path="/admin/profile">
+            <AdminPanel />
+          </Route>
+          <Route exact path="/users">
+            <User />
+          </Route>
+          <Route exact path="/orders">
+            <Orders />
           </Route>
         </Switch>
       </Router>
