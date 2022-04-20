@@ -1,8 +1,7 @@
-import { users } from "../reducers";
 import swal from "sweetalert";
 const axios = require("axios");
 //const userSet = require("../auth/utils/userSet");
-const jwt = require("jwt-decode");
+
 
 export function searchDestination(name) {
   return async function (dispatch) {
@@ -362,3 +361,32 @@ export const removeAllItemsFromWish = (item) => ({
   type: "REMOVE_ALL_ITEMS_IN_WISH",
   payload: item,
 });
+export function checkout(dataCheckout) {
+  try {
+    return async function (dispatch) { 
+      const data = {
+        userId: localStorage.getItem('id'),
+        plains: dataCheckout.plains,
+        email: dataCheckout.email,
+        amount: dataCheckout.amount,
+        token: dataCheckout.token
+      }
+      let response = await axios.post("http://localhost:8800/checkout", 
+      data, // todo: implementar mapeo de servicios
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }
+      );
+      if (response) {
+        return dispatch({
+          type: "CHECKOUT",
+          payload: response.data,
+        })((window.location.href = "/"))
+      } else {
+        console.log("Cosas")
+      }
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}

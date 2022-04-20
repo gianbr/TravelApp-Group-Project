@@ -2,7 +2,6 @@ import { addItemToCart, addItemToWish, removeAllItemsFromWish } from "../cart-ut
 import { removeItemFromCart } from "../cart-utils/index";
 import { addItemFromCartInCart } from "../cart-utils/index";
 import { removeAllItemsFromCart } from "../cart-utils/index";
-import { toast } from "react-toastify";
 
 const initialState = {
   plains: [],
@@ -14,6 +13,7 @@ const initialState = {
   cartPlains: [],
   userLogout: {},
   lugares: [],
+  checkout: [],
   isAdmin: false,
   wishList:[]
 };
@@ -212,6 +212,12 @@ function rootReducer(state = initialState, action) {
             ...state,
             wishList: removeAllItemsFromWish(state.wishList, action.payload),
           };
+      case "CHECKOUT": 
+        console.log("checkout", action.payload);
+        return {
+          ...state,
+          checkout: action.payload,
+        }
     default:
       return state;
   }
