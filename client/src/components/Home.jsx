@@ -1,14 +1,14 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect } from "react";
 import beachVid from "../assets/production ID_4205697.mp4";
 import Navbar from "./Navbar";
 import Destacados from "./Destacados";
 import Footer from "./Footer";
-import { useSelector } from "react-redux";
+
 import Ofertas from "./Ofertas";
 import InfoWish from "./InfoWish"
 
 function Home() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("test")));
+ 
   // console.log(JSON.stringify(user))
   // console.log(user)
 
