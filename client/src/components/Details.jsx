@@ -12,7 +12,7 @@ import Carousel from "./Carousel";
 import CarouselCom from "./CarouselCom";
 import Calendario from "./Calendario";
 import { v4 as uuid } from "uuid";
-import __ from "lodash";
+import swal from "sweetalert";
 
 function Details() {
   const { id } = useParams();
@@ -34,34 +34,39 @@ function Details() {
   }, [dispatch, id]);
 
   const handleDate = (date) => {
-    // console.log(typeof date)
-    let dateJson = JSON.stringify(date);
-    // console.log(dateJson)
-    let dateJsonSliced = dateJson.slice(1, 11);
-    // console.log(dateJsonSliced)
-    // console.log(typeof dateJson)
-    // console.log(dateJson)
-    // console.log(disabled);
-    setItem((prevState) => {
-      return { ...prevState, date: dateJsonSliced };
-    });
+    if(date){
+      let dateJson = JSON.stringify(date);
+      let dateJsonSliced = dateJson.slice(1, 11);
+      setItem((prevState) => {
+        return { ...prevState, date: dateJsonSliced };
+      });
+    }
   };
 
+  console.log(item)
+
   const handleAddCart = () => {
-    dispatch(
-      addItem({
-        ...item,
-        name: detail.title,
-        price: detail.price,
-        image: detail.images,
-        city: detail.city,
-        location: detail.location,
-        cartId: cartId,
-        stock: detail.stock,
-        id,
-      })
-    );
-    history.push("/destination");
+    if(!item.date){
+      return swal({
+        title: "¡Seleccione una fecha!",
+        icon: "error",
+      });
+    }else{
+      dispatch(
+        addItem({
+          ...item,
+          name: detail.title,
+          price: detail.price,
+          image: detail.images,
+          city: detail.city,
+          location: detail.location,
+          cartId: cartId,
+          stock: detail.stock,
+          id,
+        })
+      );
+      history.push("/destination");
+    }
   };
 
   const handleQuantity = (e) => {
@@ -82,28 +87,6 @@ function Details() {
       console.log(id);
       alert("Deleted Successfully!");
       history.push("/destination");
-    }
-  };
-
-  const renderCartButton = () => {
-    if (!__.isEmpty(user)) {
-      return (
-        <button
-          className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleAddCart}
-          disabled={disabled}
-        >
-          Agregar al carrito
-        </button>
-      );
-    } else {
-      return (
-        <Link to="/login">
-          <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Agregar al carrito
-          </button>
-        </Link>
-      );
     }
   };
 
