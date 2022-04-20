@@ -335,6 +335,46 @@ export function getIsAdmin() {
   };
 }
 
+
+export const addItemToWish = (item) => ({
+  type: "ADD_ITEM_TO_WISH",
+  payload: item,
+});
+
+export const removeAllItemsFromWish = (item) => ({
+  type: "REMOVE_ALL_ITEMS_IN_WISH",
+  payload: item,
+});
+export function checkout(dataCheckout) {
+  try {
+    return async function (dispatch) { 
+      const data = {
+        userId: localStorage.getItem('id'),
+        plains: dataCheckout.plains,
+        email: dataCheckout.email,
+        amount: dataCheckout.amount,
+        token: dataCheckout.token
+      }
+      let response = await axios.post("http://localhost:8800/checkout", 
+      data, // todo: implementar mapeo de servicios
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }
+      );
+      if (response) {
+        return dispatch({
+          type: "CHECKOUT",
+          payload: response.data,
+        })((window.location.href = "/"))
+      } else {
+        console.log("Cosas")
+      }
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export function addReview(id, data) {
   return async function (dispatch) {
     let response = await axios.patch(

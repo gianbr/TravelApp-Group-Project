@@ -9,7 +9,7 @@ const order = express.Router();
 order.get("/allorders", async (req, res) => {
   let allOrders = await Order.find();
   // console.log(allOrders);
-  if (!allOrders.length) {
+  if (allOrders.length < 0) {
     return res.json([]);
   }
   const orders = await Promise.all(
@@ -17,11 +17,19 @@ order.get("/allorders", async (req, res) => {
       let user = await User.findById(order.userId);
       let plains = await Promise.all(
         order.plains.map(async (p) => {
-          let plain = await Plain.findById(p.plainId);
-          return { title: plain.title, price: plain.price };
+          if (mongoose.isValidObjectId(p.plainId)) {
+            let plain = await Plain.findById(p.plainId);
+            if (plain == null) {
+              return [];
+            }
+            // console.log(plain);
+            return { title: plain.title, price: plain.price };
+          } else {
+            return;
+          }
         })
       );
-      console.log(plains);
+      // console.log(plains);
       return {
         user: user.username,
         plains,
@@ -30,7 +38,7 @@ order.get("/allorders", async (req, res) => {
       };
     })
   );
-  console.log(orders);
+  // console.log(orders);
   return res.json(orders);
 });
 

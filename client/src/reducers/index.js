@@ -1,4 +1,4 @@
-import { addItemToCart } from "../cart-utils/index";
+import { addItemToCart, addItemToWish, removeAllItemsFromWish } from "../cart-utils/index";
 import { removeItemFromCart } from "../cart-utils/index";
 import { addItemFromCartInCart } from "../cart-utils/index";
 import { removeAllItemsFromCart } from "../cart-utils/index";
@@ -15,7 +15,9 @@ const initialState = {
   cartPlains: [],
   userLogout: {},
   lugares: [],
+  checkout: [],
   isAdmin: false,
+  wishList:[]
 };
 
 function rootReducer(state = initialState, action) {
@@ -233,6 +235,21 @@ function rootReducer(state = initialState, action) {
         ...state,
         isAdmin: action.payload,
       };
+      case "ADD_ITEM_TO_WISH":
+        return {
+          ...state,
+          wishList: addItemToWish(state.wishList, action.payload),
+        };
+      case "REMOVE_ALL_ITEMS_IN_WISH":
+          return {
+            ...state,
+            wishList: removeAllItemsFromWish(state.wishList, action.payload),
+          };
+      case "CHECKOUT": 
+        return {
+          ...state,
+          checkout: action.payload,
+        }
     case "ADD_REVIEW":
       return {
         ...state,
