@@ -10,6 +10,7 @@ import Shopping from "./components/Shopping";
 import Register from "./components/Register";
 import ResetPassword from "./components/ResetPassword";
 import EditarServicios from "./components/EditarServicios";
+import UserReviews from "./components/UserReviews";
 function App() {
   return (
     <div>
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route exact path="/resetpassword">
             <ResetPassword />
+          </Route>
+          <Route exact path="/reviews/:id">
+            <UserReviews />
           </Route>
         </Switch>
       </Router>

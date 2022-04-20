@@ -195,6 +195,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         isAdmin: action.payload,
       };
+    case "ADD_REVIEW":
+      return {
+        ...state,
+        plains: action.payload,
+      };
 
     default:
       return state;

@@ -168,6 +168,7 @@ export default function EditarServicios() {
 
   function handleSubmit(e) {
     if (
+      Object.keys(errors).length ||
       !plain.title ||
       !plain.price ||
       !plain.location ||
@@ -185,7 +186,7 @@ export default function EditarServicios() {
     } else {
       e.preventDefault();
       dispatch(updatePlain(id, plain));
-      swal({ title: "¡Servicio creado exitosamente!", icon: "success" });
+      swal({ title: "¡Añadido exitosamente!", icon: "success" });
     }
   }
 

@@ -146,6 +146,7 @@ export default function CreateForm() {
 
   function handleSubmit(e) {
     if (
+      Object.keys(errors).length ||
       !plain.title ||
       !plain.price ||
       !plain.location ||
