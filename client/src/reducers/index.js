@@ -201,6 +201,12 @@ function rootReducer(state = initialState, action) {
           ...state,
           checkout: action.payload,
         }
+    case "ADD_REVIEW":
+      return {
+        ...state,
+        plains: action.payload,
+      };
+
     default:
       return state;
   }

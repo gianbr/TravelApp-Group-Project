@@ -11,7 +11,7 @@ import __ from "lodash";
 import { useSelector } from "react-redux";
 
 function Navbar() {
-  const user = window.localStorage.getItem("user");
+  const user = window.localStorage.getItem("user") || "";
   const [nav, setNav] = useState(false);
   const [logo, setLogo] = useState(false);
   const admin = useSelector((state) => state.isAdmin);

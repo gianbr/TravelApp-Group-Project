@@ -38,7 +38,9 @@ export function getDetailId(id) {
 }
 export function getDashboardAdmin() {
   return async function (dispatch) {
-    let response = await axios.get("http://localhost:8800/getDashboardAdmin");
+    let response = await axios.get("http://localhost:8800/getDashboardAdmin", {
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    });
     if (response.status === 200) {
       return dispatch({
         type: "GET_DASHBOARD_ADMIN",
@@ -117,8 +119,8 @@ export function setCurrentUser(users) {
   };
 }
 export function googleLogIn(payload) {
-  return async (dispatch) => {
-    try {
+  try {
+    return async (dispatch) => {
       const res = await axios.post(
         "http://localhost:8800/auth/google",
         payload
@@ -155,25 +157,25 @@ export function googleLogIn(payload) {
       //   role: role,
       //   id: id,
       // };
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function signin(data) {
   try {
-      return async function (dispatch) {
+    return async function (dispatch) {
       let response = await axios.post(
         "http://localhost:8800/auth/signin",
         data
       );
+      // window.localStorage.setItem("test", JSON.stringify(response.data));
       console.log("status", response.status);
       if (response.status === 200) {
         window.localStorage.setItem("token", response.data.token);
         window.localStorage.setItem("user", response.data.username);
         window.localStorage.setItem("id", response.data.id);
-        window.localStorage.setItem("test", JSON.stringify(response.data));
         return dispatch(
           {
             type: "SIGNIN",
@@ -200,12 +202,12 @@ export function signup(data) {
         data
       );
       //console.log('juthUP', response.data)
-      if(response.status === 200){
+      if (response.status === 200) {
         return dispatch({
           type: "SIGNUP",
           payload: response.data,
-        }) ((window.location.href = "/login"))
-      }else{
+        })((window.location.href = "/login"));
+      } else {
         return swal({
           title: "¡Credenciales en uso!",
           icon: "error",
@@ -362,4 +364,20 @@ export function checkout(dataCheckout) {
   } catch (error) {
     console.log(error);
   }
+}
+
+export function addReview(id, data) {
+  return async function (dispatch) {
+    let response = await axios.patch(
+      "http://localhost:8800/postreview/" + id,
+      data,
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }
+    );
+    return dispatch({
+      type: "ADD_REVIEW",
+      payload: response.data,
+    })((window.location.href = "/destination/" + id));
+  };
 }
