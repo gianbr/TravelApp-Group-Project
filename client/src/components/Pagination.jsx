@@ -17,10 +17,8 @@ const Pagination = ({ page, setPage, plainsPerPage, plains, pagination }) => {
   }
 
   useEffect(() => {
-      window.scrollTo(0, 0)
-    } ,[page]);
-
-
+    window.scrollTo(0, 0);
+  }, [page]);
 
   return (
     <div className="flex bg-white rounded-lg font-[Poppins]">
