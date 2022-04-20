@@ -28,7 +28,7 @@ export default function UserReviews() {
     e.preventDefault(e);
     setInput({
       ...input,
-      score: Number(input.score),
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -50,9 +50,9 @@ export default function UserReviews() {
       });
     } else {
       e.preventDefault();
-      // const toni = { ...input, score: Number(input.score) };
+      const toni = { ...input, score: Number(input.score) };
       console.log(input);
-      dispatch(addReview(id, input));
+      dispatch(addReview(id, toni));
       swal({ title: "¡Servicio creado exitosamente!", icon: "success" });
       setShowModal(false);
     }
