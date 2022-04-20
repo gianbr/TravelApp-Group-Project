@@ -298,7 +298,7 @@ function Details() {
           {user ? ( 
             <div className="">
               <button
-            className="bg-teal-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-5"
+            className="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-5"
             onClick={handleAddWish}
             disabled={disabled}
           >

@@ -4,6 +4,8 @@ import Navbar from "./Navbar";
 import Destacados from "./Destacados";
 import Footer from "./Footer";
 import { useSelector } from "react-redux";
+import Ofertas from "./Ofertas";
+import InfoWish from "./InfoWish"
 
 function Home() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("test")));
@@ -34,6 +36,8 @@ function Home() {
       </div>
 
       <Destacados />
+      <Ofertas/>
+      <InfoWish/>
       <Footer />
     </div>
   );

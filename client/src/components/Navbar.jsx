@@ -56,7 +56,7 @@ function Navbar() {
       {/* ICONOS */}
       <div className="hidden md:flex">
         <Link to="/wishlist">
-        <FaHeart className="mr-2" size={20} />{" "}
+        <FaHeart className="mr-7" size={20} />{" "}
         </Link>
         <Link to="/shopping">
           {" "}

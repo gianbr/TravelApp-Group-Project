@@ -4,6 +4,7 @@ import Footer from './Footer'
 import { Link } from 'react-router-dom'
 import { FaTrash } from 'react-icons/fa'
 import { removeAllItemsFromWish } from '../actions/index'
+import imagen from "../assets/sin autorizacion.png"
 
 
 
@@ -86,7 +87,7 @@ function WishList() {
         </div>
         ):
         (
-            <h1>a mimir la siesta</h1>
+           <img src={imagen} alt="no autorizado"/>
         )
     }
         </>
