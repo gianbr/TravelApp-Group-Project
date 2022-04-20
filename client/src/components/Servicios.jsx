@@ -114,21 +114,27 @@ export default function CreateForm() {
   }, [dispatch]);
 
   const uploadImage = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    setPlain({
-      ...plain,
-      images: [...plain.images, base64],
-    });
-  };
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-    });
+    const fileSize = e.target.files[0].size / 1024 / 1024;
+    if (fileSize > 2) {
+      alert("File size exceeds 2 MiB");
+      e.target.value = "";
+    } else {
+      const file = e.target.files[0];
+      const base64 = await convertBase64(file);
+      setPlain({
+        ...plain,
+        images: [...plain.images, base64],
+      });
+    }
+    const convertBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          resolve(reader.result);
+        };
+      });
+    };
   };
 
   // const onsubmit = (event) => {
