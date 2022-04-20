@@ -202,22 +202,6 @@ function rootReducer(state = initialState, action) {
         plains: action.payload,
       };
 
-      case "ADD_ITEM_TO_WISH":
-        return {
-          ...state,
-          wishList: addItemToWish(state.wishList, action.payload),
-        };
-      case "REMOVE_ALL_ITEMS_IN_WISH":
-          return {
-            ...state,
-            wishList: removeAllItemsFromWish(state.wishList, action.payload),
-          };
-      case "CHECKOUT": 
-        console.log("checkout", action.payload);
-        return {
-          ...state,
-          checkout: action.payload,
-        }
     default:
       return state;
   }

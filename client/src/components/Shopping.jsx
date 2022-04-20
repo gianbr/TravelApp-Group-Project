@@ -11,17 +11,17 @@ const KEY = process.env.REACT_APP_STRIPE;
 function Shopping() {
     const dispatch = useDispatch()
     const cart = useSelector((state) => state.cartPlains);
-
+    console.log(cart)
     const onToken = (token) => {
-     const totalAmount = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
-
+      const totalAmount = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
       const data = {
         plains: cart,
         email: token.email,
         amount: totalAmount,
         token: token.id
       };
-      handleCheckout(data);
+     // console.log(data);
+     handleCheckout(data);
     };
 
     const pricePack = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);

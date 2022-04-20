@@ -361,6 +361,7 @@ export const removeAllItemsFromWish = (item) => ({
   type: "REMOVE_ALL_ITEMS_IN_WISH",
   payload: item,
 });
+
 export function checkout(dataCheckout) {
   try {
     return async function (dispatch) { 
