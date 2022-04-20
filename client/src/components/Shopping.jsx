@@ -14,8 +14,16 @@ function Shopping() {
     console.log(cart)
     const onToken = (token) => {
       const totalAmount = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
+      let plains = cart.map(c => {
+          return{
+              plainId: c.id,
+              quantity: c.quantity,
+              price: c.price,
+              date: c.date
+          }
+      })
       const data = {
-        plains: cart,
+        plains,
         email: token.email,
         amount: totalAmount,
         token: token.id
