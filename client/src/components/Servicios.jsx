@@ -10,22 +10,22 @@ import { useSelector } from "react-redux";
 
 const selectLugares = [
   {
-    "provincia": "Buenos Aires",
-    "ciudades": ["Tandíl", "Mar del Plata", "Tigre", "Nuñez", "CABA"]
+    provincia: "Buenos Aires",
+    ciudades: ["Tandíl", "Mar del Plata", "Tigre", "Nuñez", "CABA"],
   },
   {
-    "provincia": "Río Negro",
-    "ciudades": ["San Carlos de Bariloche", "Viedma", "Cipolletti", "El Bolsón"]
+    provincia: "Río Negro",
+    ciudades: ["San Carlos de Bariloche", "Viedma", "Cipolletti", "El Bolsón"],
   },
   {
-    "provincia": "Misiones",
-    "ciudades": ["Puerto Iguazú", "San Ignacio", "Posadas", "Oberá"]
+    provincia: "Misiones",
+    ciudades: ["Puerto Iguazú", "San Ignacio", "Posadas", "Oberá"],
   },
   {
-    "provincia": "Mendoza",
-    "ciudades": ["Mendoza", "Rivadavia", "Las Heras", "Godoy Cruz"]
+    provincia: "Mendoza",
+    ciudades: ["Mendoza", "Rivadavia", "Las Heras", "Godoy Cruz"],
   },
-]
+];
 
 export default function CreateForm() {
   const dispatch = useDispatch();
@@ -35,31 +35,39 @@ export default function CreateForm() {
   const [provincia, setProvincia] = useState(-1);
 
   const handleProvincia = (e) => {
-    const opcion = e.target.value
-    setProvincia(opcion)
-    if(parseInt(opcion) === -1) {
+    const opcion = e.target.value;
+    setProvincia(opcion);
+    if (parseInt(opcion) === -1) {
       setPlain({
         ...plain,
-        location: '',
-        city: ''
-      })
-    }else{
+        location: "",
+        city: "",
+      });
+    } else {
       setPlain({
         ...plain,
-        location: selectLugares[opcion].provincia
-      })
+        location: selectLugares[opcion].provincia,
+      });
     }
-  }
+  };
 
   const handleCiudad = (e) => {
     setPlain({
       ...plain,
-      city: parseInt(e) === -1 ? '' : e
-    })
-  }
-  
-  const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
-  
+      city: parseInt(e) === -1 ? "" : e,
+    });
+  };
+
+  const days = [
+    "Lunes",
+    "Martes",
+    "Miercoles",
+    "Jueves",
+    "Viernes",
+    "Sabado",
+    "Domingo",
+  ];
+
   const daysCheckboxes = days.map((day) => {
     return (
       <div className="text-center px-2" key={day}>
@@ -70,16 +78,16 @@ export default function CreateForm() {
           id={day}
           name={day}
           onChange={(e) => {
-            if(e.target.checked){
+            if (e.target.checked) {
               setPlain({
                 ...plain,
-                date: [...plain.date, e.target.value]
-              })
-            }else if(!e.target.checked){
+                date: [...plain.date, e.target.value],
+              });
+            } else if (!e.target.checked) {
               setPlain({
                 ...plain,
-                date: plain.date.filter(d => d !== e.target.value)
-              })
+                date: plain.date.filter((d) => d !== e.target.value),
+              });
             }
           }}
         />
@@ -88,7 +96,7 @@ export default function CreateForm() {
         </label>
       </div>
     );
-  })
+  });
 
   const [plain, setPlain] = useState({
     title: "",
@@ -100,7 +108,7 @@ export default function CreateForm() {
     included: "",
     description: "",
     date: [],
-    score: 0
+    score: 0,
   });
 
   useEffect(() => {
@@ -251,23 +259,38 @@ export default function CreateForm() {
               </div>
 
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Provincia
+                Provincia
               </label>
-              <select onChange={handleProvincia} name="provincia" id="provinciaId" className="appearance-none block w-full bg-gray-200 text-gray-700 border border-indigo-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
+              <select
+                onChange={handleProvincia}
+                name="provincia"
+                id="provinciaId"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-indigo-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              >
                 <option value={-1}>Seleccione una provincia</option>
-                {selectLugares.map((lugar, index) =>
-                    <option key={index} value={index}>
-                      {lugar.provincia}
-                    </option>)}
+                {selectLugares.map((lugar, index) => (
+                  <option key={index} value={index}>
+                    {lugar.provincia}
+                  </option>
+                ))}
               </select>
 
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Ciudad
+                Ciudad
               </label>
-              <select onChange={(e) => handleCiudad(e.target.value)} name="ciudad" id="ciudadId" className="appearance-none block w-full bg-gray-200 text-gray-700 border border-indigo-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white">
+              <select
+                onChange={(e) => handleCiudad(e.target.value)}
+                name="ciudad"
+                id="ciudadId"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-indigo-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+              >
                 <option value={-1}>Seleccione una ciudad</option>
-                {provincia > -1 && selectLugares[provincia].ciudades.map((ciudad, index) => 
-                    <option key={index} value={ciudad}>{ciudad}</option>)}
+                {provincia > -1 &&
+                  selectLugares[provincia].ciudades.map((ciudad, index) => (
+                    <option key={index} value={ciudad}>
+                      {ciudad}
+                    </option>
+                  ))}
               </select>
 
               <div>
@@ -326,9 +349,7 @@ export default function CreateForm() {
                 >
                   Fechas
                 </label>
-                <div className="flex mb-3">
-                  {daysCheckboxes}
-                </div>
+                <div className="flex mb-3">{daysCheckboxes}</div>
                 {errors.date && <p>{errors.date}</p>}
               </div>
 
