@@ -196,7 +196,6 @@ function rootReducer(state = initialState, action) {
         isAdmin: action.payload,
       };
       case "CHECKOUT": 
-        console.log("checkout", action.payload);
         return {
           ...state,
           checkout: action.payload,

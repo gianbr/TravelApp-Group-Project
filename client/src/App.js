@@ -10,11 +10,8 @@ import Shopping from "./components/Shopping";
 import Register from "./components/Register";
 import ResetPassword from "./components/ResetPassword";
 import EditarServicios from "./components/EditarServicios";
-<<<<<<< HEAD
 
-=======
 import UserReviews from "./components/UserReviews";
->>>>>>> 3272cbf23f91effc134857882625e6a754adbac7
 function App() {
   return (
     <div>
