@@ -18,6 +18,7 @@ postPlains.post(
       included,
       description,
       date,
+      score
     } = req.body;
 
     const plainCreated = await Plain.insertMany({
@@ -30,6 +31,7 @@ postPlains.post(
       included,
       description,
       date,
+      score
     });
     res.json(plainCreated);
   }
