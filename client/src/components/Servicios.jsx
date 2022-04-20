@@ -99,7 +99,8 @@ export default function CreateForm() {
     stock: "",
     included: "",
     description: "",
-    date: []
+    date: [],
+    score: 0
   });
 
   useEffect(() => {

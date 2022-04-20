@@ -28,7 +28,7 @@ export default function UserReviews() {
     e.preventDefault(e);
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [e.target.name]: parseInt(e.target.value),
     });
   }
 
