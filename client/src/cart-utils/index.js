@@ -67,3 +67,36 @@ export const removeAllItemsFromCart = (cartItems, cartItemToRemove) => {
         return cartItems.filter((cartItem) => cartItem.cartId !== cartItemToRemove.cartId);
     }
 }
+
+export const addItemToWish = (wishItems, wishItemToAdd) => {
+    
+	const existingWishItem = wishItems.find(
+		(wishItem) => wishItem.id === wishItemToAdd.id
+	);
+    
+    if (existingWishItem) {
+        const existingDate = wishItems.find((wishItem) => wishItem.id === wishItemToAdd.id)
+        if(existingDate){
+            return wishItems.map((wishItem) => {
+                return  wishItem.id === wishItemToAdd.id
+                    ? {
+                            ...wishItem,
+                            quantity: wishItem.quantity + wishItemToAdd.quantity,
+                    }
+                    : wishItem;
+            });
+        }
+	}
+
+	return [...wishItems, { ...wishItemToAdd, quantity: wishItemToAdd.quantity }];
+};
+
+export const removeAllItemsFromWish = (wishItems, wishItemToRemove) => {
+    const existingWishItem = wishItems.find(
+        (wishItem) => wishItem.wishId === wishItemToRemove.wishId
+    );
+    
+    if (existingWishItem) {
+        return wishItems.filter((wishItem) => wishItem.wishId !== wishItemToRemove.wishId);
+    }
+}

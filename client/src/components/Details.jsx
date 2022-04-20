@@ -5,6 +5,7 @@ import {
   clearState,
   addItem,
   deletePlain,
+  addItemToWish
 } from "../actions/index";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -15,6 +16,7 @@ import { v4 as uuid } from "uuid";
 import swal from "sweetalert";
 import __ from "lodash";
 import UserReviews from "./UserReviews";
+
 
 function Details() {
   const { id } = useParams();
@@ -69,6 +71,23 @@ function Details() {
       );
       history.push("/destination");
     }
+  };
+
+  const handleAddWish = () => {
+    dispatch(
+      addItemToWish({
+        ...item,
+        name: detail.title,
+        price: detail.price,
+        image: detail.images,
+        city: detail.city,
+        location: detail.location,
+        cartId: cartId,
+        stock: detail.stock,
+        id,
+      })
+    );
+    history.push("/destination");
   };
 
   const handleQuantity = (e) => {
@@ -269,21 +288,29 @@ function Details() {
               VOLVER
             </button>
           </Link>
-          {user ? (
-            <button
-              className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={handleAddCart}
-              disabled={disabled}
-            >
+          {user ? ( 
+            <div className="">
+              <button
+            className="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-5"
+            onClick={handleAddWish}
+            disabled={disabled}
+          >
+            Agregar a la wishlist
+          </button>
+          <button
+          className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handleAddCart}
+          disabled={disabled}
+        >
+          Agregar al carrito 
+        </button>
+            </div>
+          ) : 
+          <Link to="/login">
+            <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Agregar al carrito
             </button>
-          ) : (
-            <Link to="/login">
-              <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Agregar al carrito
-              </button>
-            </Link>
-          )}
+          </Link>}
         </div>
       </div>
     </div>

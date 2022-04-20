@@ -11,6 +11,8 @@ import Register from "./components/Register";
 import ResetPassword from "./components/ResetPassword";
 import EditarServicios from "./components/EditarServicios";
 import UserReviews from "./components/UserReviews";
+import WishList from "./components/WishList";
+
 function App() {
   return (
     <div>
@@ -49,6 +51,9 @@ function App() {
           </Route>
           <Route exact path="/reviews/:id">
             <UserReviews />
+          </Route>
+          <Route extact path="/wishlist">
+            <WishList/>
           </Route>
         </Switch>
       </Router>
