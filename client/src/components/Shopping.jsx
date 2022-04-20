@@ -34,6 +34,24 @@ function Shopping() {
 
     const pricePack = cart.map((e) => e.price * e.quantity).reduce((partialSum, a) => partialSum + a, 0);
 
+    const discount = () => {
+        if(pricePack > 199999){
+            return pricePack - ((pricePack/100) * 25)
+        } else if (pricePack > 999999) {
+            return pricePack - ((pricePack/100) * 20)
+        } else if (pricePack > 49999) {
+            return pricePack - ((pricePack/100) * 15)            
+        } else if (pricePack > 39999) {
+            return pricePack - ((pricePack/100) * 15)
+        } else if (pricePack > 29999) {
+            return pricePack - ((pricePack/100) * 10)
+        } else if (pricePack > 19999) {
+            return pricePack - ((pricePack/100) * 5)
+        } else {
+            return pricePack} 
+        }
+
+       
     const handleAdd = (e, producto) => {
         if(producto.quantity + 1 > producto.stock){
             alert('No hay stock suficiente')
@@ -54,6 +72,7 @@ function Shopping() {
     const handleRemoveAllCart = (product) => {
         dispatch(removeAllItemsFromCart(product))
     }
+
 
     return (
         <div> {/* RENDERIZADO */}   
@@ -99,7 +118,10 @@ function Shopping() {
                                                 <FaPlus className="text-green-500 text-2xl cursor-pointer" onClick={(e) => handleAdd(e, item)} />
                                             </div>
                                             <span class="text-center w-1/5 font-semibold text-sm">{item.date}</span>
-                                            <span class="text-center w-1/5 font-semibold text-sm">${item.price * item.quantity}</span> {/* PRECIO MULTIPLICADO */}
+                                    
+                                             
+                                             <span class="text-center w-1/5 font-semibold text-sm">${item.price * item.quantity}</span> 
+                                            
                                         </div>
                                     </>
                                 )
@@ -116,9 +138,20 @@ function Shopping() {
                     <div id="summary" class="w-1/4 px-8 py-10"> {/* TOTAL CARRITO + ITEMS */}
                         <h1 class="font-semibold text-2xl border-b pb-8">Resumen</h1> {/* TITULO */}
                         <div class="border-t"> {/* TOTAL */}
+                            <div className="flex justify-between py-6 text-sm uppercase">
+                                <span>Precio total</span>
+                                <span>$ {pricePack}</span>
+                            </div>
+                            <div className="flex justify-between py-6 text-sm uppercase ">
+                            <span>Descuento</span>
+                            <span>$ {(pricePack - discount())}</span>
+                            </div>
+                            <hr/>
                             <div class="flex font-semibold justify-between py-6 text-sm uppercase">
                                 <span>Total</span>
-                                <span>${pricePack}</span>
+                              
+                                <span>$ {discount()}</span>                                                            
+                                
                             </div>
                              <StripeCheckout
                             name="Travel App"

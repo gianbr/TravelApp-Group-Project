@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsPerson } from "react-icons/bs";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 //import { useUser } from '../hooks/useUser';
@@ -55,6 +55,9 @@ function Navbar() {
       </ul>
       {/* ICONOS */}
       <div className="hidden md:flex">
+        <Link to="/wishlist">
+        <FaHeart className="mr-7" size={20} />{" "}
+        </Link>
         <Link to="/shopping">
           {" "}
           <FaShoppingCart className="mr-2" size={20} />{" "}
