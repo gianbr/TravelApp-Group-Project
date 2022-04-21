@@ -3,6 +3,8 @@ import './Orders.css';
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../actions";
 import NoAcceso from "../NoAcceso";
+import { Link } from "react-router-dom";
+
 
 
 function Orders () {
@@ -18,6 +20,11 @@ function Orders () {
    
   return (
     <div classname="w-full h-screen relative" style={{ backgroundColor: "#cecece" }}>
+      <Link to='/admin/profile'>
+            <button className="bg-transparent text-white font-semibold hover:text-black py-2 px-4 ">
+            Regresar al panel
+          </button>
+          </Link>
     <Fragment>
       {admin ? (
         <div className="content">
