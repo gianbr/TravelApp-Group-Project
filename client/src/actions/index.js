@@ -2,7 +2,6 @@ import swal from "sweetalert";
 const axios = require("axios");
 //const userSet = require("../auth/utils/userSet");
 
-
 export function searchDestination(name) {
   return async function (dispatch) {
     let response = await axios.get(
@@ -129,7 +128,7 @@ export function googleLogIn(payload) {
       const role = res.data.role;
       const id = res.data.id;
       const username = res.data.username;
-      window.localStorage.setItem("jwtToken", token);
+      window.localStorage.setItem("token", token);
       window.localStorage.setItem("user", username);
       window.localStorage.setItem("id", id);
       window.localStorage.setItem("test", JSON.stringify(res.data));
@@ -349,27 +348,28 @@ export const removeAllItemsFromWish = (item) => ({
 
 export function checkout(dataCheckout) {
   try {
-    return async function (dispatch) { 
+    return async function (dispatch) {
       const data = {
-        userId: localStorage.getItem('id'),
+        userId: localStorage.getItem("id"),
         plains: dataCheckout.plains,
         email: dataCheckout.email,
         amount: dataCheckout.amount,
-        token: dataCheckout.token
-      }
-      let response = await axios.post("http://localhost:8800/checkout", 
-      data, // todo: implementar mapeo de servicios
-      {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-      }
+        token: dataCheckout.token,
+      };
+      let response = await axios.post(
+        "http://localhost:8800/checkout",
+        data, // todo: implementar mapeo de servicios
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       if (response) {
         return dispatch({
           type: "CHECKOUT",
           payload: response.data,
-        })((window.location.href = "/"))
+        })((window.location.href = "/"));
       } else {
-        console.log("Cosas")
+        console.log("Cosas");
       }
     };
   } catch (error) {
@@ -392,3 +392,92 @@ export function addReview(id, data) {
     })((window.location.href = "/destination/" + id));
   };
 }
+
+export function getUsers() {
+	return async function (dispach) {
+		try {
+			const res = await axios.get('http://localhost:8800/getusers');
+		//	console.log(res);
+			return dispach({
+				type: 'GET_ALL_USERS',
+				payload: res.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function getOrders() {
+	return async dispatch => {
+		try {
+			const res = await axios.get('http://localhost:8800/orders/allorders');
+			return dispatch({
+         type: 'GET_ALL_ORDERS', 
+         payload: res.data });
+		} catch (err) {
+			console.log(err);
+		}
+	};
+}
+
+export function rolAdmin(id, email) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.put("http://localhost:8800/updateuser/addadmin/" + id, email,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      console.log("El usuario ahora es admin", data);
+      return dispatch({
+        type: "UPDATE_USER",
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function bloquearUser(id, email) {
+  return async function (dispatch) {
+    let response = await axios.put("http://localhost:8800/updateuser/addban/" + id, email,
+    {
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    });
+    return dispatch({
+      type: "ADD_BAN",
+      payload: response.data,
+    })
+  }
+}
+
+export function desbloquearUser(id, email) {
+  return async function (dispatch) {
+    let response = await axios.put("http://localhost:8800/updateuser/removeban/" + id, email,
+    {
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    });
+    return dispatch({
+      type: "REMOVE_BAN",
+      payload: response.data,
+    })
+  }
+}
+export function deleteUser(id) {
+  return async function (dispatch) {
+    try {
+      await axios.delete("http://localhost:8800/updateuser/delete/" + id, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      console.log("Usuario eliminado", id);
+      return dispatch({
+        type: "DELETE_USER",
+        payload: id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

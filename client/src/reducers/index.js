@@ -10,6 +10,8 @@ const initialState = {
   detail: [],
   plainsDestacados: [],
   users: {},
+  allUsers: [],
+  orders: [],
   cartPlains: [],
   userLogout: {},
   lugares: [],
@@ -141,6 +143,43 @@ function rootReducer(state = initialState, action) {
         ...state,
         users: action.payload,
       };
+      case 'GET_ALL_USERS':
+        return {
+          ...state,
+          users: action.payload,
+          allUsers: action.payload,
+        };
+        case "UPDATE_USER":
+          return {
+            ...state,
+            update: state.allUsers.filter((user) =>
+            user._id === action.payload._id ? action.payload : user
+            ),
+          };
+      case 'DELETE_USER':
+          return {
+            ...state,
+            allUsers: state.allUsers.filter((userd) => userd._id !== userd.payload),
+          };
+      case 'GET_ALL_ORDERS':
+            return {
+              ...state,
+              orders: action.payload,
+            };
+      case "ADD_BAN":
+              return {
+                ...state,
+                allUsers: state.allUsers.filter((user) =>
+                  user._id === action.payload._id ? action.payload : user
+                ),
+              };
+              case "REMOVE_BAN":
+                return {
+                  ...state,
+                  allUsers: state.allUsers.filter((user) =>
+                    user._id === action.payload._id ? action.payload : user
+                  ),
+                };
 
     case "ADD_ITEM":
       return {

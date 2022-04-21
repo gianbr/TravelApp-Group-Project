@@ -78,4 +78,16 @@ wishList.get("/userwl", [authJwt.verifyToken], async (req, res) => {
   }
 });
 
+wishList.delete("/deletewl", [authJwt.verifyToken], async (req, res) => {
+  try {
+    const { userId, plainId } = req.body;
+    const user = await WishList.findOne({ userId: userId });
+    user.plains = user.plains.filter((p) => p.plainId === plainId);
+    await user.save();
+    res.status(200).json({ message: "WishList deleted successfully" });
+  } catch (error) {
+    res.status(270).json({ message: "No se pudo eliminar" });
+  }
+});
+
 module.exports = wishList;
