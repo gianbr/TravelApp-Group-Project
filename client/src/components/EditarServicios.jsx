@@ -404,12 +404,12 @@ export default function EditarServicios() {
                 </button>
               </div>
               <div className="pt-4">
-                <Link to="/">
+                <Link to="/admin/profile">
                   <button
                     className="w-full max-w-[700px] mx-auto rounded-2xl py-2 pt-4 p-3 focus:outline-none focus:ring focus:ring-indigo-500 bg-indigo-400 hover:bg-indigo-300 relative text-white font-semibold"
                     type="submit"
                   >
-                    Pagina Principal
+                    Regresar al panel
                   </button>
                 </Link>
               </div>

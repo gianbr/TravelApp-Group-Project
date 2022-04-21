@@ -1,5 +1,5 @@
   .content {
-    background-color: #cecece;
+    background-color: #c5cae9;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -7,12 +7,6 @@
     width: 100%;
     margin: auto;
     overflow-x: auto;
-  }
-  .content h3 {
-    color: black;
-    text-align: center;
-    font-size: 1.5em;
-    text-transform: uppercase;
   }
   
   .selectState {
@@ -26,7 +20,7 @@
     border-collapse: collapse;  
   }
   .table thead {
-    background-color: #cecece;
+    background-color: #c5cae9;
   }
   .table thead th {
     text-align: center;
@@ -47,13 +41,13 @@
   }
   
   tbody > tr:nth-child(even) {
-    background-color: #cecece;
+    background-color: #c5cae9;
     color: black;
   }
   
   tbody > tr:nth-child(odd) .buttonDelete {
     color: black;
-    background-color: #cecece;
+    background-color: #c5cae9;
   }
   
   tbody > tr:nth-child(even) .buttonDelete {
