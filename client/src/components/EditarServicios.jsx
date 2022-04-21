@@ -79,6 +79,17 @@ export default function EditarServicios() {
 
   const uploadImage = async (e) => {
     const fileSize = e.target.files[0].size / 1024 / 1024;
+
+    const convertBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          resolve(reader.result);
+        };
+      });
+    };
+
     if (fileSize > 2) {
       alert("File size exceeds 2 MiB");
       e.target.value = "";
@@ -90,15 +101,6 @@ export default function EditarServicios() {
         images: [...plain.images, base64],
       });
     }
-    const convertBase64 = (file) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          resolve(reader.result);
-        };
-      });
-    };
   };
 
   console.log(plain.images);
