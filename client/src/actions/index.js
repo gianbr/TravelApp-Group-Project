@@ -175,6 +175,11 @@ export function signin(data) {
         window.localStorage.setItem("token", response.data.token);
         window.localStorage.setItem("user", response.data.username);
         window.localStorage.setItem("id", response.data.id);
+        const { data } = await axios.post(
+          "http://localhost:8800/wishlist/create", {userId: response.data.id}, {
+            headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+          }
+        );
         return dispatch(
           {
             type: "SIGNIN",
@@ -481,3 +486,24 @@ export function deleteUser(id) {
     }
   };
 };
+
+export function createWishlist(userId) {
+  try {
+    return async function (dispatch) {
+      // const userId = localStorage.getItem("id");
+      const { data } = await axios.post(
+        "http://localhost:8800/wishlist/create", userId, {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      console.log("Wishlist creada", data);
+      return dispatch({
+        type: "CREATE_WISHLIST",
+        payload: data,
+      });
+    };
+  } catch (error) {
+      console.log(error);
+  }
+}
+

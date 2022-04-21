@@ -82,7 +82,7 @@ wishList.delete("/deletewl", [authJwt.verifyToken], async (req, res) => {
   try {
     const { userId, plainId } = req.body;
     const user = await WishList.findOne({ userId: userId });
-    user.plains = user.plains.filter((p) => p.plainId === plainId);
+    user.plains = user.plains.filter((p) => p.plainId !== plainId);
     await user.save();
     res.status(200).json({ message: "WishList deleted successfully" });
   } catch (error) {
