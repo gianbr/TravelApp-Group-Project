@@ -51,17 +51,11 @@ function Navbar() {
           {" "}
           <Link to="/about">ACERCA DE </Link>{" "}
         </li>
-        <li> {admin ? <Link to="/servicios">SERVICIOS</Link> : null} </li>
+        <li> {admin ? <Link to="/admin/profile">PANEL ADMIN</Link> : null} </li>
       </ul>
       {/* ICONOS */}
       <div className="hidden md:flex">
-        <Link to="/wishlist">
-        <FaHeart className="mr-7" size={20} />{" "}
-        </Link>
-        <Link to="/shopping">
-          {" "}
-          <FaShoppingCart className="mr-2" size={20} />{" "}
-        </Link>
+        
         {!user ? (
           <Link to="/login">
             {" "}
@@ -69,6 +63,13 @@ function Navbar() {
           </Link>
         ) : (
           <>
+            <Link to="/wishlist">
+              <FaHeart className="mr-7" size={20} />{" "}
+            </Link>
+            <Link to="/shopping">
+              {" "}
+            <FaShoppingCart className="mr-2" size={20} />{" "}
+            </Link>
             <span className="mx-5 fw-500">Hola, {user.toUpperCase()} ♥</span>
 
             <Link onClick={logout} to="/">
@@ -100,7 +101,7 @@ function Navbar() {
             {" "}
             <Link to="/destination">DESTINOS</Link>{" "}
           </li>
-          <li> {admin ? <Link to="/servicios">SERVICIOS</Link> : null} </li>
+          <li> {admin ? <Link to="/admin/profile">PANEL ADMIN</Link> : null} </li>
           <li>
             {" "}
             <Link to="/about">ACERCA DE</Link>{" "}

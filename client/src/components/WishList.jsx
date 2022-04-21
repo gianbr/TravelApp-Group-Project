@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { FaTrash } from 'react-icons/fa'
 import { removeAllItemsFromWish } from '../actions/index'
 import imagen from "../assets/sin autorizacion.png"
-
+import NoAcceso from './NoAcceso'
 
 
 
@@ -87,7 +87,7 @@ function WishList() {
         </div>
         ):
         (
-           <img src={imagen} alt="no autorizado"/>
+            <NoAcceso />
         )
     }
         </>
