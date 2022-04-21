@@ -3,18 +3,7 @@ import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import __ from 'lodash'
 const Footer = ({ user }) => {
-  const showServices = () => {
-    if (!__.isEmpty(user)) {
-      let roles = user.roles.map(role => role.name);
-      if (roles.includes('admin')) {
-        return (
-          <>
-            <li> <Link to='/servicios'>SERVICIOS</Link> </li>
-          </>
-        )
-      }
-    }
-  }
+  
   return (
     <div className='w-full bg-indigo-300/90 text-gray-600 font-semibold py-y px-2'>
         <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-2 border-b-2 border-gray-600 py-8'>
@@ -24,12 +13,8 @@ const Footer = ({ user }) => {
                   <li className='py-1'>
                   <Link to='/destination'>Destinos</Link>
                   </li>
-                   {showServices()}
                   <li className='py-1'>
                   <Link to='/about'>Acerca de nosotros</Link>
-                  </li>
-                  <li className='py-1'>
-                    <Link to='/login'>Login</Link>
                   </li>
                 </ul>
             </div>

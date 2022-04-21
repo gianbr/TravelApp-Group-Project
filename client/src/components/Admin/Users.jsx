@@ -13,6 +13,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import './Users.css';
 import { bloquearUser, deleteUser, desbloquearUser, getUsers, rolAdmin } from "../../actions";
+import NoAcceso from "../NoAcceso";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -23,6 +24,8 @@ function User () {
     const user = useSelector(state => state.allUsers);
     const [idUser, setUser] = useState(undefined);
     const [tooltip, setTooltip] = useState('');
+
+    const admin = useSelector((state) => state.isAdmin);
     
 
 //Estados para control de alertas Borrar
@@ -156,248 +159,244 @@ const handleDes = id => {
 };
 
   return (
-    <div classname="w-full h-screen relative" style={{ backgroundColor: "#cecece" }}>
-      <Link to="/admin/profile">
-      <button className="bg-transparent text-white font-semibold hover:text-black py-2 px-4">
-       Regresa al panel
-      </button>
-      </Link>
-    <Fragment>
-      <div className="content">
-        <div>
-          <h3  style={{ color: "black" }}>Listado de Usuarios</h3>
-        </div>
-        <div>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>USUARIO</th>
-                <th>EMAIL</th>
-                <th>ROL</th>
-                <th style={{ textAlign: "center" }}>CONTROL</th>
-              </tr>
-            </thead>
-            <tbody>
-              {user && user.map(user => (
-                <tr key={user.id}>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>{user.roles}</td>
-                  <td style={{ textAlign: "center" , display: "flex" , justifyContent: "space-around"}}>
-                              {/* Borrar - Promover */}
-                      <Button
-                      style={{ backgroundColor: "#aed581", color: "white" }}
-                      variant="contained"
-                      className="buttonDelete"
-                      onClick={() => handleClickOpenPromote(user.id)}
-                    >
-                      Promover
-                    </Button>
-                    <Button
-                      style={{ backgroundColor: "#ff8a65", color: "white" }}
-                      variant="contained"
-                      className="buttonDelete"
-                      onClick={() => handleClickOpenBloq(user.id)}
-                    >
-                      <FaUserSlash />
-                    </Button>
-                    <Button
-                      style={{ backgroundColor: "#aed581", color: "white" }}
-                      variant="contained"
-                      className="buttonDelete"
-                      onClick={() => handleClickOpenDes(user.id)}
-                    >
-                      <FaUserCheck />
-                    </Button>
-
-                    <Button
-                      style={{ backgroundColor: "#ff8a65", color: "white" }}
-                      variant="contained"
-                      className="buttonDelete"
-                      onClick={() => handleClickOpenDelete(user.id)}
-                    >
-                      <AiFillDelete />
-                    </Button>
-
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Promover el usuario a admin */}
-      <Dialog
-        open={openPromote}
-        onClose={handleClosePromote}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"¿Estás seguro que quieres promover el usuario?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText
-            id="alert-dialog-description"
-            style={{ textAlign: "center", paddingBottom: "5px" }}
+    <>
+      {admin ? (
+        <div classname="w-full h-screen relative" style={{ backgroundColor: "#cecece" }}>
+        <Fragment>
+          <div className="content">
+            <div>
+              <h3  style={{ color: "black" }}>Listado de Usuarios</h3>
+            </div>
+            <div>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>USUARIO</th>
+                    <th>EMAIL</th>
+                    <th>ROL</th>
+                    <th style={{ textAlign: "center" }}>CONTROL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {user && user.map(user => (
+                    <tr key={user.id}>
+                      <td>{user.username}</td>
+                      <td>{user.email}</td>
+                      <td>{user.roles}</td>
+                      <td style={{ textAlign: "center" , display: "flex" , justifyContent: "space-around"}}>
+                                  {/* Borrar - Promover */}
+                          <Button
+                          style={{ backgroundColor: "#aed581", color: "white" }}
+                          variant="contained"
+                          className="buttonDelete"
+                          onClick={() => handleClickOpenPromote(user.id)}
+                        >
+                          Promover
+                        </Button>
+                        <Button
+                          style={{ backgroundColor: "#ff8a65", color: "white" }}
+                          variant="contained"
+                          className="buttonDelete"
+                          onClick={() => handleClickOpenBloq(user.id)}
+                        >
+                          <FaUserSlash />
+                        </Button>
+                        <Button
+                          style={{ backgroundColor: "#aed581", color: "white" }}
+                          variant="contained"
+                          className="buttonDelete"
+                          onClick={() => handleClickOpenDes(user.id)}
+                        >
+                          <FaUserCheck />
+                        </Button>
+    
+                        <Button
+                          style={{ backgroundColor: "#ff8a65", color: "white" }}
+                          variant="contained"
+                          className="buttonDelete"
+                          onClick={() => handleClickOpenDelete(user.id)}
+                        >
+                          <AiFillDelete />
+                        </Button>
+    
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+                        {/* Borrar al usuario */}
+          <Dialog 
+          open={openDelete} 
+          onClose={handleCloseDelete} 
+          aria-labelledby="alert-dialog-title" 
+          aria-describedby="alert-dialog-description">
+            <DialogTitle id="alert-dialog-title">
+              {"¿Estás seguro que quieres borrar el usuario?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{ textAlign: "center", paddingBottom: "5px" }}
+              >
+                Esta acción es irreversible.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={handleCloseDelete}
+                color="primary"
+                style={{ backgroundColor: "#ff8a65", color: "white" }}
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={handleCloseDelete}
+                color="primary"
+                autoFocus
+                style={{ backgroundColor: "#aed581", color: "white" }}
+              >
+                Continuar
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Snackbar open={openSnackDelete} autoHideDuration={6000} onClose={handleSnackDelete}>
+            <Alert onClose={handleSnackDelete} severity="success" style={{backgroundColor: '#ffff5a', color: 'black'}}>
+              El usuario fue borrado con exito
+            </Alert> 
+          </Snackbar>
+                  {/* Promover el usuario a admin */}
+          <Dialog
+            open={openPromote}
+            onClose={handleClosePromote}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
           >
-            Podrá acceder al Admin Panel junto con todas las funciones de un administrador.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleClosePromote}
-            color="primary"
-            style={{ backgroundColor: "#ff8a65", color: "white" }}
+            <DialogTitle id="alert-dialog-title">
+              {"¿Estás seguro que quieres promover el usuario?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{ textAlign: "center", paddingBottom: "5px" }}
+              >
+                Podrá acceder al Admin Panel junto con todas las funciones de un administrador.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={handleClosePromote}
+                color="primary"
+                style={{ backgroundColor: "#ff8a65", color: "white" }}
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={handleClosePromote}
+                color="primary"
+                autoFocus
+                style={{ backgroundColor: "#aed581", color: "white" }}
+              >
+                Continuar
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Snackbar open={openSnackPromote} autoHideDuration={6000} onClose={handleSnackPromote}>
+            <Alert onClose={handleSnackPromote} severity="success" style={{backgroundColor: '#ffff5a', color: 'black'}}>
+              El usuario fue promovido con exito
+            </Alert> 
+          </Snackbar>
+    
+    
+    
+                {/* Bloquer al usuario  */}
+                 <Dialog
+            open={openbloq}
+            onClose={handleCloseBloq}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
           >
-            Cancelar
-          </Button>
-          <Button
-            onClick={handleClosePromote}
-            color="primary"
-            autoFocus
-            style={{ backgroundColor: "#aed581", color: "white" }}
+            <DialogTitle id="alert-dialog-title">
+              {"¿Estás seguro que quieres bloquear el usuario?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{ textAlign: "center", paddingBottom: "5px" }}
+              >
+                El usuario no podra volver a iniciar sesion en la pagina.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={handleCloseBloq}
+                color="primary"
+                style={{ backgroundColor: "#ff8a65", color: "white" }}
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={handleCloseBloq}
+                color="primary"
+                autoFocus
+    
+                style={{ backgroundColor: "#aed581", color: "white" }}
+              >
+                Continuar
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Snackbar open={openSnackbloq} autoHideDuration={6000} onClose={handleSnackBloq}>
+            <Alert onClose={handleSnackBloq} severity="success" style={{backgroundColor: '#ffff5a', color: 'black'}}>
+              El usuario fue bloqueado con exito
+            </Alert> 
+          </Snackbar>
+    
+           {/* Desloquer al usuario  */}
+           <Dialog
+            open={opendes}
+            onClose={handleCloseDes}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
           >
-            Continuar
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Snackbar open={openSnackPromote} autoHideDuration={6000} onClose={handleSnackPromote}>
-        <Alert onClose={handleSnackPromote} severity="success" style={{backgroundColor: '#ffff5a', color: 'black'}}>
-          El usuario fue promovido con exito
-        </Alert> 
-      </Snackbar>
-
-                    {/* Borrar al usuario */}
-      <Dialog 
-      open={openDelete} 
-      onClose={handleCloseDelete} 
-      aria-labelledby="alert-dialog-title" 
-      aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title">
-          {"¿Estás seguro que quieres borrar el usuario?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText
-            id="alert-dialog-description"
-            style={{ textAlign: "center", paddingBottom: "5px" }}
-          >
-            Esta acción es irreversible.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleCloseDelete}
-            color="primary"
-            style={{ maxWidth: "25%",  backgroundColor: "#ff8a65", color: "white" }}
-          >
-            Cancelar
-          </Button>
-          <Button
-            onClick={handleCloseDelete}
-            color="primary"
-            autoFocus
-            style={{ backgroundColor: "#aed581", color: "white" }}
-          >
-            Continuar
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Snackbar open={openSnackDelete} autoHideDuration={6000} onClose={handleSnackDelete}>
-        <Alert onClose={handleSnackDelete} severity="success" style={{backgroundColor: '#ffff5a', color: 'black'}}>
-          El usuario fue borrado con exito
-        </Alert> 
-      </Snackbar>
-              
-
-
-          {/* Bloquer al usuario  */}
-             <Dialog
-        open={openbloq}
-        onClose={handleCloseBloq}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"¿Estás seguro que quieres bloquear el usuario?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText
-            id="alert-dialog-description"
-            style={{ textAlign: "center", paddingBottom: "5px" }}
-          >
-            El usuario no podra volver a iniciar sesion en la pagina.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleCloseBloq}
-            color="primary"
-            style={{ backgroundColor: "#ff8a65", color: "white" }}
-          >
-            Cancelar
-          </Button>
-          <Button
-            onClick={handleCloseBloq}
-            color="primary"
-            autoFocus
-
-            style={{ backgroundColor: "#aed581", color: "white" }}
-          >
-            Continuar
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Snackbar open={openSnackbloq} autoHideDuration={6000} onClose={handleSnackBloq}>
-        <Alert onClose={handleSnackBloq} severity="success" style={{backgroundColor: '#ffff5a', color: 'black'}}>
-          El usuario fue bloqueado con exito
-        </Alert> 
-      </Snackbar> 
-
-       {/* Desloquer al usuario  */}
-      <Dialog
-        open={opendes}
-        onClose={handleCloseDes}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"¿Estás seguro que quieres desbloquear al usuario?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText
-            id="alert-dialog-description"
-            style={{ textAlign: "center", paddingBottom: "5px" }}
-          >
-            El usuario podra acceder nuevamente a la pagina.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleCloseDes}
-            color="primary"
-            style={{ backgroundColor: "#ff8a65", color: "white" }}
-          >
-            Cancelar
-          </Button>
-          <Button
-            onClick={handleCloseDes}
-            color="primary"
-            autoFocus
-            style={{ backgroundColor: "#aed581", color: "white" }}
-          >
-            Continuar
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Snackbar open={openSnackdes} autoHideDuration={6000} onClose={handleSnackDes}>
-        <Alert onClose={handleSnackDes} severity="success" style={{backgroundColor: '#ffff5a', color: 'black'}}>
-          El usuario fue desbloqueado con exito
-        </Alert> 
-      </Snackbar>
-    </Fragment>
-    </div>
+            <DialogTitle id="alert-dialog-title">
+              {"¿Estás seguro que quieres desbloquear al usuario?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{ textAlign: "center", paddingBottom: "5px" }}
+              >
+                El usuario podra acceder nuevamente a la pagina.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={handleCloseDes}
+                color="primary"
+                style={{ backgroundColor: "#ff8a65", color: "white" }}
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={handleCloseDes}
+                color="primary"
+                autoFocus
+                style={{ backgroundColor: "#aed581", color: "white" }}
+              >
+                Continuar
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Snackbar open={openSnackDes} autoHideDuration={6000} onClose={handleSnackDes}>
+            <Alert onClose={handleSnackDes} severity="success" style={{backgroundColor: '#ffff5a', color: 'black'}}>
+              El usuario fue desbloqueado con exito
+            </Alert> 
+          </Snackbar>
+        </Fragment>
+        </div>) : ( <NoAcceso/>)}
+    </>
   );
 };
 export default User;

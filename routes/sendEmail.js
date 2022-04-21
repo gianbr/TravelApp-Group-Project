@@ -4,30 +4,6 @@ const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 const sendEmail = Router();
 
-//VER COMO CONSIGO EL EMAIL DEL USUARIO AL QUE LE QUIERO ENVIAR LLOS MAILS
-// let mailTransporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user: "travelapp10@gmail.com",
-//     pass: "proyectogrupal10",
-//   },
-// });
-
-// let details = {
-//   from: "travelapp10@gmail.com",
-//   to: "agustinapaez96@gmail.com",
-//   subject: "testing our nodemailer",
-//   text: "probando nodemailer para la app",
-// };
-
-// mailTransporter.sendMail(details, (err) => {
-//   if (err) {
-//     console.log("hubo un pinshi error", err);
-//   } else {
-//     console.log("email sent");
-//   }
-// });
-
 sendEmail.post("/", (req, res) => {
   const { username, email } = req.body;
   const contentHtml = `

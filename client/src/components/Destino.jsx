@@ -14,7 +14,7 @@ const Destino = ({image, title, price, location, id }) => {
                 </div>
                 <div className='px-6 py-4'>
                     <div>
-                        <h2 className='text-base font-medium mb-1'>{title} </h2>
+                        <h3 className='text-base font-medium mb-1'>{title} </h3>
                         <p className='leading-relaxed mb-3'> <strong>Ubicación: {location} </strong> </p>
                     </div>
                     <div className='flex justify-between items-center'>

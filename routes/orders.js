@@ -32,7 +32,7 @@ order.get("/allorders", async (req, res) => {
       );
       // console.log(plains);
       return {
-        user: user.username,
+        user: user?.username,
         plains,
         amount: order.amount,
         status: order.status,

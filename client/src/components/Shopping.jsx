@@ -139,7 +139,7 @@ function Shopping() {
                         <h1 class="font-semibold text-2xl border-b pb-8">Resumen</h1> {/* TITULO */}
                         <div class="border-t"> {/* TOTAL */}
                             <div className="flex justify-between py-6 text-sm uppercase">
-                                <span>Precio total</span>
+                                <span>Subtotal</span>
                                 <span>$ {pricePack}</span>
                             </div>
                             <div className="flex justify-between py-6 text-sm uppercase ">
@@ -158,13 +158,14 @@ function Shopping() {
                             image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6NodUpVl-Hyx0WuWpdC8oK_RLaHvMjgkXuw&usqp=CAU"
                             billingAddress
                             shippingAddress
-                            description={`Your total is $${pricePack}`}
+                            description={`Your total is $${discount()}`}
                             amount={cart.pricePack * 100}
                             token={onToken}  
                             stripeKey={KEY}
                             >   
                              <button              
-                               type="submit" 
+                               type="submit"
+                               disabled={cart.length === 0} 
                                class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
                                Confirmar y pagar
                                </button>

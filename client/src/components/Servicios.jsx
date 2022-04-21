@@ -7,6 +7,7 @@ import regsVideo from "../assets/pexels-cottonbro-5329613.mp4";
 import { Link } from "react-router-dom";
 import { validarServicios } from "./validarServicios";
 import { useSelector } from "react-redux";
+import NoAcceso from "./NoAcceso";
 
 const selectLugares = [
   {
@@ -376,7 +377,7 @@ export default function CreateForm() {
           {/* FIN DEL FORMULARIO */}
         </div>
       ) : (
-        <h1>A DORMIR LA SIESTA</h1>
+        <NoAcceso/>
       )}
     </>
   );
