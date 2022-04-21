@@ -162,6 +162,11 @@ const handleDes = id => {
     <>
       {admin ? (
         <div classname="w-full h-screen relative" style={{ backgroundColor: "#cecece" }}>
+          <Link to='/admin/profile'>
+            <button className="bg-transparent text-white font-semibold hover:text-black py-2 px-4 ">
+            Regresar al panel
+          </button>
+          </Link>
         <Fragment>
           <div className="content">
             <div>
@@ -389,7 +394,7 @@ const handleDes = id => {
               </Button>
             </DialogActions>
           </Dialog>
-          <Snackbar open={openSnackDes} autoHideDuration={6000} onClose={handleSnackDes}>
+          <Snackbar open={openSnackdes} autoHideDuration={6000} onClose={handleSnackDes}>
             <Alert onClose={handleSnackDes} severity="success" style={{backgroundColor: '#ffff5a', color: 'black'}}>
               El usuario fue desbloqueado con exito
             </Alert> 
