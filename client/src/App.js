@@ -56,7 +56,7 @@ function App() {
           </Route>
           <Route extact path="/wishlist">
             <WishList/>
-            </Route>
+          </Route>
           <Route exact path="/reviews/:id">
             <UserReviews />
           </Route>

@@ -2,6 +2,7 @@ import React, {useEffect, Fragment } from "react";
 import './Orders.css';
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../actions";
+import NoAcceso from "../NoAcceso";
 
 
 function Orders () {
@@ -13,10 +14,12 @@ function Orders () {
       dispatch(getOrders());
       }, [dispatch]);
 
+      const admin = useSelector((state) => state.isAdmin);
    
   return (
     <Fragment>
-      <div className="content">
+      {admin ? (
+        <div className="content">
         <div>
           <h3 style={{ color: "black" }}>Listado de Ordenes</h3>
         </div>
@@ -47,6 +50,7 @@ function Orders () {
           </table>
         </div>
       </div>
+      ) : ( <NoAcceso/>)}
     </Fragment>
   );
 };
