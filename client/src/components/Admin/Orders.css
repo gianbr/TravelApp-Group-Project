@@ -8,12 +8,7 @@
   margin: auto;
   overflow-x: auto;
 }
-.content h3 {
-  color: white;
-  text-align: center;
-  font-size: 1.5em;
-  text-transform: uppercase;
-}
+
 
 .selectState {
   width: 50%;

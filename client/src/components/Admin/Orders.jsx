@@ -17,6 +17,7 @@ function Orders () {
       const admin = useSelector((state) => state.isAdmin);
    
   return (
+    <div classname="w-full h-screen relative" style={{ backgroundColor: "#cecece" }}>
     <Fragment>
       {admin ? (
         <div className="content">
@@ -52,6 +53,7 @@ function Orders () {
       </div>
       ) : ( <NoAcceso/>)}
     </Fragment>
+    </div>
   );
 };
 export default Orders;

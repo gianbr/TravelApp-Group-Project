@@ -1,4 +1,8 @@
-import { addItemToCart, addItemToWish, removeAllItemsFromWish } from "../cart-utils/index";
+import {
+  addItemToCart,
+  addItemToWish,
+  removeAllItemsFromWish,
+} from "../cart-utils/index";
 import { removeItemFromCart } from "../cart-utils/index";
 import { addItemFromCartInCart } from "../cart-utils/index";
 import { removeAllItemsFromCart } from "../cart-utils/index";
@@ -17,7 +21,7 @@ const initialState = {
   lugares: [],
   checkout: [],
   isAdmin: false,
-  wishList:[]
+  wishList: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -143,43 +147,43 @@ function rootReducer(state = initialState, action) {
         ...state,
         users: action.payload,
       };
-      case 'GET_ALL_USERS':
-        return {
-          ...state,
-          users: action.payload,
-          allUsers: action.payload,
-        };
-        case "UPDATE_USER":
-          return {
-            ...state,
-            update: state.allUsers.filter((user) =>
-            user._id === action.payload._id ? action.payload : user
-            ),
-          };
-      case 'DELETE_USER':
-          return {
-            ...state,
-            allUsers: state.allUsers.filter((userd) => userd._id !== userd.payload),
-          };
-      case 'GET_ALL_ORDERS':
-            return {
-              ...state,
-              orders: action.payload,
-            };
-      case "ADD_BAN":
-              return {
-                ...state,
-                allUsers: state.allUsers.filter((user) =>
-                  user._id === action.payload._id ? action.payload : user
-                ),
-              };
-              case "REMOVE_BAN":
-                return {
-                  ...state,
-                  allUsers: state.allUsers.filter((user) =>
-                    user._id === action.payload._id ? action.payload : user
-                  ),
-                };
+    case "GET_ALL_USERS":
+      return {
+        ...state,
+        users: action.payload,
+        allUsers: action.payload,
+      };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        update: state.allUsers.filter((user) =>
+          user._id === action.payload._id ? action.payload : user
+        ),
+      };
+    case "DELETE_USER":
+      return {
+        ...state,
+        allUsers: state.allUsers.filter((userd) => userd._id !== userd.payload),
+      };
+    case "GET_ALL_ORDERS":
+      return {
+        ...state,
+        orders: action.payload,
+      };
+    case "ADD_BAN":
+      return {
+        ...state,
+        allUsers: state.allUsers.filter((user) =>
+          user._id === action.payload._id ? action.payload : user
+        ),
+      };
+    case "REMOVE_BAN":
+      return {
+        ...state,
+        allUsers: state.allUsers.filter((user) =>
+          user._id === action.payload._id ? action.payload : user
+        ),
+      };
 
     case "ADD_ITEM":
       return {
@@ -235,25 +239,34 @@ function rootReducer(state = initialState, action) {
         ...state,
         isAdmin: action.payload,
       };
-      case "ADD_ITEM_TO_WISH":
-        return {
-          ...state,
-          wishList: addItemToWish(state.wishList, action.payload),
-        };
-      case "REMOVE_ALL_ITEMS_IN_WISH":
-          return {
-            ...state,
-            wishList: removeAllItemsFromWish(state.wishList, action.payload),
-          };
-      case "CHECKOUT": 
-        return {
-          ...state,
-          checkout: action.payload,
-        }
+    case "ADD_ITEM_TO_WISH":
+      return {
+        ...state,
+      };
+    case "REMOVE_ALL_ITEMS_IN_WISH":
+      return {
+        ...state,
+        wishList: removeAllItemsFromWish(state.wishList, action.payload),
+      };
+    case "CHECKOUT":
+      return {
+        ...state,
+        checkout: action.payload,
+      };
     case "ADD_REVIEW":
       return {
         ...state,
         plains: action.payload,
+      };
+    case "GET_USER_WL":
+      return {
+        ...state,
+        wishList: action.payload,
+      };
+    case "DELETE_ITEM_WL":
+      return {
+        ...state,
+        wishList: action.payload,
       };
 
     default:

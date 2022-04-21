@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Fragment } from "react";
-import { Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillDelete } from "react-icons/ai";
 import { FaUserCheck, FaUserSlash } from "react-icons/fa";
@@ -27,120 +27,136 @@ function User () {
 
     const admin = useSelector((state) => state.isAdmin);
     
-    useEffect(
+
+//Estados para control de alertas Borrar
+const [openDelete, setOpenDelete] = useState(false);
+const [openSnackDelete, setSnackDelete] = useState(false);
+
+ //Estados para control de alertas Promover
+const [openPromote, setOpenPromote] = useState(false);
+const [openSnackPromote, setSnackPromote] = useState(false);
+
+//Estados para control de alertas Bloquear
+const [openbloq, setOpenbloq] = useState(false);
+const [openSnackbloq, setSnackbloq] = useState(false);
+
+//Estados para control de alertas Desbloquear
+const [opendes, setOpendes] = useState(false);
+const [openSnackdes, setSnackdes] = useState(false);
+
+//Funciones control de alertas Borrar
+const handleClickOpenDelete = (id) => {
+  setOpenDelete(true);
+  setUser(id);
+};
+
+const handleCloseDelete = () => {
+  setOpenDelete(false);
+  handleDelete(idUser);
+};
+
+const handleSnackDelete = () => {
+  setSnackDelete(false);
+};
+
+ //Funciones control de alertas Promover
+const handleClickOpenPromote = (id) => {
+  setOpenPromote(true);
+  setUser(id);
+};
+
+const handleClosePromote = () => {
+  setOpenPromote(false);
+  handlePromote(idUser);
+};
+
+const handleSnackPromote = () => {
+  setSnackPromote(false);
+}; 
+
+//Funciones control de alertas Promover
+const handleClickOpenBloq = (id) => {
+  setOpenbloq(true);
+  setUser(id);
+};
+
+const handleCloseBloq = () => {
+  setOpenbloq(false);
+  handleBloq(idUser);
+};
+
+const handleSnackBloq = () => {
+  setSnackbloq(false);
+}; 
+
+//Funciones control de alertas Promover
+const handleClickOpenDes = (id) => {
+  setOpendes(true);
+  setUser(id);
+};
+
+const handleCloseDes = () => {
+  setOpendes(false);
+  handleDes(idUser);
+};
+
+const handleSnackDes = () => {
+  setSnackdes(false);
+}; 
+  // fin de alertas
+  useEffect(
 		() => {
 		dispatch(getUsers());
 		}, [dispatch]);
 
-     //Estados para control de alertas Borrar
-  const [openDelete, setOpenDelete] = useState(false);
-  const [openSnackDelete, setSnackDelete] = useState(false);
-
-   //Estados para control de alertas Promover
-  const [openPromote, setOpenPromote] = useState(false);
-  const [openSnackPromote, setSnackPromote] = useState(false);
-
-  //Estados para control de alertas Promover
-  const [openBloq, setOpenBloq] = useState(false);
-  const [openSnackBloq, setSnackBloq] = useState(false);
-
-  //Estados para control de alertas Promover
-  const [openDes, setOpenDes] = useState(false);
-  const [openSnackDes, setSnackDes] = useState(false);
-
-
-
-  //Funciones control de alertas Borrar
-  const handleClickOpenDelete = (id) => {
-    setOpenDelete(true);
-    setUser(id);
-  };
-
-  const handleCloseDelete = () => {
-    setOpenDelete(false);
-    handleDelete(idUser);
-  };
-  
-  const handleSnackDelete = () => {
-    setSnackDelete(false);
-  };
-
-   //Funciones control de alertas Promover
-  const handleClickOpenPromote = (id) => {
-    setOpenPromote(true);
-    setUser(id);
-  };
-
-  const handleClosePromote = () => {
-    setOpenPromote(false);
-    handlePromote(idUser);
-  };
-
-  const handleSnackPromote = () => {
-    setSnackPromote(false);
-  }; 
-
-   //Funciones control de alertas Bloquear
-   const handleClickOpenBloq = (id) => {
-    setOpenBloq(true);
-    setUser(id);
-  };
-
-  const handleCloseBloq = () => {
-    setOpenBloq(false);
-    handleBloq(idUser);
-  };
-
-  const handleSnackBloq = () => {
-    setSnackBloq(false);
-  }; 
-
-    //Funciones control de alertas Desbloquear
-
-    const handleClickOpenDes = (id) => {
-      setOpenDes(true);
-      setUser(id);
-    };
-  
-    const handleCloseDes = () => {
-      setOpenDes(false);
-      handleDesb(idUser);
-    };
-  
-    const handleSnackDes = () => {
-      setSnackDes(false);
-    }; 
-  // fin de alertas
   const handleDelete = id => {
+    try {
     dispatch(deleteUser(id),
     setTooltip('Se eliminó el usuario'),
-    setTimeout(() => setTooltip(''), 3000),
-    setSnackDelete(true),
+    setTimeout(() => setTooltip(''), 1000),
     [dispatch, setTooltip]);
+
+    setSnackDelete(true);
+    } catch (error) {
+      console.error(error);
+    };
 };
   
-const handleBloq = id => {
-  dispatch(bloquearUser(id),
-  setTooltip('Se bloqueo al usuario'),
-  setTimeout(() => setTooltip(''), 3000),
-  setSnackBloq(true),
-  [dispatch, setTooltip]);
-};
-
-const handleDesb = id => {
-  dispatch(desbloquearUser(id),
-  setTooltip('Se desbloque al usuario'),
-  setTimeout(() => setTooltip(''), 3000),
-  setSnackDes(true),
-  [dispatch, setTooltip]);
-};
   const handlePromote = (id) => {
-    dispatch(rolAdmin(id),
-    setTooltip('Se eliminó el usuario'),
-    setTimeout(() => setTooltip(''), 3000),
+    try {
+      dispatch(rolAdmin(id),
+    setTooltip('El usuario ahora es admin'),
+    setTimeout(() => setTooltip(''), 1000),
     setSnackPromote(true),
     [dispatch, setTooltip]);
+    } catch (error) {
+      console.error(error);
+    };
   };
+
+  const handleBloq = id => {
+    try {
+      dispatch(bloquearUser(id),
+    setTooltip('Se bloqueo al usuario'),
+    setTimeout(() => setTooltip(''), 1000),
+    [dispatch, setTooltip]);
+    setSnackbloq(true)
+    } catch (error) {
+      console.error(error);
+    }
+};
+
+const handleDes = id => {
+  try {
+    dispatch(desbloquearUser(id),
+    setTooltip('Se desbloqueo al usuario'),
+    setTimeout(() => setTooltip(''), 1000),
+    [dispatch, setTooltip]);
+    setSnackdes(true)
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <>
@@ -296,7 +312,7 @@ const handleDesb = id => {
     
                 {/* Bloquer al usuario  */}
                  <Dialog
-            open={openBloq}
+            open={openbloq}
             onClose={handleCloseBloq}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
@@ -331,7 +347,7 @@ const handleDesb = id => {
               </Button>
             </DialogActions>
           </Dialog>
-          <Snackbar open={openSnackBloq} autoHideDuration={6000} onClose={handleSnackBloq}>
+          <Snackbar open={openSnackbloq} autoHideDuration={6000} onClose={handleSnackBloq}>
             <Alert onClose={handleSnackBloq} severity="success" style={{backgroundColor: '#ffff5a', color: 'black'}}>
               El usuario fue bloqueado con exito
             </Alert> 
@@ -339,7 +355,7 @@ const handleDesb = id => {
     
            {/* Desloquer al usuario  */}
            <Dialog
-            open={openDes}
+            open={opendes}
             onClose={handleCloseDes}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
