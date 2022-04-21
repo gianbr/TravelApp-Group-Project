@@ -7,7 +7,7 @@ const authJwt = require("../middlewares/authjwt");
 
 postReview.patch(
   "/:id",
-  [authJwt.verifyToken, authJwt.isAdmin],
+  [authJwt.verifyToken],
   async (req, res) => {
     const { id } = req.params;
     const { score, comments } = req.body;
