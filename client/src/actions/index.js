@@ -176,8 +176,12 @@ export function signin(data) {
         window.localStorage.setItem("user", response.data.username);
         window.localStorage.setItem("id", response.data.id);
         const { data } = await axios.post(
-          "http://localhost:8800/wishlist/create", {userId: response.data.id}, {
-            headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+          "http://localhost:8800/wishlist/create",
+          { userId: response.data.id },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
           }
         );
         return dispatch(
@@ -340,11 +344,30 @@ export function getIsAdmin() {
   };
 }
 
-
-export const addItemToWish = (item) => ({
-  type: "ADD_ITEM_TO_WISH",
-  payload: item,
-});
+// export const addItemToWish = (item) => ({
+//   type: "ADD_ITEM_TO_WISH",
+//   payload: item,
+// });
+export function addItemToWish(id) {
+  console.log(id);
+  return async function (dispatch) {
+    let response = await axios.put(
+      "http://localhost:8800/wishlist/additem",
+      {
+        userId: localStorage.getItem("id"),
+        plainId: id,
+      },
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }
+    );
+    if (response) {
+      return dispatch({
+        type: "ADD_ITEM_TO_WISH",
+      });
+    }
+  };
+}
 
 export const removeAllItemsFromWish = (item) => ({
   type: "REMOVE_ALL_ITEMS_IN_WISH",
@@ -399,37 +422,40 @@ export function addReview(id, data) {
 }
 
 export function getUsers() {
-	return async function (dispach) {
-		try {
-			const res = await axios.get('http://localhost:8800/getusers');
-		//	console.log(res);
-			return dispach({
-				type: 'GET_ALL_USERS',
-				payload: res.data,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  return async function (dispach) {
+    try {
+      const res = await axios.get("http://localhost:8800/getusers");
+      //	console.log(res);
+      return dispach({
+        type: "GET_ALL_USERS",
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function getOrders() {
-	return async dispatch => {
-		try {
-			const res = await axios.get('http://localhost:8800/orders/allorders');
-			return dispatch({
-         type: 'GET_ALL_ORDERS', 
-         payload: res.data });
-		} catch (err) {
-			console.log(err);
-		}
-	};
+  return async (dispatch) => {
+    try {
+      const res = await axios.get("http://localhost:8800/orders/allorders");
+      return dispatch({
+        type: "GET_ALL_ORDERS",
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 }
 
 export function rolAdmin(id, email) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.put("http://localhost:8800/updateuser/addadmin/" + id, email,
+      const { data } = await axios.put(
+        "http://localhost:8800/updateuser/addadmin/" + id,
+        email,
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
         }
@@ -447,28 +473,34 @@ export function rolAdmin(id, email) {
 
 export function bloquearUser(id, email) {
   return async function (dispatch) {
-    let response = await axios.put("http://localhost:8800/updateuser/addban/" + id, email,
-    {
-      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-    });
+    let response = await axios.put(
+      "http://localhost:8800/updateuser/addban/" + id,
+      email,
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }
+    );
     return dispatch({
       type: "ADD_BAN",
       payload: response.data,
-    })
-  }
+    });
+  };
 }
 
 export function desbloquearUser(id, email) {
   return async function (dispatch) {
-    let response = await axios.put("http://localhost:8800/updateuser/removeban/" + id, email,
-    {
-      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-    });
+    let response = await axios.put(
+      "http://localhost:8800/updateuser/removeban/" + id,
+      email,
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }
+    );
     return dispatch({
       type: "REMOVE_BAN",
       payload: response.data,
-    })
-  }
+    });
+  };
 }
 export function deleteUser(id) {
   return async function (dispatch) {
@@ -485,14 +517,57 @@ export function deleteUser(id) {
       console.log(error);
     }
   };
-};
-
+}
+export function getWishUser(id) {
+  return async function (dispatch) {
+    console.log(localStorage.getItem("id"));
+    console.log(localStorage.getItem("token"));
+    let response = await axios.get(
+      "http://localhost:8800/wishlist/" + id,
+      // {
+      //   userId: localStorage.getItem("id"),
+      // },
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }
+    );
+    console.log(response.data);
+    if (response) {
+      return dispatch({
+        type: "GET_USER_WL",
+        payload: response.data,
+      });
+    }
+  };
+}
+export function removeItemWL(id) {
+  return async function (dispatch) {
+    let response = await axios.put(
+      "http://localhost:8800/wishlist/deletewl",
+      {
+        userId: localStorage.getItem("id"),
+        plainId: id,
+      },
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }
+    );
+    if (response) {
+      return dispatch({
+        type: "DELETE_ITEM_WL",
+        payload: response.data,
+      });
+    }
+  };
+}
 export function createWishlist(userId) {
   try {
     return async function (dispatch) {
       // const userId = localStorage.getItem("id");
       const { data } = await axios.post(
-        "http://localhost:8800/wishlist/create", userId, {
+        "http://localhost:8800/wishlist/create",
+        userId,
+        {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
         }
       );
@@ -503,7 +578,6 @@ export function createWishlist(userId) {
       });
     };
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 }
-
