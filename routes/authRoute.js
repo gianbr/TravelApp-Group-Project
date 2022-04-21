@@ -11,6 +11,7 @@ const { OAuth2Client } = require("google-auth-library");
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 const mail = require("../middlewares/mail");
+const obj = require("../config");
 
 dotenv.config();
 
@@ -122,46 +123,37 @@ authRoute.post(
 
       console.log(payload);
 
-      const newUser = new User({
-        username: payload.name,
-        email: payload.email,
-        password: payload.at_hash, //guardo la contraseña encriptada
-      });
-
-      if (roles) {
-        //
-        const foundRoles = await Role.find({ name: { $in: roles } });
-        newUser.roles = foundRoles.map((role) => role._id); //me va a devolver un arreglo con los IDS
-      } else {
-        const role = await Role.findOne({ name: "user" });
-        newUser.roles = [role._id]; //si el usuario no tiene roles, le asigno el rol de user por defecto
-      }
-
       const user = await User.findOne({ email: payload.email });
-      if (user)
+      if (user) {
         return res.status(200).json({
           token: token,
           username: user.username,
           id: user._id,
         });
-      console.log("encontrado", user);
-      // return res.status(400).json({ message: "Email already exists" })
-      //guardo el usuario
+      } else {
+        const newUser = new User({
+          username: payload.name,
+          email: payload.email,
+          password: payload.at_hash, //guardo la contraseña encriptada
+        });
 
-      const userNew = await newUser.save();
-      console.log("creado", userNew);
-      const jtoken = jwt.sign({ id: userNew._id }, config.SECRET, {
-        expiresIn: "86400s", //1 dia
-      });
-      // return res.status(201).json({
-      //   token: jtoken,
-      //   username: userNew.username,
-      //   id: userNew._id,
-      // });
-      req.token = jtoken;
-      req.username = userNew.username;
-      req.id = userNew._id;
-      req.email = userNew.email;
+        if (roles) {
+          //
+          const foundRoles = await Role.find({ name: { $in: roles } });
+          newUser.roles = foundRoles.map((role) => role._id); //me va a devolver un arreglo con los IDS
+        } else {
+          const role = await Role.findOne({ name: "user" });
+          newUser.roles = [role._id]; //si el usuario no tiene roles, le asigno el rol de user por defecto
+        }
+        const userNew = await newUser.save();
+        const jtoken = jwt.sign({ id: userNew._id }, config.SECRET, {
+          expiresIn: "86400s", //1 dia
+        });
+        req.token = jtoken;
+        req.username = userNew.username;
+        req.id = userNew._id;
+        req.email = userNew.email;
+      }
       next();
     } catch (error) {
       console.log(error);
