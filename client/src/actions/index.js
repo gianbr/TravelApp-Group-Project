@@ -336,21 +336,6 @@ export function getIsAdmin() {
   };
 }
 
-export function addReview(id, data) {
-  return async function (dispatch) {
-    let response = await axios.patch(
-      "http://localhost:8800/postreview/" + id,
-      data,
-      {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-      }
-    );
-    return dispatch({
-      type: "ADD_REVIEW",
-      payload: response.data,
-    })((window.location.href = "/destination/" + id));
-  };
-}
 
 export const addItemToWish = (item) => ({
   type: "ADD_ITEM_TO_WISH",
@@ -390,4 +375,20 @@ export function checkout(dataCheckout) {
   } catch (error) {
     console.log(error);
   }
+}
+
+export function addReview(id, data) {
+  return async function (dispatch) {
+    let response = await axios.patch(
+      "http://localhost:8800/postreview/" + id,
+      data,
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }
+    );
+    return dispatch({
+      type: "ADD_REVIEW",
+      payload: response.data,
+    })((window.location.href = "/destination/" + id));
+  };
 }

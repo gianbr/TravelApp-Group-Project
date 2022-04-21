@@ -310,7 +310,8 @@ function Details() {
             <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Agregar al carrito
             </button>
-          </Link>}
+          </Link>
+          }
         </div>
       </div>
     </div>

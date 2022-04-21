@@ -196,6 +196,21 @@ function rootReducer(state = initialState, action) {
         ...state,
         isAdmin: action.payload,
       };
+      case "ADD_ITEM_TO_WISH":
+        return {
+          ...state,
+          wishList: addItemToWish(state.wishList, action.payload),
+        };
+      case "REMOVE_ALL_ITEMS_IN_WISH":
+          return {
+            ...state,
+            wishList: removeAllItemsFromWish(state.wishList, action.payload),
+          };
+      case "CHECKOUT": 
+        return {
+          ...state,
+          checkout: action.payload,
+        }
     case "ADD_REVIEW":
       return {
         ...state,
