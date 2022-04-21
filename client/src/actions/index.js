@@ -128,7 +128,7 @@ export function googleLogIn(payload) {
       const role = res.data.role;
       const id = res.data.id;
       const username = res.data.username;
-      window.localStorage.setItem("jwtToken", token);
+      window.localStorage.setItem("token", token);
       window.localStorage.setItem("user", username);
       window.localStorage.setItem("id", id);
       window.localStorage.setItem("test", JSON.stringify(res.data));
@@ -347,27 +347,28 @@ export const removeAllItemsFromWish = (item) => ({
 });
 export function checkout(dataCheckout) {
   try {
-    return async function (dispatch) { 
+    return async function (dispatch) {
       const data = {
-        userId: localStorage.getItem('id'),
+        userId: localStorage.getItem("id"),
         plains: dataCheckout.plains,
         email: dataCheckout.email,
         amount: dataCheckout.amount,
-        token: dataCheckout.token
-      }
-      let response = await axios.post("http://localhost:8800/checkout", 
-      data, // todo: implementar mapeo de servicios
-      {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-      }
+        token: dataCheckout.token,
+      };
+      let response = await axios.post(
+        "http://localhost:8800/checkout",
+        data, // todo: implementar mapeo de servicios
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       if (response) {
         return dispatch({
           type: "CHECKOUT",
           payload: response.data,
-        })((window.location.href = "/"))
+        })((window.location.href = "/"));
       } else {
-        console.log("Cosas")
+        console.log("Cosas");
       }
     };
   } catch (error) {
