@@ -15,6 +15,7 @@ order.get("/allorders", async (req, res) => {
   const orders = await Promise.all(
     allOrders.map(async (order) => {
       let user = await User.findById(order.userId);
+      console.log(user);
       let plains = await Promise.all(
         order.plains.map(async (p) => {
           if (mongoose.isValidObjectId(p.plainId)) {
