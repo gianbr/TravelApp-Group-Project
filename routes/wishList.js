@@ -4,6 +4,7 @@ const wishList = express.Router();
 const authJwt = require("../middlewares/authjwt");
 const WishList = require("../models/WishList");
 const Plain = require("../models/Planes");
+const { ObjectId } = require("mongodb");
 
 wishList.post("/create", [authJwt.verifyToken], async (req, res) => {
   try {
@@ -26,6 +27,14 @@ wishList.post("/create", [authJwt.verifyToken], async (req, res) => {
 wishList.put("/additem", [authJwt.verifyToken], async (req, res) => {
   try {
     const { userId, plainId } = req.body;
+    const WL = await WishList.findOne({ userId: userId });
+    let plains = WL.plains;
+    console.log(plains);
+    plains.forEach((p) => {
+      if (p.plainId == plainId) {
+        res.status(200).json({ message: "El plan ya esta en la wl" });
+      }
+    });
     const userWL = await WishList.updateOne(
       {
         userId: userId,
@@ -46,9 +55,11 @@ wishList.put("/additem", [authJwt.verifyToken], async (req, res) => {
   }
 });
 
-wishList.get("/userwl", [authJwt.verifyToken], async (req, res) => {
+wishList.get("/:id", [authJwt.verifyToken], async (req, res) => {
   try {
-    const { userId } = req.body;
+    // const { userId } = req.body;
+    const userId = req.params.id;
+    console.log(userId);
     const userWL = await WishList.findOne({ userId: userId });
     if (userWL) {
       if (userWL.plains.length > 0) {
@@ -56,12 +67,14 @@ wishList.get("/userwl", [authJwt.verifyToken], async (req, res) => {
           userWL.plains.map(async (p) => {
             let plain = await Plain.findById(p.plainId);
             return {
+              id: plain._id,
               title: plain.title,
               price: plain.price,
               location: plain.location,
               city: plain.city,
               date: plain.date,
               images: plain.images,
+              quantity: plain.stock,
             };
           })
         );
@@ -78,16 +91,65 @@ wishList.get("/userwl", [authJwt.verifyToken], async (req, res) => {
   }
 });
 
-wishList.delete("/deletewl", [authJwt.verifyToken], async (req, res) => {
-  try {
-    const { userId, plainId } = req.body;
-    const user = await WishList.findOne({ userId: userId });
-    user.plains = user.plains.filter((p) => p.plainId !== plainId);
-    await user.save();
-    res.status(200).json({ message: "WishList deleted successfully" });
-  } catch (error) {
-    res.status(270).json({ message: "No se pudo eliminar" });
-  }
+wishList.put("/deletewl", [authJwt.verifyToken], async (req, res) => {
+  // const { userId } = req.params.id;
+  // const { plainId } = req.body;
+  const { userId, plainId } = req.body;
+  // console.log(userId);
+  // console.log(plainId);
+  // await Album.findOneAndUpdate(
+  //   { _id: albumId },
+  //   { $pull: { images: { _id: imageId } } },
+  //   { safe: true, multi: false }
+  // );
+  let WL = await WishList.findOne({ userId: userId });
+  let userWl = await WishList.findByIdAndUpdate(
+    { _id: WL._id },
+    {
+      $pull: { plains: { plainId: plainId } },
+    },
+    { safe: true, multi: false }
+  );
+  res.json(userWl);
+
+  // if (userWl) {
+  //   if (userWl.plains.length == 0) {
+  //     return res.status(200).json([]);
+  //   } else {
+  //     userWl.plains.forEach(async (p) => {
+  //       let plain = await p.findOne({ plainId: plainId });
+  //       if (plain) {
+  //         console.log("*************");
+  //       }
+
+  //       // } p.remove();
+  //       // } else {
+  //       //   console.log("*************************");
+  //       // }
+  //     });
+  //     // let plains = userWl.plains.map((p) => {
+  //     //   console.log(p);
+  //     //   if (p.plainId == plainId) {
+  //     //     p.remove();
+  //     //   }
+  //     // });
+  //     // let Wl = await WishList.updateOne(
+  //     //   { userId: userId },
+  //     //   {
+  //     //     $set: {
+  //     //       plains: plains,
+  //     //     },
+  //     //   }
+  //     // );
+  //     res.status(200).json(userWl);
+  //   }
+  // } else {
+  //   res.status(200).json([]);
+  // }
+  // user.plains = user.plains.filter((p) => p.plainId !== plainId);
+  // await user.save();
+  // console.log(user);
+  // res.status(200).json(user);
 });
 
 module.exports = wishList;
