@@ -2,6 +2,7 @@ import React, {useEffect, Fragment } from "react";
 import './Orders.css';
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../actions";
+import { Link } from "react-router-dom";
 
 
 function Orders () {
@@ -15,7 +16,13 @@ function Orders () {
 
    
   return (
+    <div classname="w-full h-screen relative" style={{ backgroundColor: "#cecece" }}>
     <Fragment>
+    <Link to="/admin/profile">
+      <button className="bg-transparent text-white font-semibold hover:text-black py-2 px-4">
+  Regresa al panel
+</button>
+</Link>
       <div className="content">
         <div>
           <h3 style={{ color: "black" }}>Listado de Ordenes</h3>
@@ -48,6 +55,7 @@ function Orders () {
         </div>
       </div>
     </Fragment>
+    </div>
   );
 };
 export default Orders;

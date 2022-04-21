@@ -4,12 +4,7 @@
     justify-content: space-around;
     margin: auto;
 }
-.container h2 {
-    color: "gray-light";
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 0;
-}
+
 .container h3 {
     margin: .4em;
 }

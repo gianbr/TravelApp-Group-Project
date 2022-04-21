@@ -51,7 +51,7 @@ function Navbar() {
           {" "}
           <Link to="/about">ACERCA DE </Link>{" "}
         </li>
-        <li> {admin ? <Link to="/servicios">SERVICIOS</Link> : null} </li>
+        <li> {admin ? <Link to="/admin/profile">PANEL DE CONTROL</Link> : null} </li>
       </ul>
       {/* ICONOS */}
       <div className="hidden md:flex">

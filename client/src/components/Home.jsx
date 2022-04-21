@@ -6,6 +6,7 @@ import Footer from "./Footer";
 
 import Ofertas from "./Ofertas";
 import InfoWish from "./InfoWish"
+import Contact from "./Contact";
 
 function Home() {
  
@@ -38,6 +39,7 @@ function Home() {
       <Destacados />
       <Ofertas/>
       <InfoWish/>
+      <Contact />
       <Footer />
     </div>
   );
