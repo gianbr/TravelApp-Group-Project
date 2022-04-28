@@ -67,16 +67,3 @@ tbody > tr:nth-child(even) .buttonDelete {
   display: flex;
   justify-content: space-around;
 }
-::-webkit-scrollbar {
-  height: 4px;
-  width: 4px;
-  background: black;
-}
-::-webkit-scrollbar-thumb:horizontal {
-  background: #cecece;
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:vertical {
-  background: #cecece;
-  border-radius: 10px;
-}
