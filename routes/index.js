@@ -11,7 +11,6 @@ const getUsers = require("./getUsers");
 const apiLugares = require("./apiLugares");
 const getCheckAdmin = require("./getCheckAdmin");
 const postReview = require("./postReview");
-const cart = require("./cart");
 const checkout = require("./checkout");
 const sendEmail = require("./sendEmail");
 const order = require("./orders");
