@@ -84,7 +84,7 @@ export default function Filters({ setPage }) {
         <option value="desc">Mayor - Menor</option>
       </select>
       {user ? (
-        <>
+        <div className="flex items-center">
           <a href="http://localhost:3000/wishlist">
             <FaHeart className="mr-2 text-white" size={20} />
           </a>
@@ -93,7 +93,7 @@ export default function Filters({ setPage }) {
               <FaShoppingCart className="mr-2 text-white" size={20} />
             </Link>
           </button>
-        </>
+        </div>
       ) : (
         <div className=""></div>
       )}
