@@ -49,12 +49,19 @@ function Details() {
   console.log(item);
 
   const handleAddCart = () => {
-    if (!item.date) {
+    if(!item.date && !item.quantity){
+      return swal("Error", "Debe seleccionar una fecha y una cantidad", "error");
+    }else if (!item.date) {
       return swal({
         title: "¡Seleccione una fecha!",
         icon: "error",
       });
-    } else {
+    }else if(!item.quantity){
+      return swal({
+        title: "¡Seleccione cantidad de personas!",
+        icon: "error",
+      });
+    }else {
       dispatch(
         addItem({
           ...item,
@@ -102,13 +109,18 @@ function Details() {
   };
 
   const handleDelete = (id) => {
-    const sure = window.confirm("Are you sure you want to delete this?");
-    if (sure) {
-      dispatch(deletePlain(id));
-      console.log(id);
-      alert("Deleted Successfully!");
-      history.push("/destination");
-    }
+    swal({
+      title: "¿Está seguro de eliminar este paquete?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal ("¡Eliminado!", "El paquete ha sido eliminado", "success");
+        dispatch(deletePlain(id));
+        history.push("/destination");
+      }
+    })
   };
 
   console.log("score", detail?.score);
@@ -300,7 +312,6 @@ function Details() {
               <button
                 className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 onClick={handleAddCart}
-                disabled={disabled}
               >
                 Agregar al carrito
               </button>
