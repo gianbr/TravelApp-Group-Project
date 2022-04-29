@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { removeItem, addItemFromCart, removeAllItemsFromCart, checkout } from '../actions/index'
 import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa'
 import StripeCheckout from "react-stripe-checkout";
+import swal from 'sweetalert'
 
 
 const KEY = process.env.REACT_APP_STRIPE;
@@ -54,8 +55,8 @@ function Shopping() {
        
     const handleAdd = (e, producto) => {
         if(producto.quantity + 1 > producto.stock){
-            alert('No hay stock suficiente')
-            console.log(producto.quantity)
+            // sweetalert
+            return swal("No hay stock suficiente", "", "error")
         }else{
             dispatch(addItemFromCart(producto))
             console.log("quantity", producto.quantity)
@@ -66,11 +67,41 @@ function Shopping() {
     }
 
     const handleRemove = (product) => {
-        dispatch(removeItem(product))
+        if(product.quantity === 1){
+            swal({
+                title: "¿Estás seguro?",
+                text: "¿Seguro que deseas eliminar este producto?",
+                icon: "warning",
+                buttons: true
+            }).then((willDelete) => {
+                if (willDelete) {
+                    swal("Producto eliminado", {
+                        icon: "success",
+                    });
+                    dispatch(removeItem(product))
+                }
+            })
+        }else{
+            dispatch(removeItem(product))
+        }
     }
 
     const handleRemoveAllCart = (product) => {
-        dispatch(removeAllItemsFromCart(product))
+        swal({
+            title: "¿Estás seguro?",
+            text: "¿Deseas eliminar este producto?",
+            icon: "warning",
+            buttons: true,
+            })
+        .then((confirm) => {
+            if(confirm){
+                swal("Producto eliminado", {
+                    icon: "success",
+                });
+                dispatch(removeAllItemsFromCart(product))
+            }
+        })
+        // dispatch(removeAllItemsFromCart(product))
     }
 
 
